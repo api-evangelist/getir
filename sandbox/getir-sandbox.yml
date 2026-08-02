@@ -1,0 +1,116 @@
+generated: '2026-07-31'
+method: searched
+source: https://developers.getir.com/food/documentation/giris — "Test Cards", "Test Order" and "URLs"
+  sections, served by https://food-pos-api-gateway.getirapi.com/v1/documentations/contents (ids 3, 7,
+  8)
+docs: https://developers.getir.com/food/documentation/giris
+description: 'GetirFood separates test from live by HOST, not by key prefix: the same credential model
+  is used against a distinct development gateway. Getir issues both test and live secret keys when a POS/integrator
+  company is approved, and provisions a test user plus a test restaurant in the development environment.
+  Test orders are placed through a hosted web workspace. All values below are published verbatim by Getir;
+  nothing here was invented.'
+environments:
+- name: production
+  base_url: https://food-external-api-gateway.getirapi.com/
+  swagger: https://food-external-api-gateway.getirapi.com/swagger.json
+- name: test
+  base_url: https://food-external-api-gateway.development.getirapi.com
+  swagger: https://food-external-api-gateway.development.getirapi.com/swagger.json
+  note: A user is created in the test environment for your account to display and configure your restaurant.
+separation:
+  mechanism: separate host per environment
+  key_prefixes: none published
+  note: Credentials are issued per environment (test and live) by Getir; there is no in-band test/live
+    mode switch.
+test_order_workspace:
+  url: https://web-workspace.development.getirapi.com/
+  default_otp_password: '1234'
+  notes:
+  - You cannot log in with the username and password given to you — sign up as a real Getir user would
+    and add an address to the test account.
+  - Masterpass logins take no payment in the development environment.
+  - Test restaurants are defined in Arnavutköy Mah. so test couriers can serve; do not change restaurant
+    addresses.
+  - Select Arnavutköy Mahallesi as your address or restaurants will appear closed.
+test_cards:
+  source_note: Getir also points integrators at https://creditcardgenerator.com/visa-credit-card-generator/
+    and suggests activating pay-at-the-door on the test restaurant to simplify test orders.
+  count: 21
+  cards:
+  - card_number: '5890040000000010'
+    bank: Akbank
+    card_type: Master Card (Debit)
+  - card_number: '5526080000000000'
+    bank: Akbank
+    card_type: Master Card (Credit)
+  - card_number: '4766620000000000'
+    bank: Denizbank
+    card_type: Visa (Debit)
+  - card_number: '4603450000000000'
+    bank: Denizbank
+    card_type: Visa (Credit)
+  - card_number: '4987490000000000'
+    bank: Finansbank
+    card_type: Visa (Debit)
+  - card_number: '5311570000000000'
+    bank: Finansbank
+    card_type: Master Card (Credit)
+  - card_number: '9792020000000000'
+    bank: Finansbank
+    card_type: Troy (Debit)
+  - card_number: '9792030000000000'
+    bank: Finansbank
+    card_type: Troy (Credit)
+  - card_number: '5170410000000000'
+    bank: Garanti Bankası
+    card_type: Master Card (Debit)
+  - card_number: '5400360000000000'
+    bank: Garanti Bankası
+    card_type: Master Card (Credit)
+  - card_number: '374427000000003'
+    bank: Garanti Bankası
+    card_type: American Express
+  - card_number: '4475050000000000'
+    bank: Halkbank
+    card_type: Visa (Debit)
+  - card_number: '5528790000000000'
+    bank: Halkbank
+    card_type: Master Card (Credit)
+  - card_number: '4059030000000000'
+    bank: HSBC Bank
+    card_type: Visa (Debit)
+  - card_number: '5504720000000000'
+    bank: HSBC Bank
+    card_type: Master Card (Credit)
+  - card_number: '5892830000000000'
+    bank: Türkiye İş Bankası
+    card_type: Master Card (Debit)
+  - card_number: '4543590000000000'
+    bank: Türkiye İş Bankası
+    card_type: Visa (Credit)
+  - card_number: '4910050000000000'
+    bank: Vakıfbank
+    card_type: Visa (Debit)
+  - card_number: '4157920000000000'
+    bank: Vakıfbank
+    card_type: Visa (Credit)
+  - card_number: '5168880000000000'
+    bank: Yapı ve Kredi Bankası
+    card_type: Master Card (Debit)
+  - card_number: '5451030000000000'
+    bank: Yapı ve Kredi Bankası
+    card_type: Master Card (Credit)
+go_live_checklist:
+- Control of order cancelling
+- Control of an order brought by the restaurant
+- Control of an order brought by Getir
+- Control of discounts and campaigns, both restaurant-paid and Getir-paid
+- Control of scheduled orders
+- /status/open, /status/close and related endpoint integrations
+- Send a confirmation e-mail with the order receipt printout of an order containing a Campaign and an
+  Order Note created from integration data
+go_live_contact: getiryemekapi@getir.com
+x-evidence:
+  fetched: '2026-07-31'
+  docs_api: https://food-pos-api-gateway.getirapi.com/v1/documentations/contents?title=7&language=en
+  http_status: 200

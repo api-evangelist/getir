@@ -1,0 +1,86 @@
+generated: '2026-07-31'
+method: probed
+source: live GET probes of the /.well-known/ surface on every Getir host in apis.yml + the
+  OpenAPI servers[] host.
+description: >-
+  No /.well-known/ discovery document is published on any Getir host. Recorded as an honest
+  negative result — no WellKnown or SecurityTxt pointer is wired into apis.yml because there is
+  nothing to point at. Note the false-positive trap on developers.getir.com: it is a
+  single-page app whose catch-all returns HTTP 200 with the same 32,919-byte HTML shell for
+  every /.well-known/* path. Those were rejected, not counted as hits.
+documents: []
+hosts:
+- host: getir.com
+  note: Bot-protected — returns 403/405 with a "Human Verification" interstitial to automated clients.
+  probes:
+  - {path: /.well-known/security.txt, status: 403, content_type: text/html, hit: false}
+  - {path: /.well-known/openid-configuration, status: 403, content_type: text/html, hit: false}
+  - {path: /.well-known/oauth-authorization-server, status: 403, content_type: text/html, hit: false}
+  - {path: /.well-known/oauth-protected-resource, status: 403, content_type: text/html, hit: false}
+  - {path: /.well-known/api-catalog, status: 403, content_type: text/html, hit: false}
+  - {path: /.well-known/ai-plugin.json, status: 403, content_type: text/html, hit: false}
+  - {path: /.well-known/agent-card.json, status: 403, content_type: text/html, hit: false}
+  - {path: /.well-known/agent.json, status: 403, content_type: text/html, hit: false}
+  - {path: /llms.txt, status: 403, content_type: text/html, hit: false}
+- host: developers.getir.com
+  note: SPA catch-all — HTTP 200 with an HTML shell for every path. All rejected as non-JSON/non-text hits.
+  probes:
+  - {path: /.well-known/security.txt, status: 200, content_type: text/html, hit: false, rejected: spa-html-catch-all}
+  - {path: /.well-known/openid-configuration, status: 200, content_type: text/html, hit: false, rejected: spa-html-catch-all}
+  - {path: /.well-known/oauth-authorization-server, status: 200, content_type: text/html, hit: false, rejected: spa-html-catch-all}
+  - {path: /.well-known/oauth-protected-resource, status: 200, content_type: text/html, hit: false, rejected: spa-html-catch-all}
+  - {path: /.well-known/api-catalog, status: 200, content_type: text/html, hit: false, rejected: spa-html-catch-all}
+  - {path: /.well-known/ai-plugin.json, status: 200, content_type: text/html, hit: false, rejected: spa-html-catch-all}
+  - {path: /.well-known/agent-card.json, status: 200, content_type: text/html, hit: false, rejected: spa-html-catch-all}
+  - {path: /.well-known/agent.json, status: 200, content_type: text/html, hit: false, rejected: spa-html-catch-all}
+  - {path: /llms.txt, status: 200, content_type: text/html, hit: false, rejected: spa-html-catch-all}
+- host: food-external-api-gateway.getirapi.com
+  note: Returns a real JSON 404 ({"code":22,"error":"RouteNotFoundError"}) for every well-known path.
+  probes:
+  - {path: /.well-known/security.txt, status: 404, hit: false}
+  - {path: /.well-known/openid-configuration, status: 404, hit: false}
+  - {path: /.well-known/oauth-authorization-server, status: 404, hit: false}
+  - {path: /.well-known/oauth-protected-resource, status: 404, hit: false}
+  - {path: /.well-known/api-catalog, status: 404, hit: false}
+  - {path: /.well-known/ai-plugin.json, status: 404, hit: false}
+  - {path: /.well-known/agent-card.json, status: 404, hit: false}
+  - {path: /.well-known/agent.json, status: 404, hit: false}
+  - {path: /llms.txt, status: 404, hit: false}
+- host: food-pos-api-gateway.getirapi.com
+  probes:
+  - {path: /.well-known/security.txt, status: 404, hit: false}
+  - {path: /.well-known/openid-configuration, status: 404, hit: false}
+  - {path: /.well-known/oauth-authorization-server, status: 404, hit: false}
+  - {path: /.well-known/oauth-protected-resource, status: 404, hit: false}
+  - {path: /.well-known/api-catalog, status: 404, hit: false}
+  - {path: /.well-known/ai-plugin.json, status: 404, hit: false}
+  - {path: /.well-known/agent-card.json, status: 404, hit: false}
+  - {path: /.well-known/agent.json, status: 404, hit: false}
+  - {path: /llms.txt, status: 404, hit: false}
+- host: locals-integration-pos-api-gateway.artisan.getirapi.com
+  probes:
+  - {path: /.well-known/security.txt, status: 404, hit: false}
+  - {path: /.well-known/openid-configuration, status: 404, hit: false}
+  - {path: /.well-known/oauth-authorization-server, status: 404, hit: false}
+  - {path: /.well-known/oauth-protected-resource, status: 404, hit: false}
+  - {path: /.well-known/api-catalog, status: 404, hit: false}
+  - {path: /.well-known/ai-plugin.json, status: 404, hit: false}
+  - {path: /.well-known/agent-card.json, status: 404, hit: false}
+  - {path: /.well-known/agent.json, status: 404, hit: false}
+  - {path: /llms.txt, status: 404, hit: false}
+- host: getiryemek.com
+  probes:
+  - {path: /.well-known/security.txt, status: 403, hit: false}
+  - {path: /.well-known/agent-card.json, status: 403, hit: false}
+  - {path: /.well-known/agent.json, status: 403, hit: false}
+a2a_result:
+  agent_card_found: false
+  note: >-
+    No A2A Agent Card on any host at either the canonical /.well-known/agent-card.json or the
+    legacy /.well-known/agent.json path. Per pipeline policy nothing was authored — the a2a/
+    directory is intentionally absent.
+x-evidence:
+  fetched: '2026-07-31'
+  hosts_probed: 8
+  paths_per_host: 9
+  hits: 0

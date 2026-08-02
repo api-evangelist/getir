@@ -1,0 +1,84 @@
+generated: '2026-07-31'
+method: derived
+source: openapi/getir-food-openapi.yml + https://developers.getir.com/food/documentation/giris
+description: >-
+  Which cross-cutting standards the GetirFood partner API conforms to. Derived from the Swagger
+  document and the published integration docs, with live probes of the gateway. Getir publishes
+  no certification or compliance program page, so no `Compliance` pointer is emitted.
+standards:
+- id: openapi-3
+  conforms: false
+  evidence: 'The published contract is Swagger 2.0 (`swagger: "2.0"`), not OpenAPI 3.x.'
+- id: swagger-2.0
+  conforms: true
+  evidence: 'https://food-external-api-gateway.getirapi.com/swagger.json declares `swagger: "2.0"` with 54 paths / 62 operations / 63 definitions.'
+- id: oauth2
+  conforms: false
+  evidence: No oauth2 securityDefinitions in the spec; auth is a proprietary secret-key login returning an opaque `token` header value.
+- id: openid-connect
+  conforms: false
+  evidence: /.well-known/openid-configuration returns 404 on every Getir host.
+- id: rfc8414-oauth-authorization-server-metadata
+  conforms: false
+  evidence: /.well-known/oauth-authorization-server returns 404 on every Getir host.
+- id: rfc9116-security-txt
+  conforms: false
+  evidence: /.well-known/security.txt returns 404 (API hosts) or 403 (getir.com) — no security.txt published.
+- id: rfc9457-problem-details
+  conforms: false
+  evidence: Errors use a proprietary {code, error, message, details, source} JSON envelope, not application/problem+json.
+- id: rfc8594-sunset-header
+  conforms: false
+  evidence: No Sunset or Deprecation header support documented; no deprecation policy published.
+- id: rfc7807-problem-details
+  conforms: false
+  evidence: Same proprietary envelope; no problem+json media type anywhere in the spec.
+- id: http-429-rate-limit-signaling
+  conforms: false
+  evidence: >-
+    A token-scoped rate limiter is documented (300 req / 60s default) but no 429 response is
+    declared in the spec and no RateLimit-* headers are documented.
+- id: rfc9111-http-caching
+  conforms: false
+  evidence: >-
+    Gateway responses observed with `cache-control: no-cache`; no caching contract
+    documented.
+- id: webhooks
+  conforms: true
+  evidence: Two documented outbound POST callbacks (new order, cancel order) authenticated with a shared x-api-key. See asyncapi/getir-food-webhooks.yml.
+- id: asyncapi
+  conforms: false
+  evidence: No AsyncAPI document published for the webhook surface.
+- id: tls-1.2-minimum
+  conforms: true
+  evidence: >-
+    Docs state "TLS Versiyon: TLSv1.2_2019 and above"; live probe of
+    food-external-api-gateway.getirapi.com negotiated TLSv1.3.
+- id: hsts
+  conforms: false
+  evidence: No Strict-Transport-Security header observed on getir.com, developers.getir.com or the API gateway. See security/getir-domain-security.yml.
+- id: dnssec
+  conforms: false
+  evidence: Neither getir.com nor getirapi.com is DNSSEC-signed.
+- id: caa
+  conforms: false
+  evidence: No CAA records on getir.com or getirapi.com.
+- id: dmarc
+  conforms: partial
+  evidence: getir.com publishes SPF and DMARC with policy `none`; getirapi.com publishes neither SPF nor DMARC.
+- id: iso8601-datetimes
+  conforms: true
+  evidence: Docs state all system dates/times are GMT; changelog entries carry ISO 8601 timestamps.
+compliance_program:
+  published: false
+  certifications: []
+  trust_center: null
+  note: >-
+    probe-security-programs.py found no trust center, no bug bounty, no responsible-disclosure
+    page and no security.txt. getir.com is bot-protected, so a human-visible compliance page
+    cannot be excluded — but nothing verifiable was found, so no Compliance or TrustCenter
+    pointer is emitted.
+x-evidence:
+  fetched: '2026-07-31'
+  spec: https://food-external-api-gateway.getirapi.com/swagger.json
+  http_status: 200

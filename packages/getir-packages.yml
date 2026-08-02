@@ -1,0 +1,56 @@
+generated: '2026-07-31'
+method: searched
+source: >-
+  npm registry search, PyPI, pkg.go.dev, RubyGems, Packagist, crates.io, NuGet, Maven Central,
+  the GitHub org https://github.com/getir, and the GetirFood developer portal
+  (https://developers.getir.com/).
+description: >-
+  Getir ships no first-party client library for the GetirFood partner API. Integrators call the
+  REST gateway directly. The one genuinely first-party public package found (getir-react-hooks,
+  published by the npm user `getir` from bitbucket.org/getirdev) is an internal React utility,
+  not an API client — so no `SDKs` pointer is emitted for this provider.
+
+official_api_sdk: false
+sdk_count: 0
+
+packages:
+- language: javascript
+  registry: npm
+  name: getir-react-hooks
+  url: https://www.npmjs.com/package/getir-react-hooks
+  install: npm install getir-react-hooks
+  publisher: getir
+  repository: https://bitbucket.org/getirdev/getir-react-hooks
+  official: true
+  is_api_client: false
+  description: Custom React hooks published by Getir's engineering org. Front-end utility, unrelated to the GetirFood partner API.
+
+third_party:
+- language: typescript
+  registry: npm
+  name: '@theyahia/getir-mcp'
+  url: https://www.npmjs.com/package/@theyahia/getir-mcp
+  version: 1.0.1
+  install: npx -y @theyahia/getir-mcp
+  repository: https://github.com/theYahia/getir-mcp
+  official: false
+  description: >-
+    Community MCP server wrapping the Getir partner API (8 tools). Not published, endorsed or
+    hosted by Getir. Recorded in mcp/getir-mcp.yml.
+
+registries_probed:
+- {registry: npm, query: getir, result: no first-party API client}
+- {registry: pypi, names_probed: [getir, getir-api, getirfood], result: 'getir exists but is unrelated to Getir the company; getir-api and getirfood 404'}
+- {registry: pkg.go.dev, result: none found}
+- {registry: rubygems, result: none found}
+- {registry: packagist, result: none found}
+- {registry: crates.io, result: none found}
+- {registry: nuget, result: none found}
+- {registry: maven-central, result: none found}
+- {registry: github, org: 'https://github.com/getir', result: 'org exists (name "getir", blog https://getir.com) with 0 public repositories'}
+
+x-evidence:
+  fetched: '2026-07-31'
+  npm_search: https://registry.npmjs.org/-/v1/search?text=getir
+  github_org_api: https://api.github.com/orgs/getir
+  http_status: 200

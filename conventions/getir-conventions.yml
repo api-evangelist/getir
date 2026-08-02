@@ -1,0 +1,119 @@
+generated: '2026-07-31'
+method: searched
+source: >-
+  https://developers.getir.com/food/documentation/giris (Introduction, URLs, Authentication,
+  Integration Structure, Rate Limiter, System Time, Order Flow, Time Limit) plus derivation
+  from openapi/getir-food-openapi.yml.
+description: >-
+  Cross-cutting request/response semantics for the GetirFood partner API — the runtime rules
+  that apply to every operation and that the Swagger 2.0 document does not express.
+
+base_url: https://food-external-api-gateway.getirapi.com
+test_base_url: https://food-external-api-gateway.development.getirapi.com
+api_style: REST over HTTPS, JSON request and response bodies
+spec_format: Swagger 2.0 (OpenAPI 2.0)
+
+authentication:
+  scheme: Opaque token in a `token` request header, obtained from POST /auth/login
+  credentials: appSecretKey + restaurantSecretKey (issued by Getir, not self-service)
+  token_ttl_seconds: 3600
+  detail: authentication/getir-authentication.yml
+
+idempotency:
+  supported: false
+  note: >-
+    Getir publishes no idempotency-key header or parameter, and none appears in the Swagger
+    document. Safe replay is instead constrained by ORDERING rules: at least 1 minute must
+    elapse between verify -> prepare and prepare -> deliver, and re-issuing a completed
+    transition returns a domain error (2 FoodOrderAlreadyVerified, 13 FoodOrderAlreadyCancelled,
+    89 TransferredFoodOrderError) rather than replaying the original response.
+  no_idempotency_pointer: true
+
+pagination:
+  style: none
+  note: >-
+    No cursor or offset pagination is documented or present in the spec. Order collections are
+    retrieved through purpose-built endpoints (/food-orders/active,
+    /food-orders/periodic/unapproved, /food-orders/periodic/cancelled) and through date-bounded
+    report endpoints (/food-orders/report, /food-orders/report/details), which cap the range at
+    a maximum number of days (error 99 FoodOrderReportMaxDaysError).
+
+field_expansion:
+  supported: false
+
+metadata:
+  supported: false
+  note: Free-text carried on domain objects instead (clientNote, cancelNote, product note).
+
+localization:
+  pattern: Bilingual objects
+  description: >-
+    Human-readable strings are returned as { "tr": string, "en": string } objects on product
+    names, display info, payment method text and cancel reasons. The documentation API itself
+    takes a `language` query parameter accepting only `tr` or `en`.
+
+time:
+  timezone: GMT
+  docs_quote: >-
+    "All dates and times returning from the system are Greenwich Mean Time (GMT). Therefore time
+    and dates should be configured according to GMT and local time difference."
+  docs: https://developers.getir.com/food/documentation/giris
+
+request_tracing:
+  request_id_header: none documented
+
+versioning:
+  scheme: document-version
+  current: 1.5.8
+  note: >-
+    The API version lives in the Swagger `info.version` field (1.5.8). There is no version
+    segment in the URI path, no version request header and no dated version train. Environment
+    is selected by host, not by version.
+  changelog_endpoint: GET /changelog (operationId getChangelog)
+  detail: lifecycle/getir-lifecycle.yml
+
+error_envelope:
+  format: proprietary JSON (not RFC 9457 problem+json)
+  fields: [code, error, message, details, source]
+  registry_size: 99
+  detail: errors/getir-error-codes.yml
+
+rate_limiting:
+  default: 300 requests / 60 seconds per token, 20 second block
+  strictest: 2 requests / 60 seconds per token, 30 second block (restaurant + menu config surface)
+  response_signal: none documented — no 429 declared in the spec, no rate-limit headers
+  detail: rate-limits/getir-rate-limits.yml
+
+event_delivery:
+  direction: outbound (Getir -> partner)
+  mechanism: HTTP POST to two partner-registered webhook URLs (new order, cancel order)
+  auth: shared x-api-key header, identical for both URLs
+  fallback: >-
+    "In cases where you cannot handle the order data we have sent to you, you can query your
+    orders via the /unapproved endpoint. Alternatively, you can query the /active endpoint.
+    You should not constantly query the /unapproved endpoint."
+  detail: asyncapi/getir-food-webhooks.yml
+
+order_state_machine:
+  documented_statuses:
+    '325': Scheduled order awaiting approval — approve with POST /food-orders/{id}/verify-scheduled
+    '350': Approved; no longer returned by /food-orders/periodic/unapproved
+    '400': Pre-approved scheduled order or immediate order — approve with POST /food-orders/{id}/verify
+    '500': Automatically set one hour before a scheduled order's delivery time (being prepared)
+  delivery_types:
+    '1': Delivered by a Getir courier — verify -> prepare -> handover
+    '2': Delivered by the restaurant's own courier — verify -> prepare -> deliver
+  timing_rules:
+  - An order must be answered (approved or cancelled) within 30 seconds; otherwise the restaurant is called automatically by IVR.
+  - The confirmation time limit is 5 minutes; a restaurant that reaches it is automatically closed and its orders cancelled.
+  - At least 1 minute must elapse between calls to verify, prepare and deliver.
+  docs: https://developers.getir.com/food/documentation/giris
+
+transport_security:
+  tls_minimum: TLSv1.2_2019
+  detail: security/getir-domain-security.yml
+
+x-evidence:
+  fetched: '2026-07-31'
+  docs_api: https://food-pos-api-gateway.getirapi.com/v1/documentations/titles?language=en
+  http_status: 200

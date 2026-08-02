@@ -1,0 +1,31 @@
+generated: '2026-07-31'
+method: probed
+source: live DNS/TLS/HTTP probes of apis.yml + OpenAPI hosts
+hosts:
+- host: getir.com
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Feb  5 23:59:59 2027 GMT
+  hsts: null
+- host: developers.getir.com
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Feb  5 23:59:59 2027 GMT
+  hsts: false
+- host: food-external-api-gateway.getirapi.com
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Jan 26 23:59:59 2027 GMT
+  hsts: null
+domains:
+- domain: getir.com
+  dnssec: false
+  caa: []
+  spf: true
+  dmarc: true
+  dmarc_policy: none
+- domain: getirapi.com
+  dnssec: false
+  caa: []
+  spf: false
+  dmarc: false

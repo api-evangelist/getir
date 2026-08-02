@@ -1,0 +1,415 @@
+specification: API Commons Rate Limits
+specificationVersion: '0.1'
+provider: Getir
+providerId: getir
+generated: '2026-07-31'
+method: searched
+source: https://developers.getir.com/food/documentation/giris — "Rate Limiter" section, served by https://food-pos-api-gateway.getirapi.com/v1/documentations/contents?title=5&language=en
+docs: https://developers.getir.com/food/documentation/giris
+tags:
+- Rate Limiting
+- Food Delivery
+- Point of Sale
+description: 'GetirFood enforces a token-scoped rate limiter on the partner gateway. The default budget
+  is 300 requests per 60 seconds per token, after which the token is blocked for 20 seconds. Two endpoint
+  families carry much tighter budgets: the restaurant/menu read+config surface is capped at 2 requests
+  per 60 seconds (30s block) and cancel-options at 40 requests per 600 seconds (60s block). The /periodic
+  order-polling endpoints and several order-state transitions are explicitly exempt from the limiter.'
+scope: token
+exemptions:
+- /food-orders/periodic/* endpoints are excluded from the rate limiter.
+headers:
+  note: No rate-limit response headers are documented, and the Swagger document declares no 429 response.
+    Throttling surfaces as a blocked token for the block window.
+limits:
+- name: Default token budget
+  scope: token
+  metric: requests
+  limit: 300
+  timeFrame: 60 seconds
+  block: 20 seconds
+  applies_to: All rate-limited endpoints unless overridden below.
+- name: Restaurant, menu and payment-method configuration surface
+  scope: token
+  metric: requests
+  limit: 2
+  timeFrame: 60 seconds
+  block: 30 seconds
+  applies_to: 21 documented restaurant/*, products/option-products/* configuration operations.
+- name: Food order cancel options
+  scope: token
+  metric: requests
+  limit: 40
+  timeFrame: 600 seconds
+  block: 60 seconds
+  applies_to: GET /food-orders/{foodOrderId}/cancel-options
+endpoints:
+- method: POST
+  path: /auth/login
+  rate_limited: true
+  budget:
+    limit: 300
+    window_seconds: 60
+    block_seconds: 20
+- method: GET
+  path: /food-orders/report
+  rate_limited: true
+  budget:
+    limit: 300
+    window_seconds: 60
+    block_seconds: 20
+- method: GET
+  path: /food-orders/report/details
+  rate_limited: true
+  budget:
+    limit: 300
+    window_seconds: 60
+    block_seconds: 20
+- method: POST
+  path: /food-orders/report/details
+  rate_limited: true
+  budget:
+    limit: 300
+    window_seconds: 60
+    block_seconds: 20
+- method: GET
+  path: /food-orders/{foodOrderId}/available-restaurants-for-transfer
+  rate_limited: false
+  budget:
+    limit: 300
+    window_seconds: 60
+    block_seconds: 20
+- method: GET
+  path: /food-orders/{foodOrderId}/cancel-options
+  rate_limited: true
+  budget:
+    limit: 40
+    window_seconds: 600
+    block_seconds: 60
+- method: POST
+  path: /food-orders/active
+  rate_limited: true
+  budget:
+    limit: 300
+    window_seconds: 60
+    block_seconds: 20
+- method: POST
+  path: /food-orders/periodic/cancelled
+  rate_limited: false
+  budget:
+    limit: 300
+    window_seconds: 60
+    block_seconds: 20
+- method: POST
+  path: /food-orders/periodic/unapproved
+  rate_limited: false
+  budget:
+    limit: 300
+    window_seconds: 60
+    block_seconds: 20
+- method: POST
+  path: /food-orders/{foodOrderId}/verify-scheduled
+  rate_limited: true
+  budget:
+    limit: 300
+    window_seconds: 60
+    block_seconds: 20
+- method: POST
+  path: /food-orders/{foodOrderId}/deliver
+  rate_limited: false
+  budget:
+    limit: 300
+    window_seconds: 60
+    block_seconds: 20
+- method: POST
+  path: /food-orders/{foodOrderId}/prepare
+  rate_limited: false
+  budget:
+    limit: 300
+    window_seconds: 60
+    block_seconds: 20
+- method: POST
+  path: /food-orders/{foodOrderId}/transfer-to-another-restaurant
+  rate_limited: false
+  budget:
+    limit: 300
+    window_seconds: 60
+    block_seconds: 20
+- method: POST
+  path: /food-orders/{foodOrderId}/handover
+  rate_limited: false
+  budget:
+    limit: 300
+    window_seconds: 60
+    block_seconds: 20
+- method: POST
+  path: /food-orders/{foodOrderId}/cancel
+  rate_limited: false
+  budget:
+    limit: 300
+    window_seconds: 60
+    block_seconds: 20
+- method: POST
+  path: /food-orders/{foodOrderId}/verify
+  rate_limited: false
+  budget:
+    limit: 300
+    window_seconds: 60
+    block_seconds: 20
+- method: GET
+  path: /payment-methods
+  rate_limited: true
+  budget:
+    limit: 300
+    window_seconds: 60
+    block_seconds: 20
+- method: GET
+  path: /products/{productId}/status
+  rate_limited: true
+  budget:
+    limit: 300
+    window_seconds: 60
+    block_seconds: 20
+- method: PUT
+  path: /products/{productId}/status
+  rate_limited: true
+  budget:
+    limit: 300
+    window_seconds: 60
+    block_seconds: 20
+- method: GET
+  path: /products/chain-id/{chainProductId}/status
+  rate_limited: true
+  budget:
+    limit: 300
+    window_seconds: 60
+    block_seconds: 20
+- method: PUT
+  path: /products/chain-id/{chainProductId}/status
+  rate_limited: true
+  budget:
+    limit: 300
+    window_seconds: 60
+    block_seconds: 20
+- method: POST
+  path: /products/{productId}/inactivate-as-option
+  rate_limited: true
+  budget:
+    limit: 300
+    window_seconds: 60
+    block_seconds: 20
+- method: POST
+  path: /products/{productId}/activate-as-option
+  rate_limited: true
+  budget:
+    limit: 300
+    window_seconds: 60
+    block_seconds: 20
+- method: POST
+  path: /products/chain-id/{chainProductId}/activate-as-option
+  rate_limited: true
+  budget:
+    limit: 300
+    window_seconds: 60
+    block_seconds: 20
+- method: POST
+  path: /products/chain-id/{chainProductId}/inactivate-as-option
+  rate_limited: true
+  budget:
+    limit: 300
+    window_seconds: 60
+    block_seconds: 20
+- method: POST
+  path: /products/option-products/{optionProductId}/activate-as-option
+  rate_limited: true
+  budget:
+    limit: 300
+    window_seconds: 60
+    block_seconds: 20
+- method: POST
+  path: /products/option-products/{optionProductId}/inactivate-as-option
+  rate_limited: true
+  budget:
+    limit: 300
+    window_seconds: 60
+    block_seconds: 20
+- method: POST
+  path: /products/option-products/chain-id/{chainOptionProductId}/activate-as-option
+  rate_limited: true
+  budget:
+    limit: 300
+    window_seconds: 60
+    block_seconds: 20
+- method: POST
+  path: /products/option-products/chain-id/{chainOptionProductId}/inactivate-as-option
+  rate_limited: true
+  budget:
+    limit: 300
+    window_seconds: 60
+    block_seconds: 20
+- method: PUT
+  path: /products/{productId}/option-categories/{optionCategoryId}/options/{optionId}/status
+  rate_limited: true
+  budget:
+    limit: 300
+    window_seconds: 60
+    block_seconds: 20
+- method: PUT
+  path: /products/chain-id/{chainProductId}/option-categories/{chainOptionCategoryId}/options/{chainOptionId}/status
+  rate_limited: true
+  budget:
+    limit: 300
+    window_seconds: 60
+    block_seconds: 20
+- method: GET
+  path: /restaurants
+  rate_limited: true
+  budget:
+    limit: 2
+    window_seconds: 60
+    block_seconds: 30
+- method: GET
+  path: /restaurants/menu
+  rate_limited: true
+  budget:
+    limit: 2
+    window_seconds: 60
+    block_seconds: 30
+- method: GET
+  path: /restaurants/option-products
+  rate_limited: true
+  budget:
+    limit: 2
+    window_seconds: 60
+    block_seconds: 30
+- method: GET
+  path: /restaurants/payment-methods
+  rate_limited: true
+  budget:
+    limit: 2
+    window_seconds: 60
+    block_seconds: 30
+- method: POST
+  path: /restaurants/payment-methods
+  rate_limited: true
+  budget:
+    limit: 2
+    window_seconds: 60
+    block_seconds: 30
+- method: DELETE
+  path: /restaurants/payment-methods
+  rate_limited: true
+  budget:
+    limit: 2
+    window_seconds: 60
+    block_seconds: 30
+- method: GET
+  path: /restaurants/zones
+  rate_limited: true
+  budget:
+    limit: 2
+    window_seconds: 60
+    block_seconds: 30
+- method: GET
+  path: /restaurants/zones/{zoneId}
+  rate_limited: true
+  budget:
+    limit: 2
+    window_seconds: 60
+    block_seconds: 30
+- method: POST
+  path: /restaurants/courier/disable
+  rate_limited: true
+  budget:
+    limit: 2
+    window_seconds: 60
+    block_seconds: 30
+- method: POST
+  path: /restaurants/courier/enable
+  rate_limited: true
+  budget:
+    limit: 2
+    window_seconds: 60
+    block_seconds: 30
+- method: POST
+  path: /restaurants/payment-methods/active
+  rate_limited: true
+  budget:
+    limit: 2
+    window_seconds: 60
+    block_seconds: 30
+- method: POST
+  path: /restaurants/payment-methods/inactive
+  rate_limited: true
+  budget:
+    limit: 2
+    window_seconds: 60
+    block_seconds: 30
+- method: PUT
+  path: /restaurants/average-preparation-time
+  rate_limited: true
+  budget:
+    limit: 2
+    window_seconds: 60
+    block_seconds: 30
+- method: PUT
+  path: /restaurants/delivery-duration
+  rate_limited: true
+  budget:
+    limit: 2
+    window_seconds: 60
+    block_seconds: 30
+- method: DELETE
+  path: /restaurants/delivery-duration
+  rate_limited: true
+  budget:
+    limit: 2
+    window_seconds: 60
+    block_seconds: 30
+- method: PUT
+  path: /restaurants/status/close
+  rate_limited: true
+  budget:
+    limit: 2
+    window_seconds: 60
+    block_seconds: 30
+- method: PUT
+  path: /restaurants/status/open
+  rate_limited: true
+  budget:
+    limit: 2
+    window_seconds: 60
+    block_seconds: 30
+- method: PUT
+  path: /restaurants/zones/{zoneId}/inactive
+  rate_limited: true
+  budget:
+    limit: 2
+    window_seconds: 60
+    block_seconds: 30
+- method: PUT
+  path: /restaurants/zones/{zoneId}/active
+  rate_limited: true
+  budget:
+    limit: 2
+    window_seconds: 60
+    block_seconds: 30
+- method: PUT
+  path: /restaurants/option-products/{optionProductId}/option-categories/{optionCategoryId}/options/{optionId}/status
+  rate_limited: true
+  budget:
+    limit: 2
+    window_seconds: 60
+    block_seconds: 30
+- method: PUT
+  path: /restaurants/option-products/chain-id/{chainOptionProductId}/option-categories/{chainOptionCategoryId}/options/{chainOptionId}/status
+  rate_limited: true
+  budget:
+    limit: 2
+    window_seconds: 60
+    block_seconds: 30
+x-evidence:
+  fetched: '2026-07-31'
+  docs_api: https://food-pos-api-gateway.getirapi.com/v1/documentations/contents?title=5&language=en
+  http_status: 200
+  endpoints_recorded: 52

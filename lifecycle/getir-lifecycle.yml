@@ -1,0 +1,90 @@
+generated: '2026-07-31'
+method: searched
+source: >-
+  https://developers.getir.com/food/documentation/giris + the live Swagger document at
+  https://food-external-api-gateway.getirapi.com/swagger.json + the public status page.
+description: >-
+  Lifecycle posture for the GetirFood partner API. Getir versions the API through the Swagger
+  `info.version` field and exposes a machine-readable changelog endpoint, but publishes no
+  deprecation policy, no Sunset/Deprecation header support and no SLA document.
+
+versioning:
+  scheme: document-version
+  current: 1.5.8
+  in_uri: false
+  in_header: false
+  docs: https://developers.getir.com/food/api-documentation
+  note: >-
+    Environments are selected by host (production vs development gateway), not by a version
+    segment. No version negotiation mechanism is documented.
+
+changelog:
+  endpoint: GET /changelog
+  operationId: getChangelog
+  url: https://food-external-api-gateway.getirapi.com/changelog
+  authenticated: false
+  detail: changelog/getir-changelog.yml
+
+deprecation:
+  policy_url: null
+  policy_published: false
+  sunset_header: false
+  deprecation_header: false
+  note: >-
+    No deprecation or sunset policy was found on the developer portal, in the docs content API,
+    or in the Swagger document. No `Deprecation` pointer is emitted for this provider.
+
+deprecated_operations: []
+deprecated_operations_note: >-
+  Zero of the 62 operations in openapi/getir-food-openapi.yml carry `deprecated: true`.
+
+sla:
+  url: null
+  uptime_target: null
+  note: No published SLA or uptime commitment was found.
+
+status_page:
+  url: https://getir-food-integration.instatus.com/
+  provider: Instatus
+  components:
+  - food-external-api-gateway
+  feeds:
+    rss: https://getir-food-integration.instatus.com/default/history.rss
+    atom: https://getir-food-integration.instatus.com/default/history.atom
+  observed_status: All systems operational; no incidents reported in the past 7 days
+  observed_on: '2026-07-31'
+
+health_check:
+  endpoint: GET /health
+  operationId: getHealth
+  authenticated: false
+  observed_response: '{"time":1785542262531,"status":"OK"}'
+  observed_on: '2026-07-31'
+
+onboarding:
+  self_service: false
+  process: >-
+    A restaurant asks its POS or integrator company to request an account from Getir. Getir
+    issues test and live credentials. Go-live requires completing a published test checklist
+    and sending a confirmation e-mail with an order receipt printout.
+  contact: getiryemekapi@getir.com
+  detail: sandbox/getir-sandbox.yml
+
+corporate_context:
+  note: >-
+    In February 2026 Uber agreed to acquire Getir's Türkiye delivery business (food, grocery,
+    retail and water) for $335M plus a $100M minority stake in the remaining portfolio; the
+    Turkish Competition Authority cleared the transaction in June 2026 subject to a $500M
+    Türkiye investment commitment. Uber has said the acquired unit will be merged with
+    Trendyol Go. As of the probe date the GetirFood developer portal, docs content API,
+    production gateway and status page are all live and serving.
+  observed_on: '2026-07-31'
+  evidence:
+  - https://investor.uber.com/news-events/news/press-release-details/2026/Uber-Doubles-Down-on-Trkiye-with-Agreement-to-Acquire-Getirs-Delivery-Business/default.aspx
+  - https://www.agbi.com/retail/2026/06/turkey-clears-uber-takeover-of-getirs-delivery-arm/
+
+x-evidence:
+  fetched: '2026-07-31'
+  swagger_http_status: 200
+  status_page_http_status: 200
+  health_http_status: 200

@@ -1,0 +1,80 @@
+generated: '2026-07-31'
+method: searched
+source: https://developers.getir.com/food/documentation/giris — "Authentication" section, served by
+  https://food-pos-api-gateway.getirapi.com/v1/documentations/contents?title=4&language=en
+docs: https://developers.getir.com/food/documentation/giris
+description: >-
+  GetirFood does not declare securityDefinitions in its Swagger 2.0 document. Authentication is
+  a two-step, documented-only model: POST /auth/login exchanges the company/restaurant secret
+  keys for a bearer-style opaque token, which is then supplied as a REQUIRED `token` request
+  HEADER on every other operation (57 of 62 operations carry it as an explicit header
+  parameter). There is no OAuth 2.0, no OpenID Connect and no scope surface, so scopes/ is
+  intentionally absent for this provider.
+summary:
+  types: [custom-token]
+  api_key_in: [header]
+  oauth2_flows: []
+  declared_in_spec: false
+  documented_in_docs: true
+schemes:
+- name: token
+  type: apiKey
+  in: header
+  parameter: token
+  required: true
+  applies_to_operations: 57
+  description: >-
+    Opaque session token returned by POST /auth/login. Sent on every authenticated request as
+    the `token` HTTP header. The Swagger document models it as an individual header parameter
+    on each operation rather than as a global security scheme.
+  sources:
+  - openapi/getir-food-openapi.yml
+  - https://developers.getir.com/food/documentation/giris
+login:
+  operation_id: postAuthLogin
+  method: POST
+  path: /auth/login
+  request_schema: '#/definitions/Login Schema'
+  response_schema: '#/definitions/Login Response Schema'
+  credentials:
+  - name: appSecretKey
+    description: Secret key issued to the integrating company (POS / integrator).
+  - name: restaurantSecretKey
+    description: Secret key issued per restaurant being managed.
+  spec_description: >-
+    "Authentication is performed via HTTP Basic Auth. Use your appSecretKey and
+    restaurantSecretKey taking new token for reaching all routes." (verbatim from the
+    operation description in the Swagger document)
+  note: >-
+    The operation description says "HTTP Basic Auth" while the request is modelled as a JSON
+    body carrying the two secret keys; the docs describe it as a secret-key login. Recorded as
+    published — not reconciled by us.
+token:
+  ttl: 3600
+  ttl_human: 1 hour
+  refresh: Call POST /auth/login again to obtain a new token; there is no refresh-token flow.
+  docs_quote: >-
+    "The validity period of the token is 1 hour. As the token will expire at the end of this
+    period, you need to login again and get a new one."
+credential_issuance:
+  process: >-
+    Credentials are not self-service. A restaurant asks its POS/integrator company to request
+    an account from Getir; both test and live credentials are issued by Getir.
+  contact: getiryemekapi@getir.com
+  docs: https://developers.getir.com/food/documentation/giris
+webhook_authentication:
+  mechanism: x-api-key
+  direction: Getir -> partner (outbound order push)
+  description: >-
+    Partners register a new-order URL and a cancel-order URL plus a single `x-api-key` value
+    that Getir sends on both callbacks. The same x-api-key value must be used for both URLs.
+  detail: asyncapi/getir-food-webhooks.yml
+transport_security:
+  tls_minimum: TLSv1.2_2019
+  docs_quote: 'TLS Versiyon: TLSv1.2_2019 and above'
+  source: https://developers.getir.com/food/documentation/giris
+x-evidence:
+  fetched: '2026-07-31'
+  spec: https://food-external-api-gateway.getirapi.com/swagger.json
+  docs_api: https://food-pos-api-gateway.getirapi.com/v1/documentations/contents?title=4&language=en
+  http_status: 200

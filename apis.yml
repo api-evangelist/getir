@@ -1,18 +1,102 @@
 aid: getir
 name: Getir
-description: 'Getir is a company surfaced via the API Evangelist harvest backlog (source: secondary-market)
-  and added to the network as a stub for full-pipeline profiling.'
+description: >-
+  Getir is an Istanbul-based on-demand delivery company, founded in 2015, that pioneered the
+  ultrafast "groceries in minutes" model and grew into a super-app spanning rapid grocery
+  (Getir), large-basket grocery (GetirBüyük), water (GetirSu), restaurant food delivery
+  (GetirYemek / GetirFood) and local-merchant commerce (GetirÇarşı / GetirLocals). Its
+  developer-facing surface is a partner-integration platform rather than a public product API:
+  Getir publishes the GetirFood API — a Swagger 2.0 contract at
+  food-external-api-gateway.getirapi.com covering restaurant onboarding, menu and product
+  status, working hours, delivery zones, payment methods and the full food-order lifecycle
+  (verify, prepare, handover, deliver, cancel, transfer) — for POS and integrator companies
+  that connect restaurant point-of-sale systems to GetirFood. Orders are pushed to partners
+  over webhooks, with a documented rate limiter, a 99-entry service error registry, published
+  test cards and a dedicated test environment. In February 2026 Uber agreed to acquire Getir's
+  Türkiye delivery business, cleared by the Turkish Competition Authority in June 2026.
 url: https://raw.githubusercontent.com/api-evangelist/getir/refs/heads/main/apis.yml
+image: https://developers.getir.com/assets/getir-developers-logo-BbJf7m5Z.svg
 x-type: company
 x-source: harvest:secondary-market
-x-tier: stub
-x-tier-reason: harvest
 specificationVersion: '0.20'
 created: '2026-07-31'
 modified: '2026-07-31'
 tags:
 - Company
-apis: []
+- Food Delivery
+- Grocery Delivery
+- On-Demand Delivery
+- Logistics
+- Restaurants
+- Point of Sale
+- Marketplace
+- Turkey
+- Partner Integration
+apis:
+- name: GetirFood API
+  description: >-
+    The GetirFood (GetirYemek) partner integration API — a Swagger 2.0 contract with 62
+    operations across seven tags (auth, restaurants, products, chain-menus, food-orders,
+    payment-methods, changelog, health). It lets a POS or integrator company authenticate
+    with company + restaurant secret keys, read and mutate restaurant state (open/close,
+    working hours, delivery zones, average preparation time, courier service, payment
+    methods), manage menu/product and option availability, and drive the food-order
+    lifecycle: verify, verify-scheduled, prepare, handover, deliver, cancel, transfer to
+    another restaurant, and invoice attachment. New and cancelled orders are pushed to
+    partner-hosted webhook URLs; /food-orders/periodic/unapproved and /food-orders/active
+    are the documented backup queries.
+  humanURL: https://developers.getir.com/food/documentation/giris
+  baseURL: https://food-external-api-gateway.getirapi.com
+  image: https://developers.getir.com/assets/getir-food-logo-tr-D65QhRcl.svg
+  tags:
+  - Food Delivery
+  - Restaurants
+  - Orders
+  - Menus
+  - Point of Sale
+  - Webhooks
+  properties:
+  - type: OpenAPI
+    url: openapi/getir-food-openapi.yml
+  - type: Swagger
+    url: openapi/_original/getir-food-openapi.json
+  - type: Documentation
+    url: https://developers.getir.com/food/documentation/giris
+  - type: APIReference
+    url: https://developers.getir.com/food/api-documentation
+  - type: GettingStarted
+    url: https://developers.getir.com/food/documentation/giris
+  - type: Authentication
+    url: authentication/getir-authentication.yml
+  - type: RateLimits
+    url: rate-limits/getir-rate-limits.yml
+  - type: ErrorCatalog
+    url: errors/getir-error-codes.yml
+  - type: Webhooks
+    url: asyncapi/getir-food-webhooks.yml
+  - type: Sandbox
+    url: sandbox/getir-sandbox.yml
+  - type: Conventions
+    url: conventions/getir-conventions.yml
+  - type: DataModel
+    url: data-model/getir-data-model.yml
+  - type: Overlay
+    url: overlays/getir-food-overlay.yaml
+  - type: Conformance
+    url: conformance/getir-conformance.yml
+  - type: Lifecycle
+    url: lifecycle/getir-lifecycle.yml
+  - type: ChangeLog
+    url: changelog/getir-changelog.yml
+  - type: AgentSkill
+    url: skills/_index.yml
+  - type: StatusPage
+    url: https://getir-food-integration.instatus.com/
+x-enrichment:
+  date: '2026-07-31'
+  status: enriched
+  artifacts_added: 25
+  pass: local-v1
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
@@ -20,4 +104,52 @@ maintainers:
   email: info@apis.io
 common:
 - type: Website
-  url: https://forgeglobal.com/getir_stock/
+  url: https://getir.com/
+- type: DeveloperPortal
+  url: https://developers.getir.com/
+- type: Documentation
+  url: https://developers.getir.com/food/documentation/giris
+- type: APIReference
+  url: https://developers.getir.com/food/api-documentation
+- type: GettingStarted
+  url: https://developers.getir.com/food/documentation/giris
+- type: Support
+  url: mailto:getiryemekapi@getir.com
+- type: StatusPage
+  url: https://getir-food-integration.instatus.com/
+- type: GitHubOrganization
+  url: https://github.com/getir
+- type: PrivacyPolicy
+  url: https://getir.com/yardim/gizlilik-politikasi/
+- type: Authentication
+  url: authentication/getir-authentication.yml
+- type: RateLimits
+  url: rate-limits/getir-rate-limits.yml
+- type: ErrorCatalog
+  url: errors/getir-error-codes.yml
+- type: Webhooks
+  url: asyncapi/getir-food-webhooks.yml
+- type: Sandbox
+  url: sandbox/getir-sandbox.yml
+- type: Conventions
+  url: conventions/getir-conventions.yml
+- type: DataModel
+  url: data-model/getir-data-model.yml
+- type: Conformance
+  url: conformance/getir-conformance.yml
+- type: Lifecycle
+  url: lifecycle/getir-lifecycle.yml
+- type: ChangeLog
+  url: changelog/getir-changelog.yml
+- type: AgentSkill
+  url: skills/_index.yml
+- type: Packages
+  url: packages/getir-packages.yml
+- type: LLMsTxt
+  url: llms/getir-llms.txt
+- type: AgenticAccess
+  url: agentic-access/getir-agentic-access.yml
+- type: DomainSecurity
+  url: security/getir-domain-security.yml
+- type: Overlay
+  url: overlays/getir-food-overlay.yaml

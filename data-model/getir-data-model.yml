@@ -1,0 +1,134 @@
+generated: '2026-07-31'
+method: derived
+source: openapi/getir-food-openapi.yml (Swagger 2.0, 63 definitions, 54 paths, 62 operations)
+description: >-
+  Entity-relationship graph for the GetirFood partner API, derived from the Swagger definitions,
+  their $ref links, and the id-reference fields carried on request/response bodies. The spec
+  names most nested schemas generically (Model1..Model37), so entities below are anchored on the
+  named definitions and on the path structure, which carries the real resource hierarchy.
+
+id_style: MongoDB ObjectId (24-character hex) — the docs type order, client, courier, product
+  and restaurant identifiers as `ObjectId`.
+
+entities:
+- name: Company
+  description: The POS / integrator company holding the appSecretKey. Not directly addressable; it scopes every credential.
+  identified_by: appSecretKey
+  operations: [postAuthLogin]
+- name: Session
+  description: The opaque token returned by login, scoped to one restaurant.
+  schema: Login Response Schema
+  fields: [restaurantId, token]
+  operations: [postAuthLogin]
+- name: Restaurant
+  description: A restaurant affiliated with the integrating company. The implicit subject of nearly every operation — selected by the token, not by a path parameter.
+  schema: restaurant
+  fields: [id, name, brand]
+  operations: [getRestaurants, getRestaurantsMenu, getRestaurantsReviews, putRestaurantsStatusOpen,
+    putRestaurantsStatusClose, putRestaurantsAveragepreparationtime, putRestaurantsDeliverydurationBusyness,
+    postRestaurantsCourierEnable, postRestaurantsCourierDisable, postRestaurantsPosstatus, putRestaurantsPosstatus]
+- name: Brand
+  description: The chain/brand a restaurant belongs to. Chain-level menus and products hang off it.
+  schema: brand
+  fields: [id, name]
+- name: WorkingHours
+  description: Per-day open/close windows for a restaurant.
+  schema: restaurantWorkingHours (array of workingHours {startTime, endTime})
+  operations: [getRestaurantsWorkinghours, putRestaurantsWorkinghours]
+- name: Zone
+  description: A delivery zone attached to a restaurant, individually activatable, with ETA options.
+  operations: [getRestaurantsZones, getRestaurantsZonesZoneid, getRestaurantsZonesEta,
+    putRestaurantsZonesZoneidActive, putRestaurantsZonesZoneidInactive, putRestaurantsRestaurantidZonesZoneid]
+- name: PaymentMethod
+  description: A payment method, globally listed and then attached to / activated on a restaurant.
+  operations: [getPaymentmethods, getRestaurantsPaymentmethods, postRestaurantsPaymentmethods,
+    deleteRestaurantsPaymentmethods, postRestaurantsPaymentmethodsActive, postRestaurantsPaymentmethodsInactive]
+- name: Product
+  description: A menu product belonging to a restaurant, with an availability status togglable by restaurant product id or by chain product id.
+  operations: [getProductsProductidStatus, putProductsProductidStatus, getProductsChainidChainproductidStatus,
+    putProductsChainidChainproductidStatus, postProductsProductidActivateasoption, postProductsProductidInactivateasoption,
+    postProductsChainidChainproductidActivateasoption, postProductsChainidChainproductidInactivateasoption]
+- name: OptionCategory
+  description: A group of options attached to a product (e.g. size, extras).
+  schema: optionCategories
+- name: Option
+  description: An individual selectable option within an option category; status togglable per restaurant or per chain id.
+  operations: [getRestaurantsOptionproducts, putRestaurantsOptionproductsChainidChainoptionproductidOptioncategoriesChainoptioncategoryidOptionsChainoptionidStatus]
+- name: ChainMenu
+  description: A brand-level menu shared across the chain's restaurants, with chain option categories and bulk price updates.
+  operations: [getChainmenus, getChainmenusChainmenuoid, getChainmenusChainoptioncategories, postChainmenusChainmenuoidUpdateprices]
+- name: FoodOrder
+  description: The central transactional entity — an order placed by a client at a restaurant, driven through verify/prepare/handover/deliver/cancel/transfer.
+  schema: Get Food Order Response Schema
+  fields: [id, status, isScheduled, confirmationId, client, courier, products, clientNote,
+    totalPrice, totalDiscountedPrice, checkoutDate, scheduledDate, verifyDate, scheduleVerifiedDate,
+    prepareDate, handoverDate, reachDate, deliverDate, deliveryType, isEcoFriendly]
+  operations: [getFoodordersFoodorderid, postFoodordersActive, postFoodordersPeriodicUnapproved,
+    postFoodordersPeriodicCancelled, postFoodordersFoodorderidVerify, postFoodordersFoodorderidVerifyscheduled,
+    postFoodordersFoodorderidPrepare, postFoodordersFoodorderidHandover, postFoodordersFoodorderidDeliver,
+    postFoodordersFoodorderidCancel, postFoodordersFoodorderidTransfertoanotherrestaurant,
+    putFoodordersFoodorderidRestaurantpaneloperation]
+- name: Client
+  description: The consumer who placed the order, with delivery address and location. Phone numbers are delivered both masked and unmasked.
+  schema: client
+  fields: [id, name, location, clientPhoneNumber, clientUnmaskedPhoneNumber, contactPhoneNumber, deliveryAddress]
+- name: DeliveryAddress
+  schema: deliveryAddress
+  fields: [id, address, aptNo, floor, doorNo, city, district, description]
+- name: Location
+  schema: location
+  fields: [lat, lon]
+- name: Courier
+  description: The courier assigned to an order — a Getir courier (deliveryType 1) or the restaurant's own (deliveryType 2).
+  schema: courier
+  fields: [id, status, name, location]
+- name: CancelReason
+  schema: cancelReason
+  fields: [id, "messages{tr,en}", cancelSource]
+  operations: [getFoodordersFoodorderidCanceloptions]
+- name: Invoice
+  description: An invoice photo or PDF URL attached to a food order.
+  operations: [getFoodordersFoodorderidInvoice, postFoodordersFoodorderidInvoice,
+    deleteFoodordersFoodorderidInvoice, postFoodordersFoodorderidInvoiceurl]
+- name: Review
+  description: Customer reviews for a restaurant.
+  operations: [getRestaurantsReviews]
+- name: Report
+  description: Date-bounded food-order reporting, capped at a maximum day range (error 99).
+  operations: [getFoodordersReport, getFoodordersReportDetails]
+
+relationships:
+- {from: Company, to: Restaurant, type: has_many, via: appSecretKey + restaurantSecretKey}
+- {from: Session, to: Restaurant, type: belongs_to, via: restaurantId}
+- {from: Restaurant, to: Brand, type: belongs_to, via: brand.id}
+- {from: Restaurant, to: WorkingHours, type: has_many, via: restaurantWorkingHours}
+- {from: Restaurant, to: Zone, type: has_many, via: zoneId}
+- {from: Restaurant, to: PaymentMethod, type: has_many, via: /restaurants/payment-methods}
+- {from: Restaurant, to: Product, type: has_many, via: productId}
+- {from: Restaurant, to: FoodOrder, type: has_many, via: restaurant.id}
+- {from: Restaurant, to: Review, type: has_many, via: /restaurants/reviews}
+- {from: Brand, to: ChainMenu, type: has_many, via: chainMenuOID}
+- {from: ChainMenu, to: Product, type: has_many, via: chainProductId}
+- {from: Product, to: OptionCategory, type: has_many, via: optionCategories}
+- {from: OptionCategory, to: Option, type: has_many, via: options}
+- {from: FoodOrder, to: Client, type: has_one, via: client}
+- {from: FoodOrder, to: Courier, type: has_one, via: courier}
+- {from: FoodOrder, to: Product, type: has_many, via: "products[].product"}
+- {from: FoodOrder, to: Restaurant, type: belongs_to, via: restaurant.id}
+- {from: FoodOrder, to: CancelReason, type: has_one, via: cancelReason}
+- {from: FoodOrder, to: Invoice, type: has_one, via: "/food-orders/{foodOrderId}/invoice"}
+- {from: FoodOrder, to: Restaurant, type: transfers_to, via: "/food-orders/{foodOrderId}/transfer-to-another-restaurant"}
+- {from: Client, to: DeliveryAddress, type: has_one, via: deliveryAddress}
+- {from: Client, to: Location, type: has_one, via: location}
+- {from: Courier, to: Location, type: has_one, via: location}
+
+privacy_note: >-
+  Order payloads carry consumer PII — name, masked and UNMASKED phone number
+  (clientUnmaskedPhoneNumber), full delivery address down to floor/door number, and lat/lon.
+  Integrators receive this over the outbound webhook as well as over the REST API.
+
+x-evidence:
+  derived_from: openapi/getir-food-openapi.yml
+  definitions: 63
+  operations: 62
+  generated_on: '2026-07-31'

@@ -1,0 +1,445 @@
+generated: '2026-07-31'
+method: searched
+source: https://developers.getir.com/food/documentation/giris — "Service Error Messages" section, served
+  by https://food-pos-api-gateway.getirapi.com/v1/documentations/contents?title=10&language=en
+docs: https://developers.getir.com/food/documentation/giris
+format: proprietary
+description: GetirFood publishes a numeric service-error registry rather than RFC 9457 problem+json. Every
+  error response is a JSON envelope carrying a numeric `code`, a PascalCase `error` name and a human `message`;
+  validation failures add a `details[]` array and a `source` field naming the offending request part.
+  The 99 domain errors below are the published registry; the envelope-level codes were observed live against
+  the production gateway.
+envelope:
+  fields:
+    code: Numeric error code — the registry code below, or a negative/gateway code.
+    error: PascalCase error name.
+    message: Human readable message (English).
+    details: Optional array of validation failures (message, path, type, context).
+    source: Optional — which part of the request failed validation (e.g. "headers").
+  content_type: application/json; charset=utf-8
+  observed_example:
+    code: -2
+    error: ValidationError
+    message: '"token" is required'
+    source: headers
+envelope_codes:
+- code: -1
+  error: UnknownError
+  message: Unknown Error.
+  status: 500
+  method: probed
+  evidence: GET https://external-api-gateway.getirapi.com/swagger.json
+- code: -2
+  error: ValidationError
+  message: Request validation failed; see details[] and source.
+  status: 400
+  method: probed
+  evidence: GET https://food-external-api-gateway.getirapi.com/restaurants (no token header)
+- code: 22
+  error: RouteNotFoundError
+  message: RouteNotFundError
+  status: 404
+  method: probed
+  evidence: GET https://food-external-api-gateway.getirapi.com/openapi.json
+error_count: 99
+errors:
+- code: 1
+  error: FoodOrderNotFound
+  message: food order not found
+  status: 404
+- code: 2
+  error: FoodOrderAlreadyVerified
+  message: This food order already verified
+  status: 400
+- code: 3
+  error: FoodOrderStatusInvalidError
+  message: food order status is invalid for given action
+  status: 400
+- code: 4
+  error: FoodOrderStatusLock
+  message: food order status warlock failed
+  status: 400
+- code: 5
+  error: ClientAccountClosed
+  message: client account closed
+  status: 400
+- code: 6
+  error: ClientBanned
+  message: client is banned
+  status: 400
+- code: 7
+  error: ClientIsNotActivated
+  message: client is not activated
+  status: 400
+- code: 8
+  error: ClientHasNotPaymentOptions
+  message: client has not payment options
+  status: 400
+- code: 9
+  error: ClientStatusIsNotFree
+  message: client status is not free
+  status: 400
+- code: 10
+  error: ClientAddressNull
+  message: client address not found
+  status: 400
+- code: 11
+  error: FoodOrderCanNotBeCancelled
+  message: order can not be cancelled
+  status: 400
+- code: 12
+  error: FoodOrderCancelCallerTypeInvalid
+  message: caller type invalid
+  status: 400
+- code: 13
+  error: FoodOrderAlreadyCancelled
+  message: food order already cancelled
+  status: 400
+- code: 14
+  error: CourierStatusInvalid
+  message: courier status is not valid for this action
+  status: 400
+- code: 15
+  error: CourierNotReachedToRestaurant
+  message: courier status is not reached to restaurant
+  status: 400
+- code: 16
+  error: FoodOrderAlreadyRatedError
+  message: food order already rated error
+  status: 400
+- code: 17
+  error: FoodOrderRateNotOpenError
+  message: food order rate not open error
+  status: 400
+- code: 18
+  error: FoodOrderRatePeriodExpiredError
+  message: food order rate period expired error
+  status: 400
+- code: 19
+  error: MasterPassPaymentFailed
+  message: unhandled masterpass error occurred
+  status: 400
+- code: 20
+  error: BKMExpressPaymentFailed
+  message: unhandled bkm express error occurred
+  status: 400
+- code: 21
+  error: InvalidPaymentMethod
+  message: invalid payment method
+  status: 400
+- code: 22
+  error: ClientAlreadyHaveFoodOrder
+  message: client already have food order
+  status: 400
+- code: 23
+  error: NoCourierAvailable
+  message: there is no courier available for given request
+  status: 400
+- code: 24
+  error: UnderMinimumBasketSize
+  message: food order is under min basketsize
+  status: 400
+- code: 25
+  error: InconsistentFoodOrderChargeAmount
+  message: inconsistent food order charge amount
+  status: 400
+- code: 26
+  error: FoodOrderUpperPaymentLimitExceeded
+  message: upper payment limit exceeded
+  status: 400
+- code: 27
+  error: InactiveProductsInFoodOrder
+  message: inactive products in food order
+  status: 400
+- code: 28
+  error: FoodOrderRestaurantChange
+  message: food order is from another restaurant
+  status: 400
+- code: 29
+  error: BKMDailyLimitOverError
+  message: BKM daily limit over error
+  status: 400
+- code: 30
+  error: BKMClientLimitError
+  message: BKM client limit error
+  status: 400
+- code: 31
+  error: BKMClosedForOnlineTransactionError
+  message: BKM closed for online transaction error
+  status: 400
+- code: 32
+  error: BKMNoRegisteredCardError
+  message: BKM no registered card error
+  status: 400
+- code: 33
+  error: CheckoutLockError
+  message: Checkout warlock error
+  status: 400
+- code: 34
+  error: MasterpassInsufficientFundsError
+  message: masterpass insufficient funds error
+  status: 400
+- code: 35
+  error: MasterpassIncorrectExpireDateError
+  message: masterpass incorrect expire date error
+  status: 400
+- code: 36
+  error: MasterpassTransactionDisapprovedError
+  message: masterpass transaction disapproved error
+  status: 400
+- code: 37
+  error: MasterpassCardClosedForOnlineTransactionsError
+  message: masterpass card closed for online transactions error
+  status: 400
+- code: 38
+  error: RestaurantIsNotOpen
+  message: restaurant is not open
+  status: 400
+- code: 39
+  error: NoteAddNotAllowed
+  message: Note add not allowed
+  status: 400
+- code: 40
+  error: ProductNotBelongsToRestaurantError
+  message: product not belongs to restaurant error
+  status: 400
+- code: 41
+  error: ProductNotActiveError
+  message: product not active error
+  status: 400
+- code: 42
+  error: FoodOrderCannotBeAborted
+  message: food order cannot be aborted
+  status: 400
+- code: 43
+  error: MasterpassRefundError
+  message: Masterpass refund error
+  status: 400
+- code: 44
+  error: BKMExpressRefundError
+  message: BKM refund error
+  status: 400
+- code: 45
+  error: InvalidPaymentMethodForPromo
+  message: invalid payment method
+  status: 400
+- code: 46
+  error: InvalidInput
+  message: invalid promotion
+  status: 400
+- code: 47
+  error: ClientAlreadyUsedThisPromo
+  message: client already used this promo
+  status: 400
+- code: 48
+  error: PromoIsNotOpenAtThisMoment
+  message: promo is not open
+  status: 400
+- code: 49
+  error: PromoMinError
+  message: promo min order is greater than order
+  status: 400
+- code: 50
+  error: FoodOrderRefundOutOfTimeError
+  message: food order refund error
+  status: 400
+- code: 51
+  error: FoodOrderRefundNotAllowedStatusError
+  message: food order refund not allowed status error
+  status: 400
+- code: 52
+  error: FoodOrderRefundDuplicationError
+  message: food order refund duplication error
+  status: 400
+- code: 53
+  error: ClientInBannedAddress
+  message: client in banned address
+  status: 400
+- code: 54
+  error: PromoNotValidForRestaurant
+  message: promo not valid for this food order restaurant
+  status: 400
+- code: 55
+  error: FoodOrderItemRefundCountInconvenientError
+  message: food order item count inconvenient to refund
+  status: 400
+- code: 56
+  error: FoodOrderInvoiceCreateError
+  message: food order invoice create error
+  status: 400
+- code: 57
+  error: InvoiceNotFound
+  message: invoice not found
+  status: 400
+- code: 58
+  error: InvoiceUrlNotReady
+  message: invoice url not Ready
+  status: 400
+- code: 59
+  error: FoodOrderNotHaveCancelReasonError
+  message: food order not have cancel reason error
+  status: 400
+- code: 60
+  error: FoodOrderDeliveryTypeNotFoundError
+  message: food order delivery type not found error
+  status: 400
+- code: 61
+  error: RestaurantNotHaveAvailableCourierError
+  message: restaurant not have available courier error
+  status: 400
+- code: 62
+  error: FoodOrderDeliveredToClientTimeLimitError
+  message: food order delivered to client time limit error
+  status: 400
+- code: 63
+  error: FoodOrderRatePeriodExpiredError
+  message: food order rate period expired error
+  status: 400
+- code: 64
+  error: FoodOrderCourierMismatchError
+  message: food order courier and given courier does not match
+  status: 400
+- code: 65
+  error: FoodOrderTotalPriceAndProductPricesIncompatibleError
+  message: food order total price and products total prices does not match
+  status: 400
+- code: 66
+  error: HexagonRestaurantDoesntExistError
+  message: restaurant doesnt serve calculated hexagon error
+  status: 400
+- code: 67
+  error: GGFoodCourierServiceNotActiveError
+  message: gg food courier service not active error
+  status: 400
+- code: 68
+  error: FoodOrderPaymentMethodInactiveError
+  message: food order payment method inactive error
+  status: 400
+- code: 69
+  error: PaybackActionCreateRateLimitError
+  message: Too many request
+  status: 400
+- code: 70
+  error: PaybackActionAlreadyExists
+  message: payback action already exists
+  status: 400
+- code: 71
+  error: FoodOrderHasNoCourierError
+  message: food order has no courier error
+  status: 400
+- code: 72
+  error: FoodOrderWebHookError
+  message: food order webhook error
+  status: 400
+- code: 73
+  error: RestaurantAppNotFound
+  message: restaurant app not found error
+  status: 400
+- code: 74
+  error: FoodOrderPreparedTimeLimitError
+  message: food order prepared time limit error
+  status: 400
+- code: 75
+  error: ScheduledOrderMinTimeAheadAfterCheckoutError
+  message: user tried to give order for the soon error
+  status: 400
+- code: 76
+  error: ScheduledOrderGetirDeliveryError
+  message: client sent getir delivery option along with schedule dates
+  status: 400
+- code: 77
+  error: FoodOrderScheduledTimeIsNotBetweenAvailableTimes
+  message: food order scheduled time is not between available times
+  status: 400
+- code: 78
+  error: SpecialScheduleDateNotFoundError
+  message: no special schedule hour specified but tried to be accessed
+  status: 400
+- code: 79
+  error: CannotVerifyBeforeActivationError
+  message: tried to verify before scheduled food order activation
+  status: 400
+- code: 80
+  error: ChainProductNotFoundOnTargetProduct
+  message: chain product not found on target product
+  status: 400
+- code: 81
+  error: ChainOptionCategoryNotFoundOnProductToBeTransferred
+  message: chain option category not found on the product to be transferred
+  status: 400
+- code: 82
+  error: ChainOptionNotFoundOnProductToBeTransferred
+  message: chain option not found on the product to be transferred
+  status: 400
+- code: 83
+  error: ChainOptionCategoryNotFoundOnTargetProduct
+  message: chain option category not found on target product
+  status: 400
+- code: 84
+  error: ChainOptionNotFoundOnTargetProduct
+  message: chain option not found on target product
+  status: 400
+- code: 85
+  error: InactiveItemsOnTargetProductError
+  message: there are some inactive items on the target products of the order
+  status: 400
+- code: 86
+  error: PriceMismatchOnTargetProductError
+  message: there are some price mismatches on the items of the target products of the order
+  status: 400
+- code: 87
+  error: DeliveryTypeNotEligibleForFoodOrderTransfer
+  message: delivery type is not eligible for food order transfer
+  status: 400
+- code: 88
+  error: StatusNotEligibleForFoodOrderTransfer
+  message: status is not eligible for food order transfer
+  status: 400
+- code: 89
+  error: TransferredFoodOrderError
+  message: food order was transferred before
+  status: 400
+- code: 90
+  error: TransferFoodOrderTimeLimitError
+  message: food order transfer time limit exceeded
+  status: 400
+- code: 91
+  error: PromoNotAvailableForTargetRestaurant
+  message: promo not available for target restaurant
+  status: 400
+- code: 92
+  error: RestaurantNotFound
+  message: restaurant not found
+  status: 400
+- code: 93
+  error: ChainRestaurantIsNotAllowedForFoodOrderTransfer
+  message: chain restaurant is not allowed to transfer food order
+  status: 400
+- code: 94
+  error: ProductNotFoundOnTargetRestaurant
+  message: product not found on target restaurant
+  status: 400
+- code: 95
+  error: NoProductAvailableForReorderError
+  message: no product available for reorder
+  status: 400
+- code: 96
+  error: OptionNotAvailableForReorderError
+  message: option not available for reorder error
+  status: 400
+- code: 97
+  error: PromoNotValidForOnDelivery
+  message: promo not valid for on delivery
+  status: 400
+- code: 98
+  error: TransactionIdNotFoundError
+  message: transaction id not found in food order for online payment
+  status: 400
+- code: 99
+  error: FoodOrderReportMaxDaysError
+  message: maximum day limit for food order report is ${FOOD_ORDER_REPORT_MAX_DAY} days
+  status: 400
+x-evidence:
+  fetched: '2026-07-31'
+  docs_api: https://food-pos-api-gateway.getirapi.com/v1/documentations/contents?title=10&language=en
+  http_status: 200

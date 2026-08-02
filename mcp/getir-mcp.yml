@@ -1,0 +1,57 @@
+generated: '2026-07-31'
+method: searched
+status: third-party
+official: false
+source: https://www.npmjs.com/package/@theyahia/getir-mcp
+description: >-
+  Getir publishes NO official MCP server. Searched the developer portal, the docs content API,
+  the GitHub org (0 public repos), npm under @modelcontextprotocol and the MCP registries — no
+  first-party hosted or stdio server exists. One community server was found and is recorded
+  here for completeness. Because Getir does not ship it, no `MCPServer` pointer is wired into
+  apis.yml: crediting Getir for a third party's wrapper would misstate their agent posture.
+
+first_party_server: null
+first_party_probes:
+- {target: 'https://developers.getir.com/ (developer portal)', result: no MCP surface}
+- {target: 'https://food-external-api-gateway.getirapi.com/mcp', result: 404 RouteNotFoundError}
+- {target: 'https://github.com/getir', result: org exists, 0 public repositories}
+- {target: 'npm @modelcontextprotocol/* + registry search "getir"', result: no first-party package}
+
+third_party_servers:
+- name: getir-mcp
+  package: '@theyahia/getir-mcp'
+  version: 1.0.1
+  registry: npm
+  url: https://www.npmjs.com/package/@theyahia/getir-mcp
+  repository: https://github.com/theYahia/getir-mcp
+  author: theYahia
+  transport: stdio
+  install: npx -y @theyahia/getir-mcp
+  official: false
+  endorsed_by_getir: false
+  configuration:
+    env:
+      GETIR_TOKEN: Bearer token from the Getir partner portal (required)
+  auth_divergence: >-
+    The package README describes "Bearer token authentication". The GetirFood API documents an
+    opaque token sent in a `token` REQUEST HEADER (not an Authorization: Bearer header),
+    obtained from POST /auth/login and valid for 1 hour. Recorded as a divergence, not
+    reconciled by us.
+  tools:
+  - {name: list_orders, description: List active/past/scheduled orders}
+  - {name: get_order, description: Get order details by ID}
+  - {name: accept_order, description: Accept an incoming order}
+  - {name: reject_order, description: Reject an order with reason}
+  - {name: list_products, description: List products in your store}
+  - {name: update_product_availability, description: Enable/disable a product}
+  - {name: update_product_price, description: Update product price}
+  - {name: get_store_status, description: Get current store open/busy status}
+  tools_source: >-
+    Tool names and descriptions read verbatim from the published npm README. tools/list was not
+    introspected because the server is stdio-only and requires a live partner token.
+  crosswalk: mcp/getir-tool-crosswalk.yml
+
+x-evidence:
+  fetched: '2026-07-31'
+  npm_metadata: https://registry.npmjs.org/@theyahia/getir-mcp
+  http_status: 200

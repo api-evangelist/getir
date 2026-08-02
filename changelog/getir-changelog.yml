@@ -1,0 +1,49 @@
+generated: '2026-07-31'
+method: searched
+source: https://food-external-api-gateway.getirapi.com/changelog
+docs: https://developers.getir.com/food/api-documentation
+description: >-
+  GetirFood exposes its changelog as an unauthenticated API endpoint (GET /changelog,
+  operationId getChangelog) rather than as a dated HTML page. The response is a structured
+  document of sections -> versions -> entries, each entry carrying a bilingual type
+  ("Added"/"Ekleme"), a bilingual title and description, and an ISO date.
+
+scheme: document-version
+current_version: 1.5.8
+current_version_source: openapi/getir-food-openapi.yml (info.version)
+
+feed:
+  type: api
+  url: https://food-external-api-gateway.getirapi.com/changelog
+  operationId: getChangelog
+  authenticated: false
+  http_status: 200
+  content_type: application/json; charset=utf-8
+
+structure:
+  sections:
+  - name: {tr: Yenilikler, en: Change log}
+  - name: {tr: Bilinen problemler, en: Known issues}
+  entry_fields: ["type{tr,en}", "title{tr,en}", date, "description{tr,en}"]
+
+entries:
+- version: 1.0.0
+  date: '2026-07-24'
+  type: Added
+  title: Sample title
+  description: Sample description
+  section: Change log
+
+observation:
+  note: >-
+    Recorded verbatim. As fetched on 2026-07-31 the live endpoint returned a single placeholder
+    entry ("Sample title" / "Örnek başlık", dated 2026-07-24) and an empty "Known issues"
+    section — the changelog surface exists and is machine-readable, but is not currently
+    populated with real release history. No history was invented to fill it.
+  fetched: '2026-07-31'
+
+x-evidence:
+  fetched: '2026-07-31'
+  url: https://food-external-api-gateway.getirapi.com/changelog
+  http_status: 200
+  body_bytes: 383

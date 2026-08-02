@@ -1,0 +1,34 @@
+generated: '2026-07-31'
+method: generated
+source: >-
+  Packaged Agent Skills generated from the GetirFood Swagger 2.0 document
+  (openapi/getir-food-openapi.yml) and the published integration documentation at
+  https://developers.getir.com/food/documentation/giris. Every operationId below was verified
+  verbatim against the spec; cross-cutting rules cite ../conventions/, ../errors/,
+  ../rate-limits/, ../authentication/, ../asyncapi/ and ../sandbox/.
+provider_published_skills: none found (no AGENTS.md, skills/ or agent guidance on developers.getir.com)
+skills:
+- file: getir-authenticate-and-read-restaurant.md
+  name: Authenticate and read a GetirFood restaurant
+  api: openapi/getir-food-openapi.yml
+  operations: [postAuthLogin, getRestaurants, getRestaurantsMenu, getRestaurantsWorkinghours,
+    getRestaurantsZones, getRestaurantsPaymentmethods]
+- file: getir-fulfil-food-order.md
+  name: Fulfil a GetirFood order end to end
+  api: openapi/getir-food-openapi.yml
+  operations: [postAuthLogin, postFoodordersPeriodicUnapproved, postFoodordersActive,
+    getFoodordersFoodorderid, postFoodordersFoodorderidVerify, postFoodordersFoodorderidVerifyscheduled,
+    postFoodordersFoodorderidPrepare, postFoodordersFoodorderidHandover, postFoodordersFoodorderidDeliver]
+- file: getir-cancel-or-transfer-order.md
+  name: Cancel or transfer a GetirFood order
+  api: openapi/getir-food-openapi.yml
+  operations: [postAuthLogin, getFoodordersFoodorderidCanceloptions, postFoodordersFoodorderidCancel,
+    getFoodordersFoodorderidAvailablerestaurantsfortransfer, postFoodordersFoodorderidTransfertoanotherrestaurant]
+- file: getir-manage-menu-availability.md
+  name: Manage GetirFood menu and restaurant availability
+  api: openapi/getir-food-openapi.yml
+  operations: [postAuthLogin, getRestaurantsMenu, getProductsProductidStatus, putProductsProductidStatus,
+    putProductsChainidChainproductidStatus, postProductsProductidInactivateasoption,
+    postProductsProductidActivateasoption, postChainmenusChainmenuoidUpdateprices,
+    putRestaurantsStatusClose, putRestaurantsStatusOpen, putRestaurantsAveragepreparationtime,
+    putRestaurantsDeliverydurationBusyness]

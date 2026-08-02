@@ -1,0 +1,138 @@
+generated: '2026-07-31'
+method: derived
+source: >-
+  mcp/getir-mcp.yml (8 tools read verbatim from the @theyahia/getir-mcp README) bound to
+  operationIds verified verbatim in openapi/getir-food-openapi.yml.
+description: >-
+  Binds every tool exposed by the only known Getir MCP server to the GetirFood OpenAPI
+  operation(s) that back it, so each tool inherits a REAL input contract from the spec instead
+  of a guessed one. The server is community-built and stdio-only, so its live tools/list could
+  not be introspected without a partner token — bindings are by name and semantics, and
+  confidence is recorded honestly. No tool, field or operation was invented.
+
+surfaces:
+  openapi:
+    file: openapi/getir-food-openapi.yml
+    spec: Swagger 2.0
+    version: 1.5.8
+    operations: 62
+    gated: false
+    note: The spec document is public; the operations themselves require a partner token.
+  graphql: null
+  mcp:
+    server: '@theyahia/getir-mcp'
+    official: false
+    transport: stdio
+    gated: true
+    note: tools/list requires GETIR_TOKEN; tool list taken from the published README.
+
+crosswalk:
+- tool: list_orders
+  category: orders
+  rest: [postFoodordersActive, postFoodordersPeriodicUnapproved, postFoodordersPeriodicCancelled]
+  binding: rest
+  confidence: medium
+  note: >-
+    One tool fans out to three distinct REST operations — active, unapproved and cancelled are
+    separate endpoints in the spec, and the tool description ("active/past/scheduled") does not
+    say which it calls. There is no single list-orders operation.
+- tool: get_order
+  category: orders
+  rest: [getFoodordersFoodorderid]
+  binding: rest
+  confidence: high
+- tool: accept_order
+  category: orders
+  rest: [postFoodordersFoodorderidVerify, postFoodordersFoodorderidVerifyscheduled]
+  binding: rest
+  confidence: medium
+  note: >-
+    Acceptance splits by order status in the API — status 400 uses /verify, status 325 uses
+    /verify-scheduled. A single accept_order tool cannot express that branch.
+- tool: reject_order
+  category: orders
+  rest: [postFoodordersFoodorderidCancel, getFoodordersFoodorderidCanceloptions]
+  binding: rest
+  confidence: medium
+  note: >-
+    Cancellation requires a cancel reason; /cancel-options supplies the valid reason set. Error
+    59 FoodOrderNotHaveCancelReasonError is raised when the reason is missing.
+- tool: list_products
+  category: menu
+  rest: [getRestaurantsMenu, getRestaurantsOptionproducts]
+  binding: rest
+  confidence: medium
+  note: There is no /products list operation; the menu endpoint is the product listing.
+- tool: update_product_availability
+  category: menu
+  rest: [putProductsProductidStatus, putProductsChainidChainproductidStatus]
+  binding: rest
+  confidence: high
+  note: Two variants — by restaurant product id, or by chain product id.
+- tool: update_product_price
+  category: menu
+  rest: [postChainmenusChainmenuoidUpdateprices]
+  binding: rest
+  confidence: low
+  note: >-
+    The public spec exposes price mutation only at CHAIN MENU level
+    (POST /chain-menus/{chainMenuOID}/update-prices). No per-product price endpoint exists in
+    the published contract, so a per-product price tool has no exact backing operation.
+- tool: get_store_status
+  category: restaurant
+  rest: [getRestaurants, postRestaurantsPosstatus]
+  binding: rest
+  confidence: medium
+  note: >-
+    /restaurants returns restaurant information including open/closed state;
+    /restaurants/pos-status returns the key POS status. Which one the tool calls is not stated.
+
+mcp_only: []
+
+rest_only:
+- capability: Restaurant state control
+  operations: [putRestaurantsStatusOpen, putRestaurantsStatusClose, putRestaurantsAveragepreparationtime,
+    putRestaurantsDeliverydurationBusyness, postRestaurantsCourierEnable, postRestaurantsCourierDisable,
+    putRestaurantsPosstatus]
+- capability: Working hours
+  operations: [getRestaurantsWorkinghours, putRestaurantsWorkinghours]
+- capability: Delivery zones
+  operations: [getRestaurantsZones, getRestaurantsZonesZoneid, getRestaurantsZonesEta,
+    putRestaurantsZonesZoneidActive, putRestaurantsZonesZoneidInactive, putRestaurantsRestaurantidZonesZoneid]
+- capability: Payment methods
+  operations: [getPaymentmethods, getRestaurantsPaymentmethods, postRestaurantsPaymentmethods,
+    deleteRestaurantsPaymentmethods, postRestaurantsPaymentmethodsActive, postRestaurantsPaymentmethodsInactive]
+- capability: Product status reads
+  operations: [getProductsProductidStatus, getProductsChainidChainproductidStatus]
+- capability: Option availability
+  operations: [postProductsProductidActivateasoption, postProductsProductidInactivateasoption,
+    postProductsChainidChainproductidActivateasoption, postProductsChainidChainproductidInactivateasoption,
+    putRestaurantsOptionproductsChainidChainoptionproductidOptioncategoriesChainoptioncategoryidOptionsChainoptionidStatus]
+- capability: Chain menus
+  operations: [getChainmenus, getChainmenusChainmenuoid, getChainmenusChainoptioncategories]
+- capability: Order fulfilment transitions
+  operations: [postFoodordersFoodorderidPrepare, postFoodordersFoodorderidHandover,
+    postFoodordersFoodorderidDeliver, putFoodordersFoodorderidRestaurantpaneloperation]
+- capability: Order transfer
+  operations: [getFoodordersFoodorderidAvailablerestaurantsfortransfer, postFoodordersFoodorderidTransfertoanotherrestaurant]
+- capability: Invoicing
+  operations: [getFoodordersFoodorderidInvoice, postFoodordersFoodorderidInvoice,
+    deleteFoodordersFoodorderidInvoice, postFoodordersFoodorderidInvoiceurl]
+- capability: Reporting and reviews
+  operations: [getFoodordersReport, getFoodordersReportDetails, getRestaurantsReviews]
+- capability: Platform
+  operations: [postAuthLogin, getHealth, getChangelog]
+
+coverage:
+  tools_named: 8
+  tools_bound: 8
+  tools_bound_high_confidence: 2
+  mcp_only: 0
+  rest_operations_total: 62
+  rest_operations_with_a_tool: 15
+  rest_operations_without_a_tool: 47
+  coverage_percent: 24.2
+
+x-evidence:
+  generated_on: '2026-07-31'
+  operationids_verified_against: openapi/getir-food-openapi.yml

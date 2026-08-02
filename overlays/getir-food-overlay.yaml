@@ -1,0 +1,90 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for the GetirFood API
+  version: 1.0.0
+extends: openapi/getir-food-openapi.yml
+x-generated: '2026-07-31'
+x-method: generated
+x-source: >-
+  Enhancements derived from the GetirFood integration documentation
+  (https://developers.getir.com/food/documentation/giris) and from live probes of
+  https://food-external-api-gateway.getirapi.com. The harvested Swagger 2.0 document at
+  openapi/_original/getir-food-openapi.json is never mutated.
+actions:
+- target: $.info
+  update:
+    description: >-
+      GetirFood partner integration API. Authenticate with POST /auth/login using your
+      appSecretKey and restaurantSecretKey, then send the returned value as the `token` header
+      on every other request. The token is valid for 1 hour. All dates and times are GMT.
+    contact:
+      name: GetirFood API Support
+      email: getiryemekapi@getir.com
+      url: https://developers.getir.com/food/documentation/giris
+    x-apievangelist-docs: https://developers.getir.com/food/documentation/giris
+    x-apievangelist-status-page: https://getir-food-integration.instatus.com/
+    x-apievangelist-error-catalog: errors/getir-error-codes.yml
+    x-apievangelist-webhooks: asyncapi/getir-food-webhooks.yml
+    x-apievangelist-sandbox: sandbox/getir-sandbox.yml
+    x-apievangelist-conventions: conventions/getir-conventions.yml
+- target: $
+  update:
+    x-apievangelist-environments:
+    - name: production
+      host: food-external-api-gateway.getirapi.com
+    - name: test
+      host: food-external-api-gateway.development.getirapi.com
+    securityDefinitions:
+      tokenHeader:
+        type: apiKey
+        name: token
+        in: header
+        description: >-
+          Opaque session token returned by POST /auth/login, valid for 1 hour. The published
+          document declares no securityDefinitions and instead repeats `token` as a header
+          parameter on 57 operations; this overlay names the scheme so tooling can bind it.
+    x-apievangelist-rate-limits:
+      default: 300 requests / 60 seconds per token, 20 second block
+      strict_surface: 2 requests / 60 seconds per token, 30 second block
+      exempt: /food-orders/periodic/*
+      detail: rate-limits/getir-rate-limits.yml
+    x-apievangelist-error-envelope:
+      fields: [code, error, message, details, source]
+      registry_size: 99
+      format: proprietary (not RFC 9457)
+- target: $.paths['/auth/login'].post
+  update:
+    x-apievangelist-token-ttl-seconds: 3600
+    x-apievangelist-credential-issuance: >-
+      Not self-service. A POS/integrator company requests an account from Getir
+      (getiryemekapi@getir.com); test and live credentials are issued separately.
+- target: $.paths['/food-orders/{foodOrderId}/verify'].post
+  update:
+    x-apievangelist-timing: >-
+      An order must be answered within 30 seconds or the restaurant is called by IVR; the
+      confirmation time limit is 5 minutes, after which the restaurant is auto-closed and its
+      orders cancelled. At least 1 minute must elapse before calling /prepare.
+    x-apievangelist-preconditions: Order status must be 400 (immediate or pre-approved scheduled order).
+- target: $.paths['/food-orders/{foodOrderId}/verify-scheduled'].post
+  update:
+    x-apievangelist-preconditions: Order status must be 325 (scheduled order awaiting approval).
+- target: $.paths['/food-orders/{foodOrderId}/prepare'].post
+  update:
+    x-apievangelist-timing: At least 1 minute must elapse after /verify, and before /deliver.
+- target: $.paths['/food-orders/{foodOrderId}/handover'].post
+  update:
+    x-apievangelist-applies-to: deliveryType 1 — orders delivered by a Getir courier.
+- target: $.paths['/food-orders/{foodOrderId}/deliver'].post
+  update:
+    x-apievangelist-applies-to: deliveryType 2 — orders delivered by the restaurant's own courier.
+- target: $.paths['/food-orders/periodic/unapproved'].post
+  update:
+    x-apievangelist-usage: >-
+      Backup path for orders that could not be handled from the webhook push. Exempt from the
+      rate limiter, but the docs explicitly say not to poll it constantly.
+- target: $.paths['/changelog'].get
+  update:
+    x-apievangelist-note: Unauthenticated. Returns sections -> versions -> dated bilingual entries.
+- target: $.paths['/health'].get
+  update:
+    x-apievangelist-note: 'Unauthenticated. Returns {"time": epoch_ms, "status": "OK"}.'

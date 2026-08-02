@@ -1,0 +1,2198 @@
+swagger: '2.0'
+host: food-external-api-gateway.getirapi.com
+basePath: /
+schemes:
+- https
+info:
+  title: GetirFood API Documentation
+  version: 1.5.8
+tags:
+- name: health
+  description: This endpoint can be used to check the health of the application
+- name: auth
+  description: Secret keys provided to your company will be used for login. After successful login, you must use the token
+    returned to your company in other endpoints. The validity period of the token is 1 hour, at the end of this period, requests
+    will be received from this token.
+- name: restaurants
+  description: Endpoints about restaurant and courier opening and closing features can be seen in the restaurants section.
+- name: products
+  description: Endpoints in the products section can be used with product information obtained from restaurant endpoints.
+- name: food-orders
+  description: Endpoints about food orders
+- name: changelog
+- name: payment-methods
+paths:
+  /chain-menus:
+    get:
+      summary: Get chain menus
+      operationId: getChainmenus
+      parameters:
+      - type: string
+        description: This token created after login.
+        x-convert:
+          trim: true
+        name: token
+        in: header
+        required: true
+      tags:
+      - chain-menus
+      responses:
+        default:
+          schema:
+            type: string
+          description: Successful
+  /changelog:
+    get:
+      summary: Get API changelog
+      operationId: getChangelog
+      tags:
+      - changelog
+      responses:
+        default:
+          schema:
+            type: string
+          description: Successful
+  /health:
+    get:
+      summary: Health check for the service.
+      operationId: getHealth
+      tags:
+      - health
+      responses:
+        '200':
+          schema:
+            $ref: '#/definitions/Health%20Check%20Response%20Schema'
+          description: Successful
+  /payment-methods:
+    get:
+      summary: List all of the payment methods
+      operationId: getPaymentmethods
+      description: You can find all of the on-delivery payment methods with this endpoint
+      parameters:
+      - type: string
+        description: This token created after login.
+        x-convert:
+          trim: true
+        name: token
+        in: header
+        required: true
+      tags:
+      - payment-methods
+      responses:
+        '200':
+          schema:
+            $ref: '#/definitions/Model2'
+          description: Successful
+  /restaurants:
+    get:
+      summary: Get the restaurant information
+      operationId: getRestaurants
+      parameters:
+      - type: string
+        description: This token created after login.
+        x-convert:
+          trim: true
+        name: token
+        in: header
+        required: true
+      tags:
+      - restaurants
+      responses:
+        '200':
+          schema:
+            $ref: '#/definitions/Model3'
+          description: Successful
+  /chain-menus/chain-option-categories:
+    get:
+      summary: Get chain option categories
+      operationId: getChainmenusChainoptioncategories
+      parameters:
+      - type: string
+        description: This token created after login.
+        x-convert:
+          trim: true
+        name: token
+        in: header
+        required: true
+      tags:
+      - chain-menus
+      responses:
+        default:
+          schema:
+            type: string
+          description: Successful
+  /chain-menus/{chainMenuOID}:
+    get:
+      summary: Get chain menu
+      operationId: getChainmenusChainmenuoid
+      parameters:
+      - type: string
+        description: This token created after login.
+        x-convert:
+          trim: true
+        name: token
+        in: header
+        required: true
+      - type: string
+        name: chainMenuOID
+        in: path
+        required: true
+      tags:
+      - chain-menus
+      responses:
+        default:
+          schema:
+            type: string
+          description: Successful
+  /food-orders/report:
+    get:
+      summary: Get restaurant food orders report
+      operationId: getFoodordersReport
+      description: "You can use this endpoint to get food order reports to the restaurant’s POS.\n\nRestaurant Ids get to\
+        \ pass in query string and It uses with comma for multi restaurants. \n\nExample Query: \n\nrestaurantIds=3fd1e77960f103a5025b0d64,1qd1e73960f103a5024b0d61&startDate=2020-12-01&endDate=2020-12-31 "
+      parameters:
+      - type: string
+        description: This token created after login.
+        x-convert:
+          trim: true
+        name: token
+        in: header
+        required: true
+      - type: string
+        format: date
+        name: startDate
+        in: query
+        required: true
+      - type: string
+        format: date
+        name: endDate
+        in: query
+        required: true
+      - type: string
+        name: restaurantIds
+        in: query
+      - type: string
+        enum:
+        - ChainFinancial
+        - RestaurantFinancial
+        name: templateName
+        in: query
+      tags:
+      - food-orders
+      responses:
+        default:
+          schema:
+            type: string
+          description: Successful
+  /food-orders/{foodOrderId}:
+    get:
+      summary: Get food order
+      operationId: getFoodordersFoodorderid
+      parameters:
+      - type: string
+        description: This token created after login.
+        x-convert:
+          trim: true
+        name: token
+        in: header
+        required: true
+      - type: string
+        description: Food Order's Id
+        name: foodOrderId
+        in: path
+        required: true
+      tags:
+      - food-orders
+      responses:
+        '200':
+          schema:
+            $ref: '#/definitions/Get%20Food%20Order%20Response%20Schema'
+          description: Successful
+  /restaurants/menu:
+    get:
+      summary: Get the restaurant menu and options
+      operationId: getRestaurantsMenu
+      parameters:
+      - type: string
+        description: This token created after login.
+        x-convert:
+          trim: true
+        name: token
+        in: header
+        required: true
+      tags:
+      - restaurants
+      responses:
+        '200':
+          schema:
+            $ref: '#/definitions/Model13'
+          description: Successful
+  /restaurants/option-products:
+    get:
+      summary: Get the restaurant option products
+      operationId: getRestaurantsOptionproducts
+      parameters:
+      - type: string
+        description: This token created after login.
+        x-convert:
+          trim: true
+        name: token
+        in: header
+        required: true
+      tags:
+      - restaurants
+      responses:
+        '200':
+          schema:
+            $ref: '#/definitions/Model15'
+          description: Successful
+  /restaurants/payment-methods:
+    get:
+      summary: Get the restaurant payment methods
+      operationId: getRestaurantsPaymentmethods
+      parameters:
+      - type: string
+        description: This token created after login.
+        x-convert:
+          trim: true
+        name: token
+        in: header
+        required: true
+      tags:
+      - restaurants
+      responses:
+        '200':
+          schema:
+            $ref: '#/definitions/Model17'
+          description: Successful
+    post:
+      summary: Add restaurant payment method
+      operationId: postRestaurantsPaymentmethods
+      parameters:
+      - type: string
+        description: This token created after login.
+        x-convert:
+          trim: true
+        name: token
+        in: header
+        required: true
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/Model22'
+      tags:
+      - restaurants
+      responses:
+        '200':
+          schema:
+            $ref: '#/definitions/Model23'
+          description: Successful
+    delete:
+      summary: Delete restaurant payment method
+      operationId: deleteRestaurantsPaymentmethods
+      parameters:
+      - type: string
+        description: This token created after login.
+        x-convert:
+          trim: true
+        name: token
+        in: header
+        required: true
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/Model22'
+      tags:
+      - restaurants
+      responses:
+        '200':
+          schema:
+            $ref: '#/definitions/Model23'
+          description: Successful
+  /restaurants/reviews:
+    get:
+      summary: Get restaurant reviews
+      operationId: getRestaurantsReviews
+      parameters:
+      - type: string
+        description: This token created after login.
+        x-convert:
+          trim: true
+        name: token
+        in: header
+        required: true
+      - type: string
+        format: date
+        name: startDate
+        in: query
+        required: true
+      - type: string
+        format: date
+        name: endDate
+        in: query
+        required: true
+      - type: number
+        name: page
+        in: query
+        required: false
+      - type: number
+        name: pageSize
+        in: query
+        required: false
+      tags:
+      - restaurants
+      responses:
+        default:
+          schema:
+            type: string
+          description: Successful
+  /restaurants/working-hours:
+    get:
+      summary: Get restaurant working hours
+      operationId: getRestaurantsWorkinghours
+      parameters:
+      - type: string
+        description: This token created after login.
+        x-convert:
+          trim: true
+        name: token
+        in: header
+        required: true
+      tags:
+      - restaurants
+      responses:
+        '200':
+          schema:
+            $ref: '#/definitions/Model19'
+          description: Successful
+    put:
+      summary: Update restaurant working hours
+      operationId: putRestaurantsWorkinghours
+      parameters:
+      - type: string
+        description: This token created after login.
+        x-convert:
+          trim: true
+        name: token
+        in: header
+        required: true
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/Model33'
+      tags:
+      - restaurants
+      responses:
+        default:
+          schema:
+            type: string
+          description: Successful
+  /restaurants/zones:
+    get:
+      summary: Get restaurant's zone list.
+      operationId: getRestaurantsZones
+      parameters:
+      - type: string
+        description: This token created after login.
+        x-convert:
+          trim: true
+        name: token
+        in: header
+        required: true
+      tags:
+      - restaurants
+      responses:
+        default:
+          schema:
+            type: string
+          description: Successful
+  /food-orders/report/details:
+    get:
+      summary: Get restaurant food orders report
+      operationId: getFoodordersReportDetails
+      description: "You can use this endpoint to get food order report details to the restaurant’s POS.\n\nRestaurant Ids\
+        \ get to pass in query string and It uses with comma for multi restaurants. \n\nExample Query: \n\nrestaurantIds=3fd1e77960f103a5025b0d64,1qd1e73960f103a5024b0d61&startDate=2020-12-01&endDate=2020-12-31 "
+      parameters:
+      - type: string
+        description: This token created after login.
+        x-convert:
+          trim: true
+        name: token
+        in: header
+        required: true
+      - type: string
+        format: date
+        name: startDate
+        in: query
+        required: true
+      - type: string
+        format: date
+        name: endDate
+        in: query
+        required: true
+      - type: string
+        name: restaurantIds
+        in: query
+      - type: string
+        enum:
+        - ChainFinancial
+        - RestaurantFinancial
+        name: templateName
+        in: query
+      tags:
+      - food-orders
+      responses:
+        default:
+          schema:
+            type: string
+          description: Successful
+  /food-orders/{foodOrderId}/cancel-options:
+    get:
+      summary: Cancel options of food order
+      operationId: getFoodordersFoodorderidCanceloptions
+      description: You can use this endpoint to get cancel options for food order.
+      parameters:
+      - type: string
+        description: This token created after login.
+        x-convert:
+          trim: true
+        name: token
+        in: header
+        required: true
+      - type: string
+        description: Food Order's Id
+        name: foodOrderId
+        in: path
+        required: true
+      tags:
+      - food-orders
+      responses:
+        '200':
+          schema:
+            $ref: '#/definitions/Food%20Order%20Cancel%20Option%20Response%20Schema'
+          description: Successful
+  /food-orders/{foodOrderId}/invoice:
+    get:
+      summary: Get Signed Invoice Photo URL of food order
+      operationId: getFoodordersFoodorderidInvoice
+      description: You can use this endpoint to get signed url of invoice photo.
+      parameters:
+      - type: string
+        description: This token created after login.
+        x-convert:
+          trim: true
+        name: token
+        in: header
+        required: true
+      - type: string
+        description: Food Order's Id
+        name: foodOrderId
+        in: path
+        required: true
+      tags:
+      - food-orders
+      responses:
+        default:
+          schema:
+            type: string
+          description: Successful
+    post:
+      summary: Add Invoice Photo to food order
+      operationId: postFoodordersFoodorderidInvoice
+      description: You can use this endpoint to add invoice photo for food order.
+      parameters:
+      - type: string
+        description: This token created after login.
+        x-convert:
+          trim: true
+        name: token
+        in: header
+        required: true
+      - type: string
+        description: Food Order's Id
+        name: foodOrderId
+        in: path
+        required: true
+      - type: file
+        description: Invoice Photo
+        x-meta:
+          swaggerType: file
+        in: formData
+        name: file
+        required: true
+      consumes:
+      - multipart/form-data
+      tags:
+      - food-orders
+      responses:
+        default:
+          schema:
+            type: string
+          description: Successful
+    delete:
+      summary: Delete Invoice Photo from food order
+      operationId: deleteFoodordersFoodorderidInvoice
+      description: You can use this endpoint to delete invoice photo for food order.
+      parameters:
+      - type: string
+        description: This token created after login.
+        x-convert:
+          trim: true
+        name: token
+        in: header
+        required: true
+      - type: string
+        description: Food Order's Id
+        name: foodOrderId
+        in: path
+        required: true
+      tags:
+      - food-orders
+      responses:
+        default:
+          schema:
+            type: string
+          description: Successful
+  /food-orders/{foodOrderId}/available-restaurants-for-transfer:
+    get:
+      summary: Get available restaurant list of food order for transfer
+      operationId: getFoodordersFoodorderidAvailablerestaurantsfortransfer
+      description: You can use this endpoint to get available restaurants for food order transfer.
+      parameters:
+      - type: string
+        description: This token created after login.
+        x-convert:
+          trim: true
+        name: token
+        in: header
+        required: true
+      - type: string
+        description: Food Order's Id
+        name: foodOrderId
+        in: path
+        required: true
+      tags:
+      - food-orders
+      responses:
+        '200':
+          schema:
+            $ref: '#/definitions/Available%20Restaurants%20for%20Food%20Order%20Transfer%20Schema'
+          description: Successful
+  /products/{productId}/status:
+    get:
+      summary: Get product status
+      operationId: getProductsProductidStatus
+      parameters:
+      - type: string
+        description: This token created after login.
+        x-convert:
+          trim: true
+        name: token
+        in: header
+        required: true
+      - type: string
+        description: Product's Id
+        name: productId
+        in: path
+        required: true
+      tags:
+      - products
+      responses:
+        '200':
+          schema:
+            $ref: '#/definitions/Model21'
+          description: Successful
+    put:
+      summary: Update product status
+      operationId: putProductsProductidStatus
+      description: 'Available status are ACTIVE: 100, INACTIVE: 200, DAILY_INACTIVE: 400'
+      parameters:
+      - type: string
+        description: This token created after login.
+        x-convert:
+          trim: true
+        name: token
+        in: header
+        required: true
+      - type: string
+        description: Product's Id
+        name: productId
+        in: path
+        required: true
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/Model34'
+      tags:
+      - products
+      responses:
+        default:
+          schema:
+            type: string
+          description: Successful
+  /restaurants/zones/eta:
+    get:
+      summary: Get all zone ETA Options
+      operationId: getRestaurantsZonesEta
+      parameters:
+      - type: string
+        description: This token created after login.
+        x-convert:
+          trim: true
+        name: token
+        in: header
+        required: true
+      tags:
+      - restaurants
+      responses:
+        default:
+          schema:
+            type: string
+          description: Successful
+  /restaurants/zones/{zoneId}:
+    get:
+      summary: Get zone by zoneId
+      operationId: getRestaurantsZonesZoneid
+      parameters:
+      - type: string
+        description: This token created after login.
+        x-convert:
+          trim: true
+        name: token
+        in: header
+        required: true
+      - type: string
+        name: zoneId
+        in: path
+        required: true
+      tags:
+      - restaurants
+      responses:
+        default:
+          schema:
+            type: string
+          description: Successful
+  /products/chain-id/{chainProductId}/status:
+    get:
+      summary: Get product status with chain product id
+      operationId: getProductsChainidChainproductidStatus
+      parameters:
+      - type: string
+        description: This token created after login.
+        x-convert:
+          trim: true
+        name: token
+        in: header
+        required: true
+      - type: string
+        description: Chain Product's Id
+        name: chainProductId
+        in: path
+        required: true
+      tags:
+      - products
+      responses:
+        '200':
+          schema:
+            $ref: '#/definitions/Model21'
+          description: Successful
+    put:
+      summary: Update product status with chain product id
+      operationId: putProductsChainidChainproductidStatus
+      description: 'Available status are ACTIVE: 100, INACTIVE: 200'
+      parameters:
+      - type: string
+        description: This token created after login.
+        x-convert:
+          trim: true
+        name: token
+        in: header
+        required: true
+      - type: string
+        description: Chain Product's Id
+        name: chainProductId
+        in: path
+        required: true
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/Model34'
+      tags:
+      - products
+      responses:
+        default:
+          schema:
+            type: string
+          description: Successful
+  /auth/login:
+    post:
+      summary: Login
+      operationId: postAuthLogin
+      description: "Authentication is performed via HTTP Basic Auth.\n Use your appSecretKey and restaurantSecretKey taking\
+        \ new token for reaching all routes."
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/Login%20Schema'
+      tags:
+      - auth
+      responses:
+        '200':
+          schema:
+            $ref: '#/definitions/Login%20Response%20Schema'
+          description: Successful
+  /food-orders/active:
+    post:
+      summary: Get restaurant active food orders
+      operationId: postFoodordersActive
+      description: You can use this endpoint to get food orders sent to the restaurant’s POS.
+      parameters:
+      - type: string
+        description: This token created after login.
+        x-convert:
+          trim: true
+        name: token
+        in: header
+        required: true
+      tags:
+      - food-orders
+      responses:
+        '200':
+          schema:
+            $ref: '#/definitions/Active%20Food%20Orders%20Response%20Schema'
+          description: Successful
+  /restaurants/pos-status:
+    post:
+      summary: Get restaurant key pos status
+      operationId: postRestaurantsPosstatus
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/Login%20Schema'
+      tags:
+      - restaurants
+      responses:
+        default:
+          schema:
+            type: string
+          description: Successful
+    put:
+      summary: Update restaurant key pos status
+      operationId: putRestaurantsPosstatus
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/Model32'
+      tags:
+      - restaurants
+      responses:
+        default:
+          schema:
+            type: string
+          description: Successful
+  /chain-menus/{chainMenuOID}/update-prices:
+    post:
+      summary: Update chain menu prices
+      operationId: postChainmenusChainmenuoidUpdateprices
+      parameters:
+      - type: string
+        description: This token created after login.
+        x-convert:
+          trim: true
+        name: token
+        in: header
+        required: true
+      - type: string
+        name: chainMenuOID
+        in: path
+        required: true
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/Model26'
+      tags:
+      - chain-menus
+      responses:
+        default:
+          schema:
+            type: string
+          description: Successful
+  /food-orders/periodic/cancelled:
+    post:
+      summary: Get restaurant cancelled food orders
+      operationId: postFoodordersPeriodicCancelled
+      description: You can use this endpoint to get cancelled food orders periodically
+      parameters:
+      - type: string
+        description: This token created after login.
+        x-convert:
+          trim: true
+        name: token
+        in: header
+        required: true
+      tags:
+      - food-orders
+      responses:
+        '200':
+          schema:
+            $ref: '#/definitions/Active%20Food%20Orders%20Response%20Schema'
+          description: Successful
+  /food-orders/periodic/unapproved:
+    post:
+      summary: Get restaurant unapproved food orders
+      operationId: postFoodordersPeriodicUnapproved
+      description: You can use this endpoint to get unapproved food orders periodically
+      parameters:
+      - type: string
+        description: This token created after login.
+        x-convert:
+          trim: true
+        name: token
+        in: header
+        required: true
+      tags:
+      - food-orders
+      responses:
+        '200':
+          schema:
+            $ref: '#/definitions/Active%20Food%20Orders%20Response%20Schema'
+          description: Successful
+  /food-orders/{foodOrderId}/cancel:
+    post:
+      summary: Cancel food order
+      operationId: postFoodordersFoodorderidCancel
+      description: You can use this endpoint to get cancel food order and update status.
+      parameters:
+      - type: string
+        description: This token created after login.
+        x-convert:
+          trim: true
+        name: token
+        in: header
+        required: true
+      - type: string
+        description: Food Order's Id
+        name: foodOrderId
+        in: path
+        required: true
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/Model27'
+      tags:
+      - food-orders
+      responses:
+        '200':
+          schema:
+            $ref: '#/definitions/Model4'
+          description: Successful
+  /food-orders/{foodOrderId}/deliver:
+    post:
+      summary: Deliver food order
+      operationId: postFoodordersFoodorderidDeliver
+      description: You can use this endpoint to delivery restaurant food order and update order status to delivered.
+      parameters:
+      - type: string
+        description: This token created after login.
+        x-convert:
+          trim: true
+        name: token
+        in: header
+        required: true
+      - type: string
+        description: Food Order's Id
+        name: foodOrderId
+        in: path
+        required: true
+      tags:
+      - food-orders
+      responses:
+        '200':
+          schema:
+            $ref: '#/definitions/Model23'
+          description: Successful
+  /food-orders/{foodOrderId}/prepare:
+    post:
+      summary: Prepare food order
+      operationId: postFoodordersFoodorderidPrepare
+      description: You can use this endpoint to prepare food order and update order status.
+      parameters:
+      - type: string
+        description: This token created after login.
+        x-convert:
+          trim: true
+        name: token
+        in: header
+        required: true
+      - type: string
+        description: Food Order's Id
+        name: foodOrderId
+        in: path
+        required: true
+      tags:
+      - food-orders
+      responses:
+        '200':
+          schema:
+            $ref: '#/definitions/Model23'
+          description: Successful
+  /food-orders/{foodOrderId}/verify:
+    post:
+      summary: Verify food order
+      operationId: postFoodordersFoodorderidVerify
+      description: You can use this endpoint to verify food order and update order status.
+      parameters:
+      - type: string
+        description: This token created after login.
+        x-convert:
+          trim: true
+        name: token
+        in: header
+        required: true
+      - type: string
+        description: Food Order's Id
+        name: foodOrderId
+        in: path
+        required: true
+      tags:
+      - food-orders
+      responses:
+        '200':
+          schema:
+            $ref: '#/definitions/Model23'
+          description: Successful
+  /food-orders/{foodOrderId}/verify-scheduled:
+    post:
+      summary: Verify scheduled food order
+      operationId: postFoodordersFoodorderidVerifyscheduled
+      description: You can use this endpoint to verify scheduled food order and update order status.
+      parameters:
+      - type: string
+        description: This token created after login.
+        x-convert:
+          trim: true
+        name: token
+        in: header
+        required: true
+      - type: string
+        description: Food Order's Id
+        name: foodOrderId
+        in: path
+        required: true
+      tags:
+      - food-orders
+      responses:
+        '200':
+          schema:
+            $ref: '#/definitions/Model23'
+          description: Successful
+  /food-orders/{foodOrderId}/invoice-url:
+    post:
+      summary: Add Invoice PDF URL to food order
+      operationId: postFoodordersFoodorderidInvoiceurl
+      description: You can use this endpoint to add invoice PDF URL for food order.
+      parameters:
+      - type: string
+        description: This token created after login.
+        x-convert:
+          trim: true
+        name: token
+        in: header
+        required: true
+      - type: string
+        description: Food Order's Id
+        name: foodOrderId
+        in: path
+        required: true
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/Model28'
+      tags:
+      - food-orders
+      responses:
+        default:
+          schema:
+            type: string
+          description: Successful
+  /food-orders/{foodOrderId}/handover:
+    post:
+      summary: Handover food order
+      operationId: postFoodordersFoodorderidHandover
+      parameters:
+      - type: string
+        description: This token created after login.
+        x-convert:
+          trim: true
+        name: token
+        in: header
+        required: true
+      - type: string
+        description: Food Order's Id
+        name: foodOrderId
+        in: path
+        required: true
+      tags:
+      - food-orders
+      responses:
+        '200':
+          schema:
+            $ref: '#/definitions/Model23'
+          description: Successful
+  /food-orders/{foodOrderId}/transfer-to-another-restaurant:
+    post:
+      summary: Transfer food order to another restaurant
+      operationId: postFoodordersFoodorderidTransfertoanotherrestaurant
+      description: You can use this endpoint to transfer food order to another restaurant.
+      parameters:
+      - type: string
+        description: This token created after login.
+        x-convert:
+          trim: true
+        name: token
+        in: header
+        required: true
+      - type: string
+        description: Food Order's Id
+        name: foodOrderId
+        in: path
+        required: true
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/Model29'
+      tags:
+      - food-orders
+      responses:
+        '200':
+          schema:
+            $ref: '#/definitions/Model23'
+          description: Successful
+  /products/{productId}/inactivate-as-option:
+    post:
+      summary: Inactivate restaurant options with product id
+      operationId: postProductsProductidInactivateasoption
+      description: The endpoint will no longer be supported as of January 1, 2025.
+      parameters:
+      - type: string
+        description: This token created after login.
+        x-convert:
+          trim: true
+        name: token
+        in: header
+        required: true
+      - type: string
+        description: Product's Id
+        name: productId
+        in: path
+        required: true
+      tags:
+      - products
+      responses:
+        '200':
+          schema:
+            $ref: '#/definitions/Model23'
+          description: Successful
+      deprecated: true
+  /products/{productId}/activate-as-option:
+    post:
+      summary: Activate restaurant options with product id
+      operationId: postProductsProductidActivateasoption
+      description: The endpoint will no longer be supported as of January 1, 2025.
+      parameters:
+      - type: string
+        description: This token created after login.
+        x-convert:
+          trim: true
+        name: token
+        in: header
+        required: true
+      - type: string
+        description: Product's Id
+        name: productId
+        in: path
+        required: true
+      tags:
+      - products
+      responses:
+        '200':
+          schema:
+            $ref: '#/definitions/Model23'
+          description: Successful
+      deprecated: true
+  /restaurants/courier/disable:
+    post:
+      summary: Disable the restaurant courier service
+      operationId: postRestaurantsCourierDisable
+      parameters:
+      - type: string
+        description: This token created after login.
+        x-convert:
+          trim: true
+        name: token
+        in: header
+        required: true
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/Model30'
+      tags:
+      - restaurants
+      responses:
+        default:
+          schema:
+            type: string
+          description: Successful
+  /restaurants/courier/enable:
+    post:
+      summary: Enable the restaurant courier service
+      operationId: postRestaurantsCourierEnable
+      parameters:
+      - type: string
+        description: This token created after login.
+        x-convert:
+          trim: true
+        name: token
+        in: header
+        required: true
+      tags:
+      - restaurants
+      responses:
+        '200':
+          schema:
+            $ref: '#/definitions/Model23'
+          description: Successful
+  /restaurants/payment-methods/active:
+    post:
+      summary: Activate restaurant payment method
+      operationId: postRestaurantsPaymentmethodsActive
+      parameters:
+      - type: string
+        description: This token created after login.
+        x-convert:
+          trim: true
+        name: token
+        in: header
+        required: true
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/Model22'
+      tags:
+      - restaurants
+      responses:
+        '200':
+          schema:
+            $ref: '#/definitions/Model23'
+          description: Successful
+  /restaurants/payment-methods/inactive:
+    post:
+      summary: Inactivate restaurant payment method
+      operationId: postRestaurantsPaymentmethodsInactive
+      parameters:
+      - type: string
+        description: This token created after login.
+        x-convert:
+          trim: true
+        name: token
+        in: header
+        required: true
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/Model22'
+      tags:
+      - restaurants
+      responses:
+        '200':
+          schema:
+            $ref: '#/definitions/Model23'
+          description: Successful
+  /products/chain-id/{chainProductId}/inactivate-as-option:
+    post:
+      summary: Inactivate restaurant options with chain product id
+      operationId: postProductsChainidChainproductidInactivateasoption
+      description: The endpoint will no longer be supported as of January 1, 2025.
+      parameters:
+      - type: string
+        description: This token created after login.
+        x-convert:
+          trim: true
+        name: token
+        in: header
+        required: true
+      - type: string
+        description: Chain Product's Id
+        name: chainProductId
+        in: path
+        required: true
+      tags:
+      - products
+      responses:
+        '200':
+          schema:
+            $ref: '#/definitions/Model23'
+          description: Successful
+      deprecated: true
+  /products/chain-id/{chainProductId}/activate-as-option:
+    post:
+      summary: Activate restaurant options with chain product id
+      operationId: postProductsChainidChainproductidActivateasoption
+      description: The endpoint will no longer be supported as of January 1, 2025.
+      parameters:
+      - type: string
+        description: This token created after login.
+        x-convert:
+          trim: true
+        name: token
+        in: header
+        required: true
+      - type: string
+        description: Chain Product's Id
+        name: chainProductId
+        in: path
+        required: true
+      tags:
+      - products
+      responses:
+        '200':
+          schema:
+            $ref: '#/definitions/Model23'
+          description: Successful
+      deprecated: true
+  /restaurants/average-preparation-time:
+    put:
+      summary: Update restaurant average preparation time
+      operationId: putRestaurantsAveragepreparationtime
+      parameters:
+      - type: string
+        description: This token created after login.
+        x-convert:
+          trim: true
+        name: token
+        in: header
+        required: true
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/Model31'
+      tags:
+      - restaurants
+      responses:
+        '200':
+          schema:
+            $ref: '#/definitions/Model23'
+          description: Successful
+      deprecated: true
+  /food-orders/{foodOrderId}/restaurant-panel-operation:
+    put:
+      summary: Restaurant panel operation food order
+      operationId: putFoodordersFoodorderidRestaurantpaneloperation
+      parameters:
+      - type: string
+        description: This token created after login.
+        x-convert:
+          trim: true
+        name: token
+        in: header
+        required: true
+      - type: string
+        description: Food Order's Id
+        name: foodOrderId
+        in: path
+        required: true
+      tags:
+      - food-orders
+      responses:
+        '200':
+          schema:
+            $ref: '#/definitions/Model23'
+          description: Successful
+  /restaurants/delivery-duration/busyness:
+    put:
+      summary: Update restaurant delivery duration plus 15 min if set True
+      operationId: putRestaurantsDeliverydurationBusyness
+      parameters:
+      - type: string
+        description: This token created after login.
+        x-convert:
+          trim: true
+        name: token
+        in: header
+        required: true
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/Model35'
+      tags:
+      - restaurants
+      responses:
+        default:
+          schema:
+            type: string
+          description: Successful
+  /restaurants/status/close:
+    put:
+      summary: Close the restaurant
+      operationId: putRestaurantsStatusClose
+      parameters:
+      - type: string
+        description: This token created after login.
+        x-convert:
+          trim: true
+        name: token
+        in: header
+        required: true
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/Model30'
+      tags:
+      - restaurants
+      responses:
+        default:
+          schema:
+            type: string
+          description: Successful
+  /restaurants/status/open:
+    put:
+      summary: Open the restaurant
+      operationId: putRestaurantsStatusOpen
+      parameters:
+      - type: string
+        description: This token created after login.
+        x-convert:
+          trim: true
+        name: token
+        in: header
+        required: true
+      tags:
+      - restaurants
+      responses:
+        '200':
+          schema:
+            $ref: '#/definitions/Model4'
+          description: Successful
+  /restaurants/zones/{zoneId}/active:
+    put:
+      summary: Activate restaurant zone status
+      operationId: putRestaurantsZonesZoneidActive
+      parameters:
+      - type: string
+        description: This token created after login.
+        x-convert:
+          trim: true
+        name: token
+        in: header
+        required: true
+      - type: string
+        name: zoneId
+        in: path
+        required: true
+      tags:
+      - restaurants
+      responses:
+        default:
+          schema:
+            type: string
+          description: Successful
+  /restaurants/zones/{zoneId}/inactive:
+    put:
+      summary: Activate restaurant zone status
+      operationId: putRestaurantsZonesZoneidInactive
+      parameters:
+      - type: string
+        description: This token created after login.
+        x-convert:
+          trim: true
+        name: token
+        in: header
+        required: true
+      - type: string
+        name: zoneId
+        in: path
+        required: true
+      tags:
+      - restaurants
+      responses:
+        default:
+          schema:
+            type: string
+          description: Successful
+  /restaurants/{restaurantId}/zones/{zoneId}:
+    put:
+      summary: Update zone of a restaurant
+      operationId: putRestaurantsRestaurantidZonesZoneid
+      parameters:
+      - type: string
+        description: This token created after login.
+        x-convert:
+          trim: true
+        name: token
+        in: header
+        required: true
+      - type: string
+        name: restaurantId
+        in: path
+        required: true
+      - type: string
+        name: zoneId
+        in: path
+        required: true
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/Model36'
+      tags:
+      - restaurants
+      responses:
+        default:
+          schema:
+            type: string
+          description: Successful
+  ? /restaurants/option-products/chain-id/{chainOptionProductId}/option-categories/{chainOptionCategoryId}/options/{chainOptionId}/status
+  : put:
+      summary: Update option product option status with chain id.
+      operationId: putRestaurantsOptionproductsChainidChainoptionproductidOptioncategoriesChainoptioncategoryidOptionsChainoptionidStatus
+      description: 'Available status are ACTIVE: 100, INACTIVE: 200<br/><br/>The endpoint will no longer be supported as of
+        January 1, 2025.'
+      parameters:
+      - type: string
+        description: This token created after login.
+        x-convert:
+          trim: true
+        name: token
+        in: header
+        required: true
+      - type: string
+        description: Chain Option Product's Id
+        name: chainOptionProductId
+        in: path
+        required: true
+      - type: string
+        name: chainOptionCategoryId
+        in: path
+        required: true
+      - type: string
+        name: chainOptionId
+        in: path
+        required: true
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/Model37'
+      tags:
+      - restaurants
+      responses:
+        '200':
+          schema:
+            $ref: '#/definitions/Model23'
+          description: Successful
+      deprecated: true
+definitions:
+  Health Check Response Schema:
+    type: object
+    properties:
+      time:
+        type: integer
+      status:
+        type: string
+  name:
+    type: object
+    properties:
+      tr:
+        type: string
+      en:
+        type: string
+  deliveryTypes:
+    type: array
+    items:
+      type: number
+  Model1:
+    type: object
+    properties:
+      id:
+        type: string
+      name:
+        $ref: '#/definitions/name'
+      icon:
+        type: string
+      paymentGroup:
+        type: number
+      deliveryTypes:
+        $ref: '#/definitions/deliveryTypes'
+      type:
+        type: number
+    required:
+    - id
+  Model2:
+    type: array
+    items:
+      $ref: '#/definitions/Model1'
+  Model3:
+    type: object
+    properties:
+      id:
+        type: string
+      averagePreparationTime:
+        type: number
+      status:
+        type: number
+      isCourierAvailable:
+        type: boolean
+      name:
+        type: string
+      isStatusChangedByUser:
+        type: boolean
+      closedSource:
+        type: number
+      rating:
+        type: number
+  location:
+    type: object
+    properties:
+      lat:
+        type: number
+      lon:
+        type: number
+  deliveryAddress:
+    type: object
+    properties:
+      id:
+        type: string
+      address:
+        type: string
+      aptNo:
+        type: string
+      floor:
+        type: string
+      doorNo:
+        type: string
+      city:
+        type: string
+      district:
+        type: string
+      description:
+        type: string
+  client:
+    type: object
+    properties:
+      id:
+        type: string
+      name:
+        type: string
+      location:
+        $ref: '#/definitions/location'
+      clientPhoneNumber:
+        type: string
+      clientUnmaskedPhoneNumber:
+        type: string
+      contactPhoneNumber:
+        type: string
+      deliveryAddress:
+        $ref: '#/definitions/deliveryAddress'
+  courier:
+    type: object
+    properties:
+      id:
+        type: string
+      status:
+        type: number
+      name:
+        type: string
+      location:
+        $ref: '#/definitions/location'
+  Model4:
+    type: object
+  optionCategories:
+    type: array
+    items:
+      $ref: '#/definitions/Model4'
+  tr:
+    type: array
+    items:
+      type: string
+  options:
+    type: object
+    properties:
+      tr:
+        $ref: '#/definitions/tr'
+      en:
+        $ref: '#/definitions/tr'
+  displayInfo:
+    type: object
+    properties:
+      title:
+        $ref: '#/definitions/name'
+      options:
+        $ref: '#/definitions/options'
+  Model5:
+    type: object
+    properties:
+      id:
+        type: string
+      imageURL:
+        type: string
+      wideImageURL:
+        type: string
+      count:
+        type: number
+      product:
+        type: string
+      chainProduct:
+        type: string
+      name:
+        $ref: '#/definitions/name'
+      price:
+        type: number
+      optionPrice:
+        type: number
+      priceWithOption:
+        type: number
+      totalPrice:
+        type: number
+      totalOptionPrice:
+        type: number
+      totalPriceWithOption:
+        type: number
+      optionCategories:
+        $ref: '#/definitions/optionCategories'
+      displayInfo:
+        $ref: '#/definitions/displayInfo'
+      note:
+        type: string
+  products:
+    type: array
+    items:
+      $ref: '#/definitions/Model5'
+  restaurant:
+    type: object
+    properties:
+      id:
+        type: string
+  cancelReason:
+    type: object
+    properties:
+      id:
+        type: string
+      messages:
+        $ref: '#/definitions/name'
+  brand:
+    type: object
+    properties:
+      id:
+        type: string
+      name:
+        type: string
+  Get Food Order Response Schema:
+    type: object
+    properties:
+      id:
+        type: string
+      status:
+        type: number
+      isScheduled:
+        type: boolean
+      confirmationId:
+        type: string
+      client:
+        $ref: '#/definitions/client'
+      courier:
+        $ref: '#/definitions/courier'
+      products:
+        $ref: '#/definitions/products'
+      clientNote:
+        type: string
+      totalPrice:
+        type: number
+      totalDiscountedPrice:
+        type: number
+      checkoutDate:
+        type: string
+      scheduledDate:
+        type: string
+      verifyDate:
+        type: string
+      scheduleVerifiedDate:
+        type: string
+      prepareDate:
+        type: string
+      handoverDate:
+        type: string
+      reachDate:
+        type: string
+      deliverDate:
+        type: string
+      deliveryType:
+        type: number
+      isEcoFriendly:
+        type: boolean
+      doNotKnock:
+        type: boolean
+      restaurant:
+        $ref: '#/definitions/restaurant'
+      paymentMethod:
+        type: number
+      paymentMethodText:
+        $ref: '#/definitions/Model4'
+      cancelNote:
+        type: string
+      cancelReason:
+        $ref: '#/definitions/cancelReason'
+      restaurantPanelOperation:
+        type: boolean
+      brand:
+        $ref: '#/definitions/brand'
+      isQueued:
+        type: boolean
+      calculatedCourierToRestaurantETA:
+        type: number
+  Model6:
+    type: object
+    properties:
+      id:
+        type: string
+      product:
+        type: string
+      chainProduct:
+        type: string
+      name:
+        $ref: '#/definitions/name'
+      clientDisplayName:
+        $ref: '#/definitions/name'
+      optionProduct:
+        type: string
+      chainOptionProduct:
+        type: string
+      optionCategories:
+        $ref: '#/definitions/tr'
+      type:
+        type: number
+      price:
+        type: number
+      weight:
+        type: number
+      status:
+        type: number
+      chainOption:
+        type: string
+  Model7:
+    type: array
+    items:
+      $ref: '#/definitions/Model6'
+  Model8:
+    type: object
+    properties:
+      id:
+        type: string
+      name:
+        $ref: '#/definitions/name'
+      minCount:
+        type: number
+      maxCount:
+        type: number
+      removeToppings:
+        type: boolean
+      weight:
+        type: number
+      status:
+        type: number
+      chainOptionCategory:
+        type: string
+      options:
+        $ref: '#/definitions/Model7'
+  Model9:
+    type: array
+    items:
+      $ref: '#/definitions/Model8'
+  Model10:
+    type: object
+    properties:
+      id:
+        type: string
+      restaurant:
+        type: string
+      productCategory:
+        type: string
+      optionCategories:
+        $ref: '#/definitions/Model9'
+      name:
+        $ref: '#/definitions/name'
+      description:
+        $ref: '#/definitions/name'
+      price:
+        type: number
+      struckPrice:
+        type: number
+      weight:
+        type: number
+      status:
+        type: number
+      isApproved:
+        type: boolean
+      imageURL:
+        type: string
+      wideImageURL:
+        type: string
+      chainProduct:
+        type: string
+  Model11:
+    type: array
+    items:
+      $ref: '#/definitions/Model10'
+  Model12:
+    type: object
+    properties:
+      id:
+        type: string
+      name:
+        $ref: '#/definitions/name'
+      restaurant:
+        type: string
+      products:
+        $ref: '#/definitions/Model11'
+      isApproved:
+        type: boolean
+      weight:
+        type: number
+      status:
+        type: number
+      chainProductCategory:
+        type: string
+  productCategories:
+    type: array
+    items:
+      $ref: '#/definitions/Model12'
+  Model13:
+    type: object
+    properties:
+      productCategories:
+        $ref: '#/definitions/productCategories'
+  Model14:
+    type: object
+    properties:
+      id:
+        type: string
+      name:
+        $ref: '#/definitions/name'
+      weight:
+        type: number
+      status:
+        type: number
+      optionCategories:
+        $ref: '#/definitions/optionCategories'
+      chainOptionProduct:
+        type: string
+      clientDisplayName:
+        $ref: '#/definitions/name'
+  Model15:
+    type: array
+    items:
+      $ref: '#/definitions/Model14'
+  Model16:
+    type: object
+    properties:
+      id:
+        type: string
+      name:
+        $ref: '#/definitions/name'
+      icon:
+        type: string
+      paymentGroup:
+        type: number
+      active:
+        type: boolean
+      deliveryTypes:
+        $ref: '#/definitions/deliveryTypes'
+      type:
+        type: number
+      text:
+        $ref: '#/definitions/name'
+  Model17:
+    type: array
+    items:
+      $ref: '#/definitions/Model16'
+  workingHours:
+    type: object
+    properties:
+      startTime:
+        type: string
+        pattern: ^(\d|0\d|1\d|2[0-3]):[0-5]\d$
+      endTime:
+        type: string
+        pattern: ^(\d|0\d|1\d|2[0-3]):[0-5]\d$
+  Model18:
+    type: object
+    properties:
+      day:
+        type: number
+        minimum: 0
+        maximum: 6
+      workingHours:
+        $ref: '#/definitions/workingHours'
+      closed:
+        type: boolean
+    required:
+    - day
+  restaurantWorkingHours:
+    type: array
+    example:
+    - day: 0
+      closed: true
+    - day: 1
+      workingHours:
+        startTime: 09:00
+        endTime: 03:00
+    - day: 2
+      workingHours:
+        startTime: 09:00
+        endTime: 02:00
+    - day: 3
+      workingHours:
+        startTime: 09:00
+        endTime: '20:00'
+    - day: 4
+      workingHours:
+        startTime: '10:00'
+        endTime: '20:00'
+    - day: 5
+      workingHours:
+        startTime: 09:00
+        endTime: '20:00'
+    - day: 6
+      workingHours:
+        startTime: 09:00
+        endTime: '20:00'
+    x-constraint:
+      length: 7
+      unique: day
+    items:
+      $ref: '#/definitions/Model18'
+  Model19:
+    type: object
+    properties:
+      restaurantWorkingHours:
+        $ref: '#/definitions/restaurantWorkingHours'
+      restaurantCourierHours:
+        $ref: '#/definitions/restaurantWorkingHours'
+  Model20:
+    type: object
+    properties:
+      id:
+        type: string
+      message:
+        type: string
+  Food Order Cancel Option Response Schema:
+    type: array
+    items:
+      $ref: '#/definitions/Model20'
+  Available Restaurants for Food Order Transfer Schema:
+    type: array
+    items:
+      $ref: '#/definitions/Model3'
+  Model21:
+    type: object
+    properties:
+      id:
+        type: string
+      status:
+        type: number
+  Login Schema:
+    type: object
+    properties:
+      appSecretKey:
+        type: string
+        example: string
+        x-format:
+          token: true
+        x-convert:
+          trim: true
+      restaurantSecretKey:
+        type: string
+        example: string
+        x-format:
+          token: true
+        x-convert:
+          trim: true
+    required:
+    - appSecretKey
+    - restaurantSecretKey
+  Login Response Schema:
+    type: object
+    properties:
+      restaurantId:
+        type: string
+      token:
+        type: string
+  Active Food Orders Response Schema:
+    type: array
+    items:
+      $ref: '#/definitions/Get%20Food%20Order%20Response%20Schema'
+  Model22:
+    type: object
+    properties:
+      paymentMethodId:
+        type: string
+    required:
+    - paymentMethodId
+  Model23:
+    type: object
+    properties:
+      result:
+        type: boolean
+  Model24:
+    type: object
+    properties:
+      chainProductOID:
+        type: string
+      price:
+        type: number
+        minimum: 0
+        x-constraint:
+          precision: 2
+    required:
+    - chainProductOID
+    - price
+  chainProducts:
+    type: array
+    items:
+      $ref: '#/definitions/Model24'
+  Model25:
+    type: object
+    properties:
+      chainOptionOID:
+        type: string
+      price:
+        type: number
+        minimum: 0
+        x-constraint:
+          precision: 2
+    required:
+    - chainOptionOID
+    - price
+  chainOptions:
+    type: array
+    items:
+      $ref: '#/definitions/Model25'
+  Model26:
+    type: object
+    properties:
+      chainProducts:
+        $ref: '#/definitions/chainProducts'
+      chainOptions:
+        $ref: '#/definitions/chainOptions'
+  Model27:
+    type: object
+    properties:
+      cancelNote:
+        type: string
+      cancelReasonId:
+        type: string
+      productId:
+        type: string
+  Model28:
+    type: object
+    properties:
+      url:
+        type: string
+        x-format:
+          uri:
+            scheme:
+            - https
+    required:
+    - url
+  Model29:
+    type: object
+    properties:
+      targetRestaurantId:
+        type: string
+  Model30:
+    type: object
+    properties:
+      timeOffAmount:
+        type: number
+        enum:
+        - 15
+        - 30
+        - 45
+  Model31:
+    type: object
+    properties:
+      averagePreparationTime:
+        type: number
+        minimum: 5
+        maximum: 90
+  Model32:
+    type: object
+    properties:
+      posStatus:
+        type: number
+        enum:
+        - 100
+        - 200
+      appSecretKey:
+        type: string
+        example: string
+        x-format:
+          token: true
+        x-convert:
+          trim: true
+      restaurantSecretKey:
+        type: string
+        example: string
+        x-format:
+          token: true
+        x-convert:
+          trim: true
+    required:
+    - posStatus
+    - appSecretKey
+    - restaurantSecretKey
+  Model33:
+    type: object
+    properties:
+      restaurantWorkingHours:
+        $ref: '#/definitions/restaurantWorkingHours'
+  Model34:
+    type: object
+    properties:
+      status:
+        type: number
+        enum:
+        - 100
+        - 200
+        - 400
+  Model35:
+    type: object
+    properties:
+      isBusy:
+        type: boolean
+      busynessDifferenceDuration:
+        type: number
+        enum:
+        - 15
+        - 30
+        - 45
+  Model36:
+    type: object
+    properties:
+      eta:
+        type: string
+      minBasketSize:
+        type: number
+        minimum: 1
+        x-constraint:
+          precision: 2
+    required:
+    - minBasketSize
+  Model37:
+    type: object
+    properties:
+      status:
+        type: number
+        enum:
+        - 100
+        - 200

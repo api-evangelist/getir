@@ -1,0 +1,114 @@
+generated: '2026-07-31'
+method: searched
+source: >-
+  https://developers.getir.com/food/documentation/giris — "Integration Structure" section,
+  served by https://food-pos-api-gateway.getirapi.com/v1/documentations/contents?title=6&language=en
+docs: https://developers.getir.com/food/documentation/giris
+spec_type: Webhooks
+asyncapi_published: false
+asyncapi_note: >-
+  Getir publishes no AsyncAPI document for this event surface. Probed /asyncapi.json,
+  /asyncapi.yaml and the docs host — all miss. This artifact captures the webhook catalog
+  exactly as Getir documents it; no AsyncAPI has been authored on their behalf.
+description: >-
+  GetirFood pushes order events to the integrating POS company rather than requiring polling.
+  The partner registers two callback URLs — one for new orders, one for order cancellations —
+  plus a single x-api-key value that Getir sends on both. All order information is delivered by
+  HTTP POST to the partner-hosted URLs.
+
+delivery:
+  direction: outbound (Getir -> partner)
+  transport: HTTPS
+  method: POST
+  registration: >-
+    Two separate URLs are supplied to Getir by the partner (new order, order cancellation),
+    together with one x-api-key value that must be identical for both.
+  authentication:
+    header: x-api-key
+    shared_across_endpoints: true
+  content_type: application/json
+
+events:
+- name: New Order
+  event: food_order.new
+  direction: outbound
+  method: POST
+  url: "partner-provided (documentation example: https://yourdomain.com/newOrder)"
+  description: Fired when a new food order is placed for a restaurant affiliated with the partner company.
+  payload_fields:
+  - id
+  - status
+  - isScheduled
+  - confirmationId
+  - client (id, name, contactPhoneNumber, clientPhoneNumber, deliveryAddress, location)
+  - courier (id, status, name, location)
+  - products[] (id, imageURL, wideImageURL, count, product, name{tr,en}, price, optionPrice,
+      priceWithOption, totalPrice, totalOptionPrice, totalPriceWithOption, optionCategories,
+      displayInfo, note, discountedPriceWithOption, totalDiscountedPriceWithOption)
+  - clientNote
+  - doNotKnock
+  - dropOffAtDoor
+  - totalPrice
+  - totalDiscountedPrice
+  - checkoutDate
+  - deliveryType
+  - isEcoFriendly
+  - paymentMethod
+  - paymentMethodText{en,tr}
+  - restaurant (id, name, brand)
+  - isQueued
+- name: Cancel Order
+  event: food_order.cancelled
+  direction: outbound
+  method: POST
+  url: "partner-provided (documentation example: https://yourdomain.com/cancelOrder)"
+  description: Fired when a previously delivered order event is cancelled.
+  payload_fields:
+  - id
+  - status
+  - isScheduled
+  - confirmationId
+  - client (id, name, contactPhoneNumber, clientPhoneNumber, deliveryAddress, location)
+  - courier (id, status, name, location)
+  - products[] (same shape as the new-order payload)
+  - clientNote
+  - doNotKnock
+  - dropOffAtDoor
+  - totalPrice
+  - totalDiscountedPrice
+  - checkoutDate
+  - verifyDate
+  - cancelDate
+  - cancelNote
+  - cancelReason (id, messages{tr,en}, cancelSource)
+  - deliveryType
+  - isEcoFriendly
+  - paymentMethod
+  - paymentMethodText{en,tr}
+  - restaurant (id, name, brand)
+  - isQueued
+
+fallback_polling:
+  description: >-
+    Documented backup path when the partner cannot process a pushed order. Getir explicitly
+    asks integrators not to poll /unapproved continuously.
+  operations:
+  - operationId: postFoodordersPeriodicUnapproved
+    path: /food-orders/periodic/unapproved
+    note: Excluded from the rate limiter, but constant polling is discouraged by the docs.
+  - operationId: postFoodordersActive
+    path: /food-orders/active
+  - operationId: postFoodordersPeriodicCancelled
+    path: /food-orders/periodic/cancelled
+
+failure_handling:
+  documented_error: >-
+    Registry code 72 FoodOrderWebHookError ("food order webhook error", HTTP 400) is the
+    published error raised on webhook failure.
+  retry_policy: not published by Getir
+  detail: errors/getir-error-codes.yml
+
+x-evidence:
+  fetched: '2026-07-31'
+  docs_api: https://food-pos-api-gateway.getirapi.com/v1/documentations/contents?title=6&language=en
+  http_status: 200
