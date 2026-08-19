@@ -1,0 +1,1413 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "GetirFood API Documentation",
+    "version": "1.5.8"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "chain-menus",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get chain menus",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/chain-menus",
+            "headers": [
+              {
+                "name": "token",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Get chain menus"
+        },
+        {
+          "info": {
+            "name": "Get chain option categories",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/chain-menus/chain-option-categories",
+            "headers": [
+              {
+                "name": "token",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Get chain option categories"
+        },
+        {
+          "info": {
+            "name": "Get chain menu",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/chain-menus/:chainMenuOID",
+            "headers": [
+              {
+                "name": "token",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "chainMenuOID",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get chain menu"
+        },
+        {
+          "info": {
+            "name": "Update chain menu prices",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/chain-menus/:chainMenuOID/update-prices",
+            "headers": [
+              {
+                "name": "token",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "chainMenuOID",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Update chain menu prices"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "changelog",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get API changelog",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/changelog"
+          },
+          "docs": "Get API changelog"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "health",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Health check for the service.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/health"
+          },
+          "docs": "Health check for the service."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "payment-methods",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List all of the payment methods",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/payment-methods",
+            "headers": [
+              {
+                "name": "token",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "You can find all of the on-delivery payment methods with this endpoint"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "restaurants",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get the restaurant information",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/restaurants",
+            "headers": [
+              {
+                "name": "token",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Get the restaurant information"
+        },
+        {
+          "info": {
+            "name": "Get the restaurant menu and options",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/restaurants/menu",
+            "headers": [
+              {
+                "name": "token",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Get the restaurant menu and options"
+        },
+        {
+          "info": {
+            "name": "Get the restaurant option products",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/restaurants/option-products",
+            "headers": [
+              {
+                "name": "token",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Get the restaurant option products"
+        },
+        {
+          "info": {
+            "name": "Get the restaurant payment methods",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/restaurants/payment-methods",
+            "headers": [
+              {
+                "name": "token",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Get the restaurant payment methods"
+        },
+        {
+          "info": {
+            "name": "Add restaurant payment method",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/restaurants/payment-methods",
+            "headers": [
+              {
+                "name": "token",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Add restaurant payment method"
+        },
+        {
+          "info": {
+            "name": "Delete restaurant payment method",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/restaurants/payment-methods",
+            "headers": [
+              {
+                "name": "token",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Delete restaurant payment method"
+        },
+        {
+          "info": {
+            "name": "Get restaurant reviews",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/restaurants/reviews",
+            "headers": [
+              {
+                "name": "token",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "startDate",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "endDate",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Get restaurant reviews"
+        },
+        {
+          "info": {
+            "name": "Get restaurant working hours",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/restaurants/working-hours",
+            "headers": [
+              {
+                "name": "token",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Get restaurant working hours"
+        },
+        {
+          "info": {
+            "name": "Update restaurant working hours",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/restaurants/working-hours",
+            "headers": [
+              {
+                "name": "token",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Update restaurant working hours"
+        },
+        {
+          "info": {
+            "name": "Get restaurant's zone list.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/restaurants/zones",
+            "headers": [
+              {
+                "name": "token",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Get restaurant's zone list."
+        },
+        {
+          "info": {
+            "name": "Get all zone ETA Options",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/restaurants/zones/eta",
+            "headers": [
+              {
+                "name": "token",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Get all zone ETA Options"
+        },
+        {
+          "info": {
+            "name": "Get zone by zoneId",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/restaurants/zones/:zoneId",
+            "headers": [
+              {
+                "name": "token",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "zoneId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get zone by zoneId"
+        },
+        {
+          "info": {
+            "name": "Get restaurant key pos status",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/restaurants/pos-status"
+          },
+          "docs": "Get restaurant key pos status"
+        },
+        {
+          "info": {
+            "name": "Update restaurant key pos status",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/restaurants/pos-status"
+          },
+          "docs": "Update restaurant key pos status"
+        },
+        {
+          "info": {
+            "name": "Disable the restaurant courier service",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/restaurants/courier/disable",
+            "headers": [
+              {
+                "name": "token",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Disable the restaurant courier service"
+        },
+        {
+          "info": {
+            "name": "Enable the restaurant courier service",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/restaurants/courier/enable",
+            "headers": [
+              {
+                "name": "token",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Enable the restaurant courier service"
+        },
+        {
+          "info": {
+            "name": "Activate restaurant payment method",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/restaurants/payment-methods/active",
+            "headers": [
+              {
+                "name": "token",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Activate restaurant payment method"
+        },
+        {
+          "info": {
+            "name": "Inactivate restaurant payment method",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/restaurants/payment-methods/inactive",
+            "headers": [
+              {
+                "name": "token",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Inactivate restaurant payment method"
+        },
+        {
+          "info": {
+            "name": "Update restaurant average preparation time",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/restaurants/average-preparation-time",
+            "headers": [
+              {
+                "name": "token",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Update restaurant average preparation time"
+        },
+        {
+          "info": {
+            "name": "Update restaurant delivery duration plus 15 min if set True",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/restaurants/delivery-duration/busyness",
+            "headers": [
+              {
+                "name": "token",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Update restaurant delivery duration plus 15 min if set True"
+        },
+        {
+          "info": {
+            "name": "Close the restaurant",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/restaurants/status/close",
+            "headers": [
+              {
+                "name": "token",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Close the restaurant"
+        },
+        {
+          "info": {
+            "name": "Open the restaurant",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/restaurants/status/open",
+            "headers": [
+              {
+                "name": "token",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Open the restaurant"
+        },
+        {
+          "info": {
+            "name": "Activate restaurant zone status",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/restaurants/zones/:zoneId/active",
+            "headers": [
+              {
+                "name": "token",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "zoneId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Activate restaurant zone status"
+        },
+        {
+          "info": {
+            "name": "Activate restaurant zone status",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/restaurants/zones/:zoneId/inactive",
+            "headers": [
+              {
+                "name": "token",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "zoneId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Activate restaurant zone status"
+        },
+        {
+          "info": {
+            "name": "Update zone of a restaurant",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/restaurants/:restaurantId/zones/:zoneId",
+            "headers": [
+              {
+                "name": "token",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "restaurantId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "zoneId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Update zone of a restaurant"
+        },
+        {
+          "info": {
+            "name": "Update option product option status with chain id.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/restaurants/option-products/chain-id/:chainOptionProductId/option-categories/:chainOptionCategoryId/options/:chainOptionId/status",
+            "headers": [
+              {
+                "name": "token",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "chainOptionProductId",
+                "value": "",
+                "type": "path",
+                "description": "Chain Option Product's Id"
+              },
+              {
+                "name": "chainOptionCategoryId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "chainOptionId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Available status are ACTIVE: 100, INACTIVE: 200<br/><br/>The endpoint will no longer be supported as of January 1, 2025."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "food-orders",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get restaurant food orders report",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/food-orders/report",
+            "headers": [
+              {
+                "name": "token",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "startDate",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "endDate",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "restaurantIds",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "templateName",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "You can use this endpoint to get food order reports to the restaurant’s POS.\n\nRestaurant Ids get to pass in query string and It uses with comma for multi restaurants. \n\nExample Query: \n\nrestaurantIds=3fd1e77960f103a5025b0d64,1qd1e73960f103a5024b0d61&startDate=2020-12-01&endDate=2020-12-31 "
+        },
+        {
+          "info": {
+            "name": "Get food order",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/food-orders/:foodOrderId",
+            "headers": [
+              {
+                "name": "token",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "foodOrderId",
+                "value": "",
+                "type": "path",
+                "description": "Food Order's Id"
+              }
+            ]
+          },
+          "docs": "Get food order"
+        },
+        {
+          "info": {
+            "name": "Get restaurant food orders report",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/food-orders/report/details",
+            "headers": [
+              {
+                "name": "token",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "startDate",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "endDate",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "restaurantIds",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "templateName",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "You can use this endpoint to get food order report details to the restaurant’s POS.\n\nRestaurant Ids get to pass in query string and It uses with comma for multi restaurants. \n\nExample Query: \n\nrestaurantIds=3fd1e77960f103a5025b0d64,1qd1e73960f103a5024b0d61&startDate=2020-12-01&endDate=2020-12-31 "
+        },
+        {
+          "info": {
+            "name": "Cancel options of food order",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/food-orders/:foodOrderId/cancel-options",
+            "headers": [
+              {
+                "name": "token",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "foodOrderId",
+                "value": "",
+                "type": "path",
+                "description": "Food Order's Id"
+              }
+            ]
+          },
+          "docs": "You can use this endpoint to get cancel options for food order."
+        },
+        {
+          "info": {
+            "name": "Get Signed Invoice Photo URL of food order",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/food-orders/:foodOrderId/invoice",
+            "headers": [
+              {
+                "name": "token",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "foodOrderId",
+                "value": "",
+                "type": "path",
+                "description": "Food Order's Id"
+              }
+            ]
+          },
+          "docs": "You can use this endpoint to get signed url of invoice photo."
+        },
+        {
+          "info": {
+            "name": "Add Invoice Photo to food order",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/food-orders/:foodOrderId/invoice",
+            "headers": [
+              {
+                "name": "token",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "foodOrderId",
+                "value": "",
+                "type": "path",
+                "description": "Food Order's Id"
+              }
+            ]
+          },
+          "docs": "You can use this endpoint to add invoice photo for food order."
+        },
+        {
+          "info": {
+            "name": "Delete Invoice Photo from food order",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/food-orders/:foodOrderId/invoice",
+            "headers": [
+              {
+                "name": "token",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "foodOrderId",
+                "value": "",
+                "type": "path",
+                "description": "Food Order's Id"
+              }
+            ]
+          },
+          "docs": "You can use this endpoint to delete invoice photo for food order."
+        },
+        {
+          "info": {
+            "name": "Get available restaurant list of food order for transfer",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/food-orders/:foodOrderId/available-restaurants-for-transfer",
+            "headers": [
+              {
+                "name": "token",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "foodOrderId",
+                "value": "",
+                "type": "path",
+                "description": "Food Order's Id"
+              }
+            ]
+          },
+          "docs": "You can use this endpoint to get available restaurants for food order transfer."
+        },
+        {
+          "info": {
+            "name": "Get restaurant active food orders",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/food-orders/active",
+            "headers": [
+              {
+                "name": "token",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "You can use this endpoint to get food orders sent to the restaurant’s POS."
+        },
+        {
+          "info": {
+            "name": "Get restaurant cancelled food orders",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/food-orders/periodic/cancelled",
+            "headers": [
+              {
+                "name": "token",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "You can use this endpoint to get cancelled food orders periodically"
+        },
+        {
+          "info": {
+            "name": "Get restaurant unapproved food orders",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/food-orders/periodic/unapproved",
+            "headers": [
+              {
+                "name": "token",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "You can use this endpoint to get unapproved food orders periodically"
+        },
+        {
+          "info": {
+            "name": "Cancel food order",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/food-orders/:foodOrderId/cancel",
+            "headers": [
+              {
+                "name": "token",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "foodOrderId",
+                "value": "",
+                "type": "path",
+                "description": "Food Order's Id"
+              }
+            ]
+          },
+          "docs": "You can use this endpoint to get cancel food order and update status."
+        },
+        {
+          "info": {
+            "name": "Deliver food order",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/food-orders/:foodOrderId/deliver",
+            "headers": [
+              {
+                "name": "token",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "foodOrderId",
+                "value": "",
+                "type": "path",
+                "description": "Food Order's Id"
+              }
+            ]
+          },
+          "docs": "You can use this endpoint to delivery restaurant food order and update order status to delivered."
+        },
+        {
+          "info": {
+            "name": "Prepare food order",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/food-orders/:foodOrderId/prepare",
+            "headers": [
+              {
+                "name": "token",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "foodOrderId",
+                "value": "",
+                "type": "path",
+                "description": "Food Order's Id"
+              }
+            ]
+          },
+          "docs": "You can use this endpoint to prepare food order and update order status."
+        },
+        {
+          "info": {
+            "name": "Verify food order",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/food-orders/:foodOrderId/verify",
+            "headers": [
+              {
+                "name": "token",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "foodOrderId",
+                "value": "",
+                "type": "path",
+                "description": "Food Order's Id"
+              }
+            ]
+          },
+          "docs": "You can use this endpoint to verify food order and update order status."
+        },
+        {
+          "info": {
+            "name": "Verify scheduled food order",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/food-orders/:foodOrderId/verify-scheduled",
+            "headers": [
+              {
+                "name": "token",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "foodOrderId",
+                "value": "",
+                "type": "path",
+                "description": "Food Order's Id"
+              }
+            ]
+          },
+          "docs": "You can use this endpoint to verify scheduled food order and update order status."
+        },
+        {
+          "info": {
+            "name": "Add Invoice PDF URL to food order",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/food-orders/:foodOrderId/invoice-url",
+            "headers": [
+              {
+                "name": "token",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "foodOrderId",
+                "value": "",
+                "type": "path",
+                "description": "Food Order's Id"
+              }
+            ]
+          },
+          "docs": "You can use this endpoint to add invoice PDF URL for food order."
+        },
+        {
+          "info": {
+            "name": "Handover food order",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/food-orders/:foodOrderId/handover",
+            "headers": [
+              {
+                "name": "token",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "foodOrderId",
+                "value": "",
+                "type": "path",
+                "description": "Food Order's Id"
+              }
+            ]
+          },
+          "docs": "Handover food order"
+        },
+        {
+          "info": {
+            "name": "Transfer food order to another restaurant",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/food-orders/:foodOrderId/transfer-to-another-restaurant",
+            "headers": [
+              {
+                "name": "token",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "foodOrderId",
+                "value": "",
+                "type": "path",
+                "description": "Food Order's Id"
+              }
+            ]
+          },
+          "docs": "You can use this endpoint to transfer food order to another restaurant."
+        },
+        {
+          "info": {
+            "name": "Restaurant panel operation food order",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/food-orders/:foodOrderId/restaurant-panel-operation",
+            "headers": [
+              {
+                "name": "token",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "foodOrderId",
+                "value": "",
+                "type": "path",
+                "description": "Food Order's Id"
+              }
+            ]
+          },
+          "docs": "Restaurant panel operation food order"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "products",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get product status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/products/:productId/status",
+            "headers": [
+              {
+                "name": "token",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "productId",
+                "value": "",
+                "type": "path",
+                "description": "Product's Id"
+              }
+            ]
+          },
+          "docs": "Get product status"
+        },
+        {
+          "info": {
+            "name": "Update product status",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/products/:productId/status",
+            "headers": [
+              {
+                "name": "token",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "productId",
+                "value": "",
+                "type": "path",
+                "description": "Product's Id"
+              }
+            ]
+          },
+          "docs": "Available status are ACTIVE: 100, INACTIVE: 200, DAILY_INACTIVE: 400"
+        },
+        {
+          "info": {
+            "name": "Get product status with chain product id",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/products/chain-id/:chainProductId/status",
+            "headers": [
+              {
+                "name": "token",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "chainProductId",
+                "value": "",
+                "type": "path",
+                "description": "Chain Product's Id"
+              }
+            ]
+          },
+          "docs": "Get product status with chain product id"
+        },
+        {
+          "info": {
+            "name": "Update product status with chain product id",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/products/chain-id/:chainProductId/status",
+            "headers": [
+              {
+                "name": "token",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "chainProductId",
+                "value": "",
+                "type": "path",
+                "description": "Chain Product's Id"
+              }
+            ]
+          },
+          "docs": "Available status are ACTIVE: 100, INACTIVE: 200"
+        },
+        {
+          "info": {
+            "name": "Inactivate restaurant options with product id",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/products/:productId/inactivate-as-option",
+            "headers": [
+              {
+                "name": "token",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "productId",
+                "value": "",
+                "type": "path",
+                "description": "Product's Id"
+              }
+            ]
+          },
+          "docs": "The endpoint will no longer be supported as of January 1, 2025."
+        },
+        {
+          "info": {
+            "name": "Activate restaurant options with product id",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/products/:productId/activate-as-option",
+            "headers": [
+              {
+                "name": "token",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "productId",
+                "value": "",
+                "type": "path",
+                "description": "Product's Id"
+              }
+            ]
+          },
+          "docs": "The endpoint will no longer be supported as of January 1, 2025."
+        },
+        {
+          "info": {
+            "name": "Inactivate restaurant options with chain product id",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/products/chain-id/:chainProductId/inactivate-as-option",
+            "headers": [
+              {
+                "name": "token",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "chainProductId",
+                "value": "",
+                "type": "path",
+                "description": "Chain Product's Id"
+              }
+            ]
+          },
+          "docs": "The endpoint will no longer be supported as of January 1, 2025."
+        },
+        {
+          "info": {
+            "name": "Activate restaurant options with chain product id",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/products/chain-id/:chainProductId/activate-as-option",
+            "headers": [
+              {
+                "name": "token",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "chainProductId",
+                "value": "",
+                "type": "path",
+                "description": "Chain Product's Id"
+              }
+            ]
+          },
+          "docs": "The endpoint will no longer be supported as of January 1, 2025."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "auth",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Login",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/auth/login"
+          },
+          "docs": "Authentication is performed via HTTP Basic Auth.\n Use your appSecretKey and restaurantSecretKey taking new token for reaching all routes."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
