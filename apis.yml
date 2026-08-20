@@ -27,6 +27,17 @@ tags:
 - Grocery Delivery
 - On-Demand Delivery
 - Logistics
+- Restaurant
+- Point-of-Sale
+- Marketplace
+- Turkey
+- Partner Integration
+tags_raw:
+- Company
+- Food Delivery
+- Grocery Delivery
+- On-Demand Delivery
+- Logistics
 - Restaurants
 - Point of Sale
 - Marketplace
@@ -49,6 +60,13 @@ apis:
   baseURL: https://food-external-api-gateway.getirapi.com
   image: https://developers.getir.com/assets/getir-food-logo-tr-D65QhRcl.svg
   tags:
+  - Food Delivery
+  - Restaurant
+  - Order
+  - Menus
+  - Point-of-Sale
+  - Webhook
+  tags_raw:
   - Food Delivery
   - Restaurants
   - Orders
