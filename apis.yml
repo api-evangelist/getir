@@ -44,38 +44,19 @@ tags_raw:
 - Turkey
 - Partner Integration
 apis:
-- name: GetirFood API
+- aid: getir:getir-auth-api
+  name: Getir Auth API
   description: >-
-    The GetirFood (GetirYemek) partner integration API — a Swagger 2.0 contract with 62
-    operations across seven tags (auth, restaurants, products, chain-menus, food-orders,
-    payment-methods, changelog, health). It lets a POS or integrator company authenticate
-    with company + restaurant secret keys, read and mutate restaurant state (open/close,
-    working hours, delivery zones, average preparation time, courier service, payment
-    methods), manage menu/product and option availability, and drive the food-order
-    lifecycle: verify, verify-scheduled, prepare, handover, deliver, cancel, transfer to
-    another restaurant, and invoice attachment. New and cancelled orders are pushed to
-    partner-hosted webhook URLs; /food-orders/periodic/unapproved and /food-orders/active
-    are the documented backup queries.
+    Secret keys provided to your company will be used for login. After successful login, you must use
+    the token returned to your company in other endpoints. The validity period of the token is 1 hour,
+    at the end of this period, requests will be received from this token.
   humanURL: https://developers.getir.com/food/documentation/giris
   baseURL: https://food-external-api-gateway.getirapi.com
-  image: https://developers.getir.com/assets/getir-food-logo-tr-D65QhRcl.svg
   tags:
-  - Food Delivery
-  - Restaurant
-  - Order
-  - Menus
-  - Point-of-Sale
-  - Webhook
-  tags_raw:
-  - Food Delivery
-  - Restaurants
-  - Orders
-  - Menus
-  - Point of Sale
-  - Webhooks
+  - auth
   properties:
   - type: OpenAPI
-    url: openapi/getir-food-openapi.yml
+    url: openapi/getir-auth-api-openapi.yml
   - type: Swagger
     url: openapi/_original/getir-food-openapi.json
   - type: Documentation
@@ -98,16 +79,295 @@ apis:
     url: conventions/getir-conventions.yml
   - type: DataModel
     url: data-model/getir-data-model.yml
-  - type: Overlay
-    url: overlays/getir-food-overlay.yaml
   - type: Conformance
     url: conformance/getir-conformance.yml
   - type: Lifecycle
     url: lifecycle/getir-lifecycle.yml
   - type: ChangeLog
     url: changelog/getir-changelog.yml
-  - type: AgentSkill
-    url: skills/_index.yml
+  - type: StatusPage
+    url: https://getir-food-integration.instatus.com/
+- aid: getir:getir-chain-menus-api
+  name: Getir Chain Menus API
+  description: The chain-menus API from Getir — 4 operation(s) for chain-menus.
+  humanURL: https://developers.getir.com/food/documentation/giris
+  baseURL: https://food-external-api-gateway.getirapi.com
+  tags:
+  - chain-menus
+  properties:
+  - type: OpenAPI
+    url: openapi/getir-chain-menus-api-openapi.yml
+  - type: Swagger
+    url: openapi/_original/getir-food-openapi.json
+  - type: Documentation
+    url: https://developers.getir.com/food/documentation/giris
+  - type: APIReference
+    url: https://developers.getir.com/food/api-documentation
+  - type: GettingStarted
+    url: https://developers.getir.com/food/documentation/giris
+  - type: Authentication
+    url: authentication/getir-authentication.yml
+  - type: RateLimits
+    url: rate-limits/getir-rate-limits.yml
+  - type: ErrorCatalog
+    url: errors/getir-error-codes.yml
+  - type: Webhooks
+    url: asyncapi/getir-food-webhooks.yml
+  - type: Sandbox
+    url: sandbox/getir-sandbox.yml
+  - type: Conventions
+    url: conventions/getir-conventions.yml
+  - type: DataModel
+    url: data-model/getir-data-model.yml
+  - type: Conformance
+    url: conformance/getir-conformance.yml
+  - type: Lifecycle
+    url: lifecycle/getir-lifecycle.yml
+  - type: ChangeLog
+    url: changelog/getir-changelog.yml
+  - type: StatusPage
+    url: https://getir-food-integration.instatus.com/
+- aid: getir:getir-changelog-api
+  name: Getir Changelog API
+  description: The changelog API from Getir — 1 operation(s) for changelog.
+  humanURL: https://developers.getir.com/food/documentation/giris
+  baseURL: https://food-external-api-gateway.getirapi.com
+  tags:
+  - changelog
+  properties:
+  - type: OpenAPI
+    url: openapi/getir-changelog-api-openapi.yml
+  - type: Swagger
+    url: openapi/_original/getir-food-openapi.json
+  - type: Documentation
+    url: https://developers.getir.com/food/documentation/giris
+  - type: APIReference
+    url: https://developers.getir.com/food/api-documentation
+  - type: GettingStarted
+    url: https://developers.getir.com/food/documentation/giris
+  - type: Authentication
+    url: authentication/getir-authentication.yml
+  - type: RateLimits
+    url: rate-limits/getir-rate-limits.yml
+  - type: ErrorCatalog
+    url: errors/getir-error-codes.yml
+  - type: Webhooks
+    url: asyncapi/getir-food-webhooks.yml
+  - type: Sandbox
+    url: sandbox/getir-sandbox.yml
+  - type: Conventions
+    url: conventions/getir-conventions.yml
+  - type: DataModel
+    url: data-model/getir-data-model.yml
+  - type: Conformance
+    url: conformance/getir-conformance.yml
+  - type: Lifecycle
+    url: lifecycle/getir-lifecycle.yml
+  - type: ChangeLog
+    url: changelog/getir-changelog.yml
+  - type: StatusPage
+    url: https://getir-food-integration.instatus.com/
+- aid: getir:getir-food-orders-api
+  name: Getir Food Orders API
+  description: Endpoints about food orders
+  humanURL: https://developers.getir.com/food/documentation/giris
+  baseURL: https://food-external-api-gateway.getirapi.com
+  tags:
+  - food-orders
+  properties:
+  - type: OpenAPI
+    url: openapi/getir-food-orders-api-openapi.yml
+  - type: Swagger
+    url: openapi/_original/getir-food-openapi.json
+  - type: Documentation
+    url: https://developers.getir.com/food/documentation/giris
+  - type: APIReference
+    url: https://developers.getir.com/food/api-documentation
+  - type: GettingStarted
+    url: https://developers.getir.com/food/documentation/giris
+  - type: Authentication
+    url: authentication/getir-authentication.yml
+  - type: RateLimits
+    url: rate-limits/getir-rate-limits.yml
+  - type: ErrorCatalog
+    url: errors/getir-error-codes.yml
+  - type: Webhooks
+    url: asyncapi/getir-food-webhooks.yml
+  - type: Sandbox
+    url: sandbox/getir-sandbox.yml
+  - type: Conventions
+    url: conventions/getir-conventions.yml
+  - type: DataModel
+    url: data-model/getir-data-model.yml
+  - type: Conformance
+    url: conformance/getir-conformance.yml
+  - type: Lifecycle
+    url: lifecycle/getir-lifecycle.yml
+  - type: ChangeLog
+    url: changelog/getir-changelog.yml
+  - type: StatusPage
+    url: https://getir-food-integration.instatus.com/
+- aid: getir:getir-health-api
+  name: Getir Health API
+  description: This endpoint can be used to check the health of the application
+  humanURL: https://developers.getir.com/food/documentation/giris
+  baseURL: https://food-external-api-gateway.getirapi.com
+  tags:
+  - health
+  properties:
+  - type: OpenAPI
+    url: openapi/getir-health-api-openapi.yml
+  - type: Swagger
+    url: openapi/_original/getir-food-openapi.json
+  - type: Documentation
+    url: https://developers.getir.com/food/documentation/giris
+  - type: APIReference
+    url: https://developers.getir.com/food/api-documentation
+  - type: GettingStarted
+    url: https://developers.getir.com/food/documentation/giris
+  - type: Authentication
+    url: authentication/getir-authentication.yml
+  - type: RateLimits
+    url: rate-limits/getir-rate-limits.yml
+  - type: ErrorCatalog
+    url: errors/getir-error-codes.yml
+  - type: Webhooks
+    url: asyncapi/getir-food-webhooks.yml
+  - type: Sandbox
+    url: sandbox/getir-sandbox.yml
+  - type: Conventions
+    url: conventions/getir-conventions.yml
+  - type: DataModel
+    url: data-model/getir-data-model.yml
+  - type: Conformance
+    url: conformance/getir-conformance.yml
+  - type: Lifecycle
+    url: lifecycle/getir-lifecycle.yml
+  - type: ChangeLog
+    url: changelog/getir-changelog.yml
+  - type: StatusPage
+    url: https://getir-food-integration.instatus.com/
+- aid: getir:getir-payment-methods-api
+  name: Getir Payment Methods API
+  description: The payment-methods API from Getir — 1 operation(s) for payment-methods.
+  humanURL: https://developers.getir.com/food/documentation/giris
+  baseURL: https://food-external-api-gateway.getirapi.com
+  tags:
+  - payment-methods
+  properties:
+  - type: OpenAPI
+    url: openapi/getir-payment-methods-api-openapi.yml
+  - type: Swagger
+    url: openapi/_original/getir-food-openapi.json
+  - type: Documentation
+    url: https://developers.getir.com/food/documentation/giris
+  - type: APIReference
+    url: https://developers.getir.com/food/api-documentation
+  - type: GettingStarted
+    url: https://developers.getir.com/food/documentation/giris
+  - type: Authentication
+    url: authentication/getir-authentication.yml
+  - type: RateLimits
+    url: rate-limits/getir-rate-limits.yml
+  - type: ErrorCatalog
+    url: errors/getir-error-codes.yml
+  - type: Webhooks
+    url: asyncapi/getir-food-webhooks.yml
+  - type: Sandbox
+    url: sandbox/getir-sandbox.yml
+  - type: Conventions
+    url: conventions/getir-conventions.yml
+  - type: DataModel
+    url: data-model/getir-data-model.yml
+  - type: Conformance
+    url: conformance/getir-conformance.yml
+  - type: Lifecycle
+    url: lifecycle/getir-lifecycle.yml
+  - type: ChangeLog
+    url: changelog/getir-changelog.yml
+  - type: StatusPage
+    url: https://getir-food-integration.instatus.com/
+- aid: getir:getir-products-api
+  name: Getir Products API
+  description: >-
+    Endpoints in the products section can be used with product information obtained from restaurant endpoints.
+  humanURL: https://developers.getir.com/food/documentation/giris
+  baseURL: https://food-external-api-gateway.getirapi.com
+  tags:
+  - products
+  properties:
+  - type: OpenAPI
+    url: openapi/getir-products-api-openapi.yml
+  - type: Swagger
+    url: openapi/_original/getir-food-openapi.json
+  - type: Documentation
+    url: https://developers.getir.com/food/documentation/giris
+  - type: APIReference
+    url: https://developers.getir.com/food/api-documentation
+  - type: GettingStarted
+    url: https://developers.getir.com/food/documentation/giris
+  - type: Authentication
+    url: authentication/getir-authentication.yml
+  - type: RateLimits
+    url: rate-limits/getir-rate-limits.yml
+  - type: ErrorCatalog
+    url: errors/getir-error-codes.yml
+  - type: Webhooks
+    url: asyncapi/getir-food-webhooks.yml
+  - type: Sandbox
+    url: sandbox/getir-sandbox.yml
+  - type: Conventions
+    url: conventions/getir-conventions.yml
+  - type: DataModel
+    url: data-model/getir-data-model.yml
+  - type: Conformance
+    url: conformance/getir-conformance.yml
+  - type: Lifecycle
+    url: lifecycle/getir-lifecycle.yml
+  - type: ChangeLog
+    url: changelog/getir-changelog.yml
+  - type: StatusPage
+    url: https://getir-food-integration.instatus.com/
+- aid: getir:getir-restaurants-api
+  name: Getir Restaurants API
+  description: >-
+    Endpoints about restaurant and courier opening and closing features can be seen in the restaurants
+    section.
+  humanURL: https://developers.getir.com/food/documentation/giris
+  baseURL: https://food-external-api-gateway.getirapi.com
+  tags:
+  - restaurants
+  properties:
+  - type: OpenAPI
+    url: openapi/getir-restaurants-api-openapi.yml
+  - type: Swagger
+    url: openapi/_original/getir-food-openapi.json
+  - type: Documentation
+    url: https://developers.getir.com/food/documentation/giris
+  - type: APIReference
+    url: https://developers.getir.com/food/api-documentation
+  - type: GettingStarted
+    url: https://developers.getir.com/food/documentation/giris
+  - type: Authentication
+    url: authentication/getir-authentication.yml
+  - type: RateLimits
+    url: rate-limits/getir-rate-limits.yml
+  - type: ErrorCatalog
+    url: errors/getir-error-codes.yml
+  - type: Webhooks
+    url: asyncapi/getir-food-webhooks.yml
+  - type: Sandbox
+    url: sandbox/getir-sandbox.yml
+  - type: Conventions
+    url: conventions/getir-conventions.yml
+  - type: DataModel
+    url: data-model/getir-data-model.yml
+  - type: Conformance
+    url: conformance/getir-conformance.yml
+  - type: Lifecycle
+    url: lifecycle/getir-lifecycle.yml
+  - type: ChangeLog
+    url: changelog/getir-changelog.yml
   - type: StatusPage
     url: https://getir-food-integration.instatus.com/
 x-enrichment:
