@@ -15,6 +15,17 @@ description: >-
   test cards and a dedicated test environment. In February 2026 Uber agreed to acquire Getir's
   Türkiye delivery business, cleared by the Turkish Competition Authority in June 2026.
 url: https://raw.githubusercontent.com/api-evangelist/getir/refs/heads/main/apis.yml
+deliveryModel:
+  model: unknown
+  open_source: false
+  commercial: false
+  callable_host: true
+  label: Delivery model not determined — needs a product licence on record
+  confidence: low
+  source:
+  - openapi
+  generated: '2026-08-28'
+  method: derived
 image: https://developers.getir.com/assets/getir-developers-logo-BbJf7m5Z.svg
 x-type: company
 x-source: harvest:secondary-market
