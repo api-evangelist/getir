@@ -64,6 +64,8 @@ apis:
   humanURL: https://developers.getir.com/food/documentation/giris
   baseURL: https://food-external-api-gateway.getirapi.com
   tags:
+  - Authentication
+  tags_raw:
   - auth
   properties:
   - type: OpenAPI
@@ -144,6 +146,8 @@ apis:
   humanURL: https://developers.getir.com/food/documentation/giris
   baseURL: https://food-external-api-gateway.getirapi.com
   tags:
+  - Changelog
+  tags_raw:
   - changelog
   properties:
   - type: OpenAPI
@@ -224,6 +228,8 @@ apis:
   humanURL: https://developers.getir.com/food/documentation/giris
   baseURL: https://food-external-api-gateway.getirapi.com
   tags:
+  - Health
+  tags_raw:
   - health
   properties:
   - type: OpenAPI
@@ -264,6 +270,8 @@ apis:
   humanURL: https://developers.getir.com/food/documentation/giris
   baseURL: https://food-external-api-gateway.getirapi.com
   tags:
+  - Payment Methods
+  tags_raw:
   - payment-methods
   properties:
   - type: OpenAPI
@@ -305,6 +313,8 @@ apis:
   humanURL: https://developers.getir.com/food/documentation/giris
   baseURL: https://food-external-api-gateway.getirapi.com
   tags:
+  - Product
+  tags_raw:
   - products
   properties:
   - type: OpenAPI
@@ -347,6 +357,8 @@ apis:
   humanURL: https://developers.getir.com/food/documentation/giris
   baseURL: https://food-external-api-gateway.getirapi.com
   tags:
+  - Restaurant
+  tags_raw:
   - restaurants
   properties:
   - type: OpenAPI
