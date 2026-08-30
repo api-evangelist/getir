@@ -1,0 +1,30 @@
+openapi: 3.2.0
+info:
+  title: GetirFood API Documentation Auth API
+  version: 1.5.8
+  description: Secret keys provided to your company will be used for login. After successful login, you must use the token returned to your company in other endpoints. The validity period of the token is 1 hour, at the end of this period, requests will be received from this token.
+servers:
+- url: https://food-external-api-gateway.getirapi.com/
+tags:
+- name: auth
+  description: Secret keys provided to your company will be used for login. After successful login, you must use the token returned to your company in other endpoints. The validity period of the token is 1 hour, at the end of this period, requests will be received from this token.
+paths:
+  /auth/login:
+    post:
+      summary: Login
+      operationId: postAuthLogin
+      description: "Authentication is performed via HTTP Basic Auth.\n Use your appSecretKey and restaurantSecretKey taking new token for reaching all routes."
+      tags:
+      - auth
+      responses:
+        '200':
+          description: Successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Login%20Response%20Schema'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Login%20Schema'

@@ -1,0 +1,24 @@
+openapi: 3.2.0
+info:
+  title: GetirFood API Documentation Health API
+  version: 1.5.8
+  description: This endpoint can be used to check the health of the application
+servers:
+- url: https://food-external-api-gateway.getirapi.com/
+tags:
+- name: health
+  description: This endpoint can be used to check the health of the application
+paths:
+  /health:
+    get:
+      summary: Health check for the service.
+      operationId: getHealth
+      tags:
+      - health
+      responses:
+        '200':
+          description: Successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Health%20Check%20Response%20Schema'

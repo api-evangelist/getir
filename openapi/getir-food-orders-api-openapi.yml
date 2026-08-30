@@ -1,0 +1,663 @@
+openapi: 3.2.0
+info:
+  title: GetirFood API Documentation Food Orders API
+  version: 1.5.8
+  description: Endpoints about food orders
+servers:
+- url: https://food-external-api-gateway.getirapi.com/
+tags:
+- name: food-orders
+  description: Endpoints about food orders
+paths:
+  /food-orders/report:
+    get:
+      summary: Get restaurant food orders report
+      operationId: getFoodordersReport
+      description: "You can use this endpoint to get food order reports to the restaurant’s POS.\n\nRestaurant Ids get to pass in query string and It uses with comma for multi restaurants. \n\nExample Query: \n\nrestaurantIds=3fd1e77960f103a5025b0d64,1qd1e73960f103a5024b0d61&startDate=2020-12-01&endDate=2020-12-31 "
+      parameters:
+      - description: This token created after login.
+        x-convert:
+          trim: true
+        name: token
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: startDate
+        in: query
+        required: true
+        schema:
+          type: string
+          format: date
+      - name: endDate
+        in: query
+        required: true
+        schema:
+          type: string
+          format: date
+      - name: restaurantIds
+        in: query
+        schema:
+          type: string
+      - name: templateName
+        in: query
+        schema:
+          type: string
+          enum:
+          - ChainFinancial
+          - RestaurantFinancial
+      tags:
+      - food-orders
+      responses:
+        default:
+          description: Successful
+          content:
+            application/json:
+              schema:
+                type: string
+  /food-orders/{foodOrderId}:
+    get:
+      summary: Get food order
+      operationId: getFoodordersFoodorderid
+      parameters:
+      - description: This token created after login.
+        x-convert:
+          trim: true
+        name: token
+        in: header
+        required: true
+        schema:
+          type: string
+      - description: Food Order's Id
+        name: foodOrderId
+        in: path
+        required: true
+        schema:
+          type: string
+      tags:
+      - food-orders
+      responses:
+        '200':
+          description: Successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Get%20Food%20Order%20Response%20Schema'
+  /food-orders/report/details:
+    get:
+      summary: Get restaurant food orders report
+      operationId: getFoodordersReportDetails
+      description: "You can use this endpoint to get food order report details to the restaurant’s POS.\n\nRestaurant Ids get to pass in query string and It uses with comma for multi restaurants. \n\nExample Query: \n\nrestaurantIds=3fd1e77960f103a5025b0d64,1qd1e73960f103a5024b0d61&startDate=2020-12-01&endDate=2020-12-31 "
+      parameters:
+      - description: This token created after login.
+        x-convert:
+          trim: true
+        name: token
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: startDate
+        in: query
+        required: true
+        schema:
+          type: string
+          format: date
+      - name: endDate
+        in: query
+        required: true
+        schema:
+          type: string
+          format: date
+      - name: restaurantIds
+        in: query
+        schema:
+          type: string
+      - name: templateName
+        in: query
+        schema:
+          type: string
+          enum:
+          - ChainFinancial
+          - RestaurantFinancial
+      tags:
+      - food-orders
+      responses:
+        default:
+          description: Successful
+          content:
+            application/json:
+              schema:
+                type: string
+  /food-orders/{foodOrderId}/cancel-options:
+    get:
+      summary: Cancel options of food order
+      operationId: getFoodordersFoodorderidCanceloptions
+      description: You can use this endpoint to get cancel options for food order.
+      parameters:
+      - description: This token created after login.
+        x-convert:
+          trim: true
+        name: token
+        in: header
+        required: true
+        schema:
+          type: string
+      - description: Food Order's Id
+        name: foodOrderId
+        in: path
+        required: true
+        schema:
+          type: string
+      tags:
+      - food-orders
+      responses:
+        '200':
+          description: Successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Food%20Order%20Cancel%20Option%20Response%20Schema'
+  /food-orders/{foodOrderId}/invoice:
+    get:
+      summary: Get Signed Invoice Photo URL of food order
+      operationId: getFoodordersFoodorderidInvoice
+      description: You can use this endpoint to get signed url of invoice photo.
+      parameters:
+      - description: This token created after login.
+        x-convert:
+          trim: true
+        name: token
+        in: header
+        required: true
+        schema:
+          type: string
+      - description: Food Order's Id
+        name: foodOrderId
+        in: path
+        required: true
+        schema:
+          type: string
+      tags:
+      - food-orders
+      responses:
+        default:
+          description: Successful
+          content:
+            application/json:
+              schema:
+                type: string
+    post:
+      summary: Add Invoice Photo to food order
+      operationId: postFoodordersFoodorderidInvoice
+      description: You can use this endpoint to add invoice photo for food order.
+      parameters:
+      - description: This token created after login.
+        x-convert:
+          trim: true
+        name: token
+        in: header
+        required: true
+        schema:
+          type: string
+      - description: Food Order's Id
+        name: foodOrderId
+        in: path
+        required: true
+        schema:
+          type: string
+      tags:
+      - food-orders
+      responses:
+        default:
+          description: Successful
+          content:
+            application/json:
+              schema:
+                type: string
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  description: Invoice Photo
+                  format: binary
+              required:
+              - file
+    delete:
+      summary: Delete Invoice Photo from food order
+      operationId: deleteFoodordersFoodorderidInvoice
+      description: You can use this endpoint to delete invoice photo for food order.
+      parameters:
+      - description: This token created after login.
+        x-convert:
+          trim: true
+        name: token
+        in: header
+        required: true
+        schema:
+          type: string
+      - description: Food Order's Id
+        name: foodOrderId
+        in: path
+        required: true
+        schema:
+          type: string
+      tags:
+      - food-orders
+      responses:
+        default:
+          description: Successful
+          content:
+            application/json:
+              schema:
+                type: string
+  /food-orders/{foodOrderId}/available-restaurants-for-transfer:
+    get:
+      summary: Get available restaurant list of food order for transfer
+      operationId: getFoodordersFoodorderidAvailablerestaurantsfortransfer
+      description: You can use this endpoint to get available restaurants for food order transfer.
+      parameters:
+      - description: This token created after login.
+        x-convert:
+          trim: true
+        name: token
+        in: header
+        required: true
+        schema:
+          type: string
+      - description: Food Order's Id
+        name: foodOrderId
+        in: path
+        required: true
+        schema:
+          type: string
+      tags:
+      - food-orders
+      responses:
+        '200':
+          description: Successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Available%20Restaurants%20for%20Food%20Order%20Transfer%20Schema'
+  /food-orders/active:
+    post:
+      summary: Get restaurant active food orders
+      operationId: postFoodordersActive
+      description: You can use this endpoint to get food orders sent to the restaurant’s POS.
+      parameters:
+      - description: This token created after login.
+        x-convert:
+          trim: true
+        name: token
+        in: header
+        required: true
+        schema:
+          type: string
+      tags:
+      - food-orders
+      responses:
+        '200':
+          description: Successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Active%20Food%20Orders%20Response%20Schema'
+  /food-orders/periodic/cancelled:
+    post:
+      summary: Get restaurant cancelled food orders
+      operationId: postFoodordersPeriodicCancelled
+      description: You can use this endpoint to get cancelled food orders periodically
+      parameters:
+      - description: This token created after login.
+        x-convert:
+          trim: true
+        name: token
+        in: header
+        required: true
+        schema:
+          type: string
+      tags:
+      - food-orders
+      responses:
+        '200':
+          description: Successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Active%20Food%20Orders%20Response%20Schema'
+  /food-orders/periodic/unapproved:
+    post:
+      summary: Get restaurant unapproved food orders
+      operationId: postFoodordersPeriodicUnapproved
+      description: You can use this endpoint to get unapproved food orders periodically
+      parameters:
+      - description: This token created after login.
+        x-convert:
+          trim: true
+        name: token
+        in: header
+        required: true
+        schema:
+          type: string
+      tags:
+      - food-orders
+      responses:
+        '200':
+          description: Successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Active%20Food%20Orders%20Response%20Schema'
+  /food-orders/{foodOrderId}/cancel:
+    post:
+      summary: Cancel food order
+      operationId: postFoodordersFoodorderidCancel
+      description: You can use this endpoint to get cancel food order and update status.
+      parameters:
+      - description: This token created after login.
+        x-convert:
+          trim: true
+        name: token
+        in: header
+        required: true
+        schema:
+          type: string
+      - description: Food Order's Id
+        name: foodOrderId
+        in: path
+        required: true
+        schema:
+          type: string
+      tags:
+      - food-orders
+      responses:
+        '200':
+          description: Successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Model4'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Model27'
+  /food-orders/{foodOrderId}/deliver:
+    post:
+      summary: Deliver food order
+      operationId: postFoodordersFoodorderidDeliver
+      description: You can use this endpoint to delivery restaurant food order and update order status to delivered.
+      parameters:
+      - description: This token created after login.
+        x-convert:
+          trim: true
+        name: token
+        in: header
+        required: true
+        schema:
+          type: string
+      - description: Food Order's Id
+        name: foodOrderId
+        in: path
+        required: true
+        schema:
+          type: string
+      tags:
+      - food-orders
+      responses:
+        '200':
+          description: Successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Model23'
+  /food-orders/{foodOrderId}/prepare:
+    post:
+      summary: Prepare food order
+      operationId: postFoodordersFoodorderidPrepare
+      description: You can use this endpoint to prepare food order and update order status.
+      parameters:
+      - description: This token created after login.
+        x-convert:
+          trim: true
+        name: token
+        in: header
+        required: true
+        schema:
+          type: string
+      - description: Food Order's Id
+        name: foodOrderId
+        in: path
+        required: true
+        schema:
+          type: string
+      tags:
+      - food-orders
+      responses:
+        '200':
+          description: Successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Model23'
+  /food-orders/{foodOrderId}/verify:
+    post:
+      summary: Verify food order
+      operationId: postFoodordersFoodorderidVerify
+      description: You can use this endpoint to verify food order and update order status.
+      parameters:
+      - description: This token created after login.
+        x-convert:
+          trim: true
+        name: token
+        in: header
+        required: true
+        schema:
+          type: string
+      - description: Food Order's Id
+        name: foodOrderId
+        in: path
+        required: true
+        schema:
+          type: string
+      tags:
+      - food-orders
+      responses:
+        '200':
+          description: Successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Model23'
+  /food-orders/{foodOrderId}/verify-scheduled:
+    post:
+      summary: Verify scheduled food order
+      operationId: postFoodordersFoodorderidVerifyscheduled
+      description: You can use this endpoint to verify scheduled food order and update order status.
+      parameters:
+      - description: This token created after login.
+        x-convert:
+          trim: true
+        name: token
+        in: header
+        required: true
+        schema:
+          type: string
+      - description: Food Order's Id
+        name: foodOrderId
+        in: path
+        required: true
+        schema:
+          type: string
+      tags:
+      - food-orders
+      responses:
+        '200':
+          description: Successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Model23'
+  /food-orders/{foodOrderId}/invoice-url:
+    post:
+      summary: Add Invoice PDF URL to food order
+      operationId: postFoodordersFoodorderidInvoiceurl
+      description: You can use this endpoint to add invoice PDF URL for food order.
+      parameters:
+      - description: This token created after login.
+        x-convert:
+          trim: true
+        name: token
+        in: header
+        required: true
+        schema:
+          type: string
+      - description: Food Order's Id
+        name: foodOrderId
+        in: path
+        required: true
+        schema:
+          type: string
+      tags:
+      - food-orders
+      responses:
+        default:
+          description: Successful
+          content:
+            application/json:
+              schema:
+                type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Model28'
+  /food-orders/{foodOrderId}/handover:
+    post:
+      summary: Handover food order
+      operationId: postFoodordersFoodorderidHandover
+      parameters:
+      - description: This token created after login.
+        x-convert:
+          trim: true
+        name: token
+        in: header
+        required: true
+        schema:
+          type: string
+      - description: Food Order's Id
+        name: foodOrderId
+        in: path
+        required: true
+        schema:
+          type: string
+      tags:
+      - food-orders
+      responses:
+        '200':
+          description: Successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Model23'
+  /food-orders/{foodOrderId}/transfer-to-another-restaurant:
+    post:
+      summary: Transfer food order to another restaurant
+      operationId: postFoodordersFoodorderidTransfertoanotherrestaurant
+      description: You can use this endpoint to transfer food order to another restaurant.
+      parameters:
+      - description: This token created after login.
+        x-convert:
+          trim: true
+        name: token
+        in: header
+        required: true
+        schema:
+          type: string
+      - description: Food Order's Id
+        name: foodOrderId
+        in: path
+        required: true
+        schema:
+          type: string
+      tags:
+      - food-orders
+      responses:
+        '200':
+          description: Successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Model23'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Model29'
+  /food-orders/{foodOrderId}/restaurant-panel-operation:
+    put:
+      summary: Restaurant panel operation food order
+      operationId: putFoodordersFoodorderidRestaurantpaneloperation
+      parameters:
+      - description: This token created after login.
+        x-convert:
+          trim: true
+        name: token
+        in: header
+        required: true
+        schema:
+          type: string
+      - description: Food Order's Id
+        name: foodOrderId
+        in: path
+        required: true
+        schema:
+          type: string
+      tags:
+      - food-orders
+      responses:
+        '200':
+          description: Successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Model23'
+components:
+  schemas:
+    Model4:
+      type: object
+    Model23:
+      type: object
+      properties:
+        result:
+          type: boolean
+    Model29:
+      type: object
+      properties:
+        targetRestaurantId:
+          type: string
+    Model28:
+      type: object
+      properties:
+        url:
+          type: string
+          x-format:
+            uri:
+              scheme:
+              - https
+      required:
+      - url
+    Model27:
+      type: object
+      properties:
+        cancelNote:
+          type: string
+        cancelReasonId:
+          type: string
+        productId:
+          type: string

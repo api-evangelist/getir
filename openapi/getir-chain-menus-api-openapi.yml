@@ -1,0 +1,155 @@
+openapi: 3.2.0
+info:
+  title: GetirFood API Documentation Chain Menus API
+  version: 1.5.8
+servers:
+- url: https://food-external-api-gateway.getirapi.com/
+tags:
+- name: chain-menus
+paths:
+  /chain-menus:
+    get:
+      summary: Get chain menus
+      operationId: getChainmenus
+      parameters:
+      - description: This token created after login.
+        x-convert:
+          trim: true
+        name: token
+        in: header
+        required: true
+        schema:
+          type: string
+      tags:
+      - chain-menus
+      responses:
+        default:
+          description: Successful
+          content:
+            application/json:
+              schema:
+                type: string
+  /chain-menus/chain-option-categories:
+    get:
+      summary: Get chain option categories
+      operationId: getChainmenusChainoptioncategories
+      parameters:
+      - description: This token created after login.
+        x-convert:
+          trim: true
+        name: token
+        in: header
+        required: true
+        schema:
+          type: string
+      tags:
+      - chain-menus
+      responses:
+        default:
+          description: Successful
+          content:
+            application/json:
+              schema:
+                type: string
+  /chain-menus/{chainMenuOID}:
+    get:
+      summary: Get chain menu
+      operationId: getChainmenusChainmenuoid
+      parameters:
+      - description: This token created after login.
+        x-convert:
+          trim: true
+        name: token
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: chainMenuOID
+        in: path
+        required: true
+        schema:
+          type: string
+      tags:
+      - chain-menus
+      responses:
+        default:
+          description: Successful
+          content:
+            application/json:
+              schema:
+                type: string
+  /chain-menus/{chainMenuOID}/update-prices:
+    post:
+      summary: Update chain menu prices
+      operationId: postChainmenusChainmenuoidUpdateprices
+      parameters:
+      - description: This token created after login.
+        x-convert:
+          trim: true
+        name: token
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: chainMenuOID
+        in: path
+        required: true
+        schema:
+          type: string
+      tags:
+      - chain-menus
+      responses:
+        default:
+          description: Successful
+          content:
+            application/json:
+              schema:
+                type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Model26'
+components:
+  schemas:
+    chainProducts:
+      type: array
+      items:
+        $ref: '#/components/schemas/Model24'
+    Model26:
+      type: object
+      properties:
+        chainProducts:
+          $ref: '#/components/schemas/chainProducts'
+        chainOptions:
+          $ref: '#/components/schemas/chainOptions'
+    Model24:
+      type: object
+      properties:
+        chainProductOID:
+          type: string
+        price:
+          type: number
+          minimum: 0
+          x-constraint:
+            precision: 2
+      required:
+      - chainProductOID
+      - price
+    Model25:
+      type: object
+      properties:
+        chainOptionOID:
+          type: string
+        price:
+          type: number
+          minimum: 0
+          x-constraint:
+            precision: 2
+      required:
+      - chainOptionOID
+      - price
+    chainOptions:
+      type: array
+      items:
+        $ref: '#/components/schemas/Model25'

@@ -1,0 +1,66 @@
+openapi: 3.2.0
+info:
+  title: GetirFood API Documentation Payment Methods API
+  version: 1.5.8
+servers:
+- url: https://food-external-api-gateway.getirapi.com/
+tags:
+- name: payment-methods
+paths:
+  /payment-methods:
+    get:
+      summary: List all of the payment methods
+      operationId: getPaymentmethods
+      description: You can find all of the on-delivery payment methods with this endpoint
+      parameters:
+      - description: This token created after login.
+        x-convert:
+          trim: true
+        name: token
+        in: header
+        required: true
+        schema:
+          type: string
+      tags:
+      - payment-methods
+      responses:
+        '200':
+          description: Successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Model2'
+components:
+  schemas:
+    Model1:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          $ref: '#/components/schemas/name'
+        icon:
+          type: string
+        paymentGroup:
+          type: number
+        deliveryTypes:
+          $ref: '#/components/schemas/deliveryTypes'
+        type:
+          type: number
+      required:
+      - id
+    deliveryTypes:
+      type: array
+      items:
+        type: number
+    name:
+      type: object
+      properties:
+        tr:
+          type: string
+        en:
+          type: string
+    Model2:
+      type: array
+      items:
+        $ref: '#/components/schemas/Model1'

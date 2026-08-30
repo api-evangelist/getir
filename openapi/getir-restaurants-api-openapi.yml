@@ -1,0 +1,1052 @@
+openapi: 3.2.0
+info:
+  title: GetirFood API Documentation Restaurants API
+  version: 1.5.8
+  description: Endpoints about restaurant and courier opening and closing features can be seen in the restaurants section.
+servers:
+- url: https://food-external-api-gateway.getirapi.com/
+tags:
+- name: restaurants
+  description: Endpoints about restaurant and courier opening and closing features can be seen in the restaurants section.
+paths:
+  /restaurants:
+    get:
+      summary: Get the restaurant information
+      operationId: getRestaurants
+      parameters:
+      - description: This token created after login.
+        x-convert:
+          trim: true
+        name: token
+        in: header
+        required: true
+        schema:
+          type: string
+      tags:
+      - restaurants
+      responses:
+        '200':
+          description: Successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Model3'
+  /restaurants/menu:
+    get:
+      summary: Get the restaurant menu and options
+      operationId: getRestaurantsMenu
+      parameters:
+      - description: This token created after login.
+        x-convert:
+          trim: true
+        name: token
+        in: header
+        required: true
+        schema:
+          type: string
+      tags:
+      - restaurants
+      responses:
+        '200':
+          description: Successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Model13'
+  /restaurants/option-products:
+    get:
+      summary: Get the restaurant option products
+      operationId: getRestaurantsOptionproducts
+      parameters:
+      - description: This token created after login.
+        x-convert:
+          trim: true
+        name: token
+        in: header
+        required: true
+        schema:
+          type: string
+      tags:
+      - restaurants
+      responses:
+        '200':
+          description: Successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Model15'
+  /restaurants/payment-methods:
+    get:
+      summary: Get the restaurant payment methods
+      operationId: getRestaurantsPaymentmethods
+      parameters:
+      - description: This token created after login.
+        x-convert:
+          trim: true
+        name: token
+        in: header
+        required: true
+        schema:
+          type: string
+      tags:
+      - restaurants
+      responses:
+        '200':
+          description: Successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Model17'
+    post:
+      summary: Add restaurant payment method
+      operationId: postRestaurantsPaymentmethods
+      parameters:
+      - description: This token created after login.
+        x-convert:
+          trim: true
+        name: token
+        in: header
+        required: true
+        schema:
+          type: string
+      tags:
+      - restaurants
+      responses:
+        '200':
+          description: Successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Model23'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Model22'
+    delete:
+      summary: Delete restaurant payment method
+      operationId: deleteRestaurantsPaymentmethods
+      parameters:
+      - description: This token created after login.
+        x-convert:
+          trim: true
+        name: token
+        in: header
+        required: true
+        schema:
+          type: string
+      tags:
+      - restaurants
+      responses:
+        '200':
+          description: Successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Model23'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Model22'
+  /restaurants/reviews:
+    get:
+      summary: Get restaurant reviews
+      operationId: getRestaurantsReviews
+      parameters:
+      - description: This token created after login.
+        x-convert:
+          trim: true
+        name: token
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: startDate
+        in: query
+        required: true
+        schema:
+          type: string
+          format: date
+      - name: endDate
+        in: query
+        required: true
+        schema:
+          type: string
+          format: date
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: number
+      - name: pageSize
+        in: query
+        required: false
+        schema:
+          type: number
+      tags:
+      - restaurants
+      responses:
+        default:
+          description: Successful
+          content:
+            application/json:
+              schema:
+                type: string
+  /restaurants/working-hours:
+    get:
+      summary: Get restaurant working hours
+      operationId: getRestaurantsWorkinghours
+      parameters:
+      - description: This token created after login.
+        x-convert:
+          trim: true
+        name: token
+        in: header
+        required: true
+        schema:
+          type: string
+      tags:
+      - restaurants
+      responses:
+        '200':
+          description: Successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Model19'
+    put:
+      summary: Update restaurant working hours
+      operationId: putRestaurantsWorkinghours
+      parameters:
+      - description: This token created after login.
+        x-convert:
+          trim: true
+        name: token
+        in: header
+        required: true
+        schema:
+          type: string
+      tags:
+      - restaurants
+      responses:
+        default:
+          description: Successful
+          content:
+            application/json:
+              schema:
+                type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Model33'
+  /restaurants/zones:
+    get:
+      summary: Get restaurant's zone list.
+      operationId: getRestaurantsZones
+      parameters:
+      - description: This token created after login.
+        x-convert:
+          trim: true
+        name: token
+        in: header
+        required: true
+        schema:
+          type: string
+      tags:
+      - restaurants
+      responses:
+        default:
+          description: Successful
+          content:
+            application/json:
+              schema:
+                type: string
+  /restaurants/zones/eta:
+    get:
+      summary: Get all zone ETA Options
+      operationId: getRestaurantsZonesEta
+      parameters:
+      - description: This token created after login.
+        x-convert:
+          trim: true
+        name: token
+        in: header
+        required: true
+        schema:
+          type: string
+      tags:
+      - restaurants
+      responses:
+        default:
+          description: Successful
+          content:
+            application/json:
+              schema:
+                type: string
+  /restaurants/zones/{zoneId}:
+    get:
+      summary: Get zone by zoneId
+      operationId: getRestaurantsZonesZoneid
+      parameters:
+      - description: This token created after login.
+        x-convert:
+          trim: true
+        name: token
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: zoneId
+        in: path
+        required: true
+        schema:
+          type: string
+      tags:
+      - restaurants
+      responses:
+        default:
+          description: Successful
+          content:
+            application/json:
+              schema:
+                type: string
+  /restaurants/pos-status:
+    post:
+      summary: Get restaurant key pos status
+      operationId: postRestaurantsPosstatus
+      tags:
+      - restaurants
+      responses:
+        default:
+          description: Successful
+          content:
+            application/json:
+              schema:
+                type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Login%20Schema'
+    put:
+      summary: Update restaurant key pos status
+      operationId: putRestaurantsPosstatus
+      tags:
+      - restaurants
+      responses:
+        default:
+          description: Successful
+          content:
+            application/json:
+              schema:
+                type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Model32'
+  /restaurants/courier/disable:
+    post:
+      summary: Disable the restaurant courier service
+      operationId: postRestaurantsCourierDisable
+      parameters:
+      - description: This token created after login.
+        x-convert:
+          trim: true
+        name: token
+        in: header
+        required: true
+        schema:
+          type: string
+      tags:
+      - restaurants
+      responses:
+        default:
+          description: Successful
+          content:
+            application/json:
+              schema:
+                type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Model30'
+  /restaurants/courier/enable:
+    post:
+      summary: Enable the restaurant courier service
+      operationId: postRestaurantsCourierEnable
+      parameters:
+      - description: This token created after login.
+        x-convert:
+          trim: true
+        name: token
+        in: header
+        required: true
+        schema:
+          type: string
+      tags:
+      - restaurants
+      responses:
+        '200':
+          description: Successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Model23'
+  /restaurants/payment-methods/active:
+    post:
+      summary: Activate restaurant payment method
+      operationId: postRestaurantsPaymentmethodsActive
+      parameters:
+      - description: This token created after login.
+        x-convert:
+          trim: true
+        name: token
+        in: header
+        required: true
+        schema:
+          type: string
+      tags:
+      - restaurants
+      responses:
+        '200':
+          description: Successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Model23'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Model22'
+  /restaurants/payment-methods/inactive:
+    post:
+      summary: Inactivate restaurant payment method
+      operationId: postRestaurantsPaymentmethodsInactive
+      parameters:
+      - description: This token created after login.
+        x-convert:
+          trim: true
+        name: token
+        in: header
+        required: true
+        schema:
+          type: string
+      tags:
+      - restaurants
+      responses:
+        '200':
+          description: Successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Model23'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Model22'
+  /restaurants/average-preparation-time:
+    put:
+      summary: Update restaurant average preparation time
+      operationId: putRestaurantsAveragepreparationtime
+      parameters:
+      - description: This token created after login.
+        x-convert:
+          trim: true
+        name: token
+        in: header
+        required: true
+        schema:
+          type: string
+      tags:
+      - restaurants
+      responses:
+        '200':
+          description: Successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Model23'
+      deprecated: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Model31'
+  /restaurants/delivery-duration/busyness:
+    put:
+      summary: Update restaurant delivery duration plus 15 min if set True
+      operationId: putRestaurantsDeliverydurationBusyness
+      parameters:
+      - description: This token created after login.
+        x-convert:
+          trim: true
+        name: token
+        in: header
+        required: true
+        schema:
+          type: string
+      tags:
+      - restaurants
+      responses:
+        default:
+          description: Successful
+          content:
+            application/json:
+              schema:
+                type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Model35'
+  /restaurants/status/close:
+    put:
+      summary: Close the restaurant
+      operationId: putRestaurantsStatusClose
+      parameters:
+      - description: This token created after login.
+        x-convert:
+          trim: true
+        name: token
+        in: header
+        required: true
+        schema:
+          type: string
+      tags:
+      - restaurants
+      responses:
+        default:
+          description: Successful
+          content:
+            application/json:
+              schema:
+                type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Model30'
+  /restaurants/status/open:
+    put:
+      summary: Open the restaurant
+      operationId: putRestaurantsStatusOpen
+      parameters:
+      - description: This token created after login.
+        x-convert:
+          trim: true
+        name: token
+        in: header
+        required: true
+        schema:
+          type: string
+      tags:
+      - restaurants
+      responses:
+        '200':
+          description: Successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Model4'
+  /restaurants/zones/{zoneId}/active:
+    put:
+      summary: Activate restaurant zone status
+      operationId: putRestaurantsZonesZoneidActive
+      parameters:
+      - description: This token created after login.
+        x-convert:
+          trim: true
+        name: token
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: zoneId
+        in: path
+        required: true
+        schema:
+          type: string
+      tags:
+      - restaurants
+      responses:
+        default:
+          description: Successful
+          content:
+            application/json:
+              schema:
+                type: string
+  /restaurants/zones/{zoneId}/inactive:
+    put:
+      summary: Activate restaurant zone status
+      operationId: putRestaurantsZonesZoneidInactive
+      parameters:
+      - description: This token created after login.
+        x-convert:
+          trim: true
+        name: token
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: zoneId
+        in: path
+        required: true
+        schema:
+          type: string
+      tags:
+      - restaurants
+      responses:
+        default:
+          description: Successful
+          content:
+            application/json:
+              schema:
+                type: string
+  /restaurants/{restaurantId}/zones/{zoneId}:
+    put:
+      summary: Update zone of a restaurant
+      operationId: putRestaurantsRestaurantidZonesZoneid
+      parameters:
+      - description: This token created after login.
+        x-convert:
+          trim: true
+        name: token
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: restaurantId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: zoneId
+        in: path
+        required: true
+        schema:
+          type: string
+      tags:
+      - restaurants
+      responses:
+        default:
+          description: Successful
+          content:
+            application/json:
+              schema:
+                type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Model36'
+  ? /restaurants/option-products/chain-id/{chainOptionProductId}/option-categories/{chainOptionCategoryId}/options/{chainOptionId}/status
+  : put:
+      summary: Update option product option status with chain id.
+      operationId: putRestaurantsOptionproductsChainidChainoptionproductidOptioncategoriesChainoptioncategoryidOptionsChainoptionidStatus
+      description: 'Available status are ACTIVE: 100, INACTIVE: 200<br/><br/>The endpoint will no longer be supported as of January 1, 2025.'
+      parameters:
+      - description: This token created after login.
+        x-convert:
+          trim: true
+        name: token
+        in: header
+        required: true
+        schema:
+          type: string
+      - description: Chain Option Product's Id
+        name: chainOptionProductId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: chainOptionCategoryId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: chainOptionId
+        in: path
+        required: true
+        schema:
+          type: string
+      tags:
+      - restaurants
+      responses:
+        '200':
+          description: Successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Model23'
+      deprecated: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Model37'
+components:
+  schemas:
+    Model14:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          $ref: '#/components/schemas/name'
+        weight:
+          type: number
+        status:
+          type: number
+        optionCategories:
+          $ref: '#/components/schemas/optionCategories'
+        chainOptionProduct:
+          type: string
+        clientDisplayName:
+          $ref: '#/components/schemas/name'
+    Model32:
+      type: object
+      properties:
+        posStatus:
+          type: number
+          enum:
+          - 100
+          - 200
+        appSecretKey:
+          type: string
+          example: string
+          x-format:
+            token: true
+          x-convert:
+            trim: true
+        restaurantSecretKey:
+          type: string
+          example: string
+          x-format:
+            token: true
+          x-convert:
+            trim: true
+      required:
+      - posStatus
+      - appSecretKey
+      - restaurantSecretKey
+    Model15:
+      type: array
+      items:
+        $ref: '#/components/schemas/Model14'
+    Model6:
+      type: object
+      properties:
+        id:
+          type: string
+        product:
+          type: string
+        chainProduct:
+          type: string
+        name:
+          $ref: '#/components/schemas/name'
+        clientDisplayName:
+          $ref: '#/components/schemas/name'
+        optionProduct:
+          type: string
+        chainOptionProduct:
+          type: string
+        optionCategories:
+          $ref: '#/components/schemas/tr'
+        type:
+          type: number
+        price:
+          type: number
+        weight:
+          type: number
+        status:
+          type: number
+        chainOption:
+          type: string
+    name:
+      type: object
+      properties:
+        tr:
+          type: string
+        en:
+          type: string
+    workingHours:
+      type: object
+      properties:
+        startTime:
+          type: string
+          pattern: ^(\d|0\d|1\d|2[0-3]):[0-5]\d$
+        endTime:
+          type: string
+          pattern: ^(\d|0\d|1\d|2[0-3]):[0-5]\d$
+    Model7:
+      type: array
+      items:
+        $ref: '#/components/schemas/Model6'
+    tr:
+      type: array
+      items:
+        type: string
+    Model37:
+      type: object
+      properties:
+        status:
+          type: number
+          enum:
+          - 100
+          - 200
+    Model16:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          $ref: '#/components/schemas/name'
+        icon:
+          type: string
+        paymentGroup:
+          type: number
+        active:
+          type: boolean
+        deliveryTypes:
+          $ref: '#/components/schemas/deliveryTypes'
+        type:
+          type: number
+        text:
+          $ref: '#/components/schemas/name'
+    restaurantWorkingHours:
+      type: array
+      example:
+      - day: 0
+        closed: true
+      - day: 1
+        workingHours:
+          startTime: 09:00
+          endTime: 03:00
+      - day: 2
+        workingHours:
+          startTime: 09:00
+          endTime: 02:00
+      - day: 3
+        workingHours:
+          startTime: 09:00
+          endTime: '20:00'
+      - day: 4
+        workingHours:
+          startTime: '10:00'
+          endTime: '20:00'
+      - day: 5
+        workingHours:
+          startTime: 09:00
+          endTime: '20:00'
+      - day: 6
+        workingHours:
+          startTime: 09:00
+          endTime: '20:00'
+      x-constraint:
+        length: 7
+        unique: day
+      items:
+        $ref: '#/components/schemas/Model18'
+    Model10:
+      type: object
+      properties:
+        id:
+          type: string
+        restaurant:
+          type: string
+        productCategory:
+          type: string
+        optionCategories:
+          $ref: '#/components/schemas/Model9'
+        name:
+          $ref: '#/components/schemas/name'
+        description:
+          $ref: '#/components/schemas/name'
+        price:
+          type: number
+        struckPrice:
+          type: number
+        weight:
+          type: number
+        status:
+          type: number
+        isApproved:
+          type: boolean
+        imageURL:
+          type: string
+        wideImageURL:
+          type: string
+        chainProduct:
+          type: string
+    Model36:
+      type: object
+      properties:
+        eta:
+          type: string
+        minBasketSize:
+          type: number
+          minimum: 1
+          x-constraint:
+            precision: 2
+      required:
+      - minBasketSize
+    Model33:
+      type: object
+      properties:
+        restaurantWorkingHours:
+          $ref: '#/components/schemas/restaurantWorkingHours'
+    optionCategories:
+      type: array
+      items:
+        $ref: '#/components/schemas/Model4'
+    Model19:
+      type: object
+      properties:
+        restaurantWorkingHours:
+          $ref: '#/components/schemas/restaurantWorkingHours'
+        restaurantCourierHours:
+          $ref: '#/components/schemas/restaurantWorkingHours'
+    Model35:
+      type: object
+      properties:
+        isBusy:
+          type: boolean
+        busynessDifferenceDuration:
+          type: number
+          enum:
+          - 15
+          - 30
+          - 45
+    Model17:
+      type: array
+      items:
+        $ref: '#/components/schemas/Model16'
+    Model12:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          $ref: '#/components/schemas/name'
+        restaurant:
+          type: string
+        products:
+          $ref: '#/components/schemas/Model11'
+        isApproved:
+          type: boolean
+        weight:
+          type: number
+        status:
+          type: number
+        chainProductCategory:
+          type: string
+    Model30:
+      type: object
+      properties:
+        timeOffAmount:
+          type: number
+          enum:
+          - 15
+          - 30
+          - 45
+    Model8:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          $ref: '#/components/schemas/name'
+        minCount:
+          type: number
+        maxCount:
+          type: number
+        removeToppings:
+          type: boolean
+        weight:
+          type: number
+        status:
+          type: number
+        chainOptionCategory:
+          type: string
+        options:
+          $ref: '#/components/schemas/Model7'
+    Model18:
+      type: object
+      properties:
+        day:
+          type: number
+          minimum: 0
+          maximum: 6
+        workingHours:
+          $ref: '#/components/schemas/workingHours'
+        closed:
+          type: boolean
+      required:
+      - day
+    Model3:
+      type: object
+      properties:
+        id:
+          type: string
+        averagePreparationTime:
+          type: number
+        status:
+          type: number
+        isCourierAvailable:
+          type: boolean
+        name:
+          type: string
+        isStatusChangedByUser:
+          type: boolean
+        closedSource:
+          type: number
+        rating:
+          type: number
+    Model22:
+      type: object
+      properties:
+        paymentMethodId:
+          type: string
+      required:
+      - paymentMethodId
+    Model31:
+      type: object
+      properties:
+        averagePreparationTime:
+          type: number
+          minimum: 5
+          maximum: 90
+    Model9:
+      type: array
+      items:
+        $ref: '#/components/schemas/Model8'
+    Model4:
+      type: object
+    Model13:
+      type: object
+      properties:
+        productCategories:
+          $ref: '#/components/schemas/productCategories'
+    Model23:
+      type: object
+      properties:
+        result:
+          type: boolean
+    deliveryTypes:
+      type: array
+      items:
+        type: number
+    productCategories:
+      type: array
+      items:
+        $ref: '#/components/schemas/Model12'
+    Model11:
+      type: array
+      items:
+        $ref: '#/components/schemas/Model10'

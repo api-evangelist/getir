@@ -1,0 +1,276 @@
+openapi: 3.2.0
+info:
+  title: GetirFood API Documentation Products API
+  version: 1.5.8
+  description: Endpoints in the products section can be used with product information obtained from restaurant endpoints.
+servers:
+- url: https://food-external-api-gateway.getirapi.com/
+tags:
+- name: products
+  description: Endpoints in the products section can be used with product information obtained from restaurant endpoints.
+paths:
+  /products/{productId}/status:
+    get:
+      summary: Get product status
+      operationId: getProductsProductidStatus
+      parameters:
+      - description: This token created after login.
+        x-convert:
+          trim: true
+        name: token
+        in: header
+        required: true
+        schema:
+          type: string
+      - description: Product's Id
+        name: productId
+        in: path
+        required: true
+        schema:
+          type: string
+      tags:
+      - products
+      responses:
+        '200':
+          description: Successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Model21'
+    put:
+      summary: Update product status
+      operationId: putProductsProductidStatus
+      description: 'Available status are ACTIVE: 100, INACTIVE: 200, DAILY_INACTIVE: 400'
+      parameters:
+      - description: This token created after login.
+        x-convert:
+          trim: true
+        name: token
+        in: header
+        required: true
+        schema:
+          type: string
+      - description: Product's Id
+        name: productId
+        in: path
+        required: true
+        schema:
+          type: string
+      tags:
+      - products
+      responses:
+        default:
+          description: Successful
+          content:
+            application/json:
+              schema:
+                type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Model34'
+  /products/chain-id/{chainProductId}/status:
+    get:
+      summary: Get product status with chain product id
+      operationId: getProductsChainidChainproductidStatus
+      parameters:
+      - description: This token created after login.
+        x-convert:
+          trim: true
+        name: token
+        in: header
+        required: true
+        schema:
+          type: string
+      - description: Chain Product's Id
+        name: chainProductId
+        in: path
+        required: true
+        schema:
+          type: string
+      tags:
+      - products
+      responses:
+        '200':
+          description: Successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Model21'
+    put:
+      summary: Update product status with chain product id
+      operationId: putProductsChainidChainproductidStatus
+      description: 'Available status are ACTIVE: 100, INACTIVE: 200'
+      parameters:
+      - description: This token created after login.
+        x-convert:
+          trim: true
+        name: token
+        in: header
+        required: true
+        schema:
+          type: string
+      - description: Chain Product's Id
+        name: chainProductId
+        in: path
+        required: true
+        schema:
+          type: string
+      tags:
+      - products
+      responses:
+        default:
+          description: Successful
+          content:
+            application/json:
+              schema:
+                type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Model34'
+  /products/{productId}/inactivate-as-option:
+    post:
+      summary: Inactivate restaurant options with product id
+      operationId: postProductsProductidInactivateasoption
+      description: The endpoint will no longer be supported as of January 1, 2025.
+      parameters:
+      - description: This token created after login.
+        x-convert:
+          trim: true
+        name: token
+        in: header
+        required: true
+        schema:
+          type: string
+      - description: Product's Id
+        name: productId
+        in: path
+        required: true
+        schema:
+          type: string
+      tags:
+      - products
+      responses:
+        '200':
+          description: Successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Model23'
+      deprecated: true
+  /products/{productId}/activate-as-option:
+    post:
+      summary: Activate restaurant options with product id
+      operationId: postProductsProductidActivateasoption
+      description: The endpoint will no longer be supported as of January 1, 2025.
+      parameters:
+      - description: This token created after login.
+        x-convert:
+          trim: true
+        name: token
+        in: header
+        required: true
+        schema:
+          type: string
+      - description: Product's Id
+        name: productId
+        in: path
+        required: true
+        schema:
+          type: string
+      tags:
+      - products
+      responses:
+        '200':
+          description: Successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Model23'
+      deprecated: true
+  /products/chain-id/{chainProductId}/inactivate-as-option:
+    post:
+      summary: Inactivate restaurant options with chain product id
+      operationId: postProductsChainidChainproductidInactivateasoption
+      description: The endpoint will no longer be supported as of January 1, 2025.
+      parameters:
+      - description: This token created after login.
+        x-convert:
+          trim: true
+        name: token
+        in: header
+        required: true
+        schema:
+          type: string
+      - description: Chain Product's Id
+        name: chainProductId
+        in: path
+        required: true
+        schema:
+          type: string
+      tags:
+      - products
+      responses:
+        '200':
+          description: Successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Model23'
+      deprecated: true
+  /products/chain-id/{chainProductId}/activate-as-option:
+    post:
+      summary: Activate restaurant options with chain product id
+      operationId: postProductsChainidChainproductidActivateasoption
+      description: The endpoint will no longer be supported as of January 1, 2025.
+      parameters:
+      - description: This token created after login.
+        x-convert:
+          trim: true
+        name: token
+        in: header
+        required: true
+        schema:
+          type: string
+      - description: Chain Product's Id
+        name: chainProductId
+        in: path
+        required: true
+        schema:
+          type: string
+      tags:
+      - products
+      responses:
+        '200':
+          description: Successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Model23'
+      deprecated: true
+components:
+  schemas:
+    Model23:
+      type: object
+      properties:
+        result:
+          type: boolean
+    Model34:
+      type: object
+      properties:
+        status:
+          type: number
+          enum:
+          - 100
+          - 200
+          - 400
+    Model21:
+      type: object
+      properties:
+        id:
+          type: string
+        status:
+          type: number

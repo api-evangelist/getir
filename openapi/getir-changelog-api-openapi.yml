@@ -1,0 +1,22 @@
+openapi: 3.2.0
+info:
+  title: GetirFood API Documentation Changelog API
+  version: 1.5.8
+servers:
+- url: https://food-external-api-gateway.getirapi.com/
+tags:
+- name: changelog
+paths:
+  /changelog:
+    get:
+      summary: Get API changelog
+      operationId: getChangelog
+      tags:
+      - changelog
+      responses:
+        default:
+          description: Successful
+          content:
+            application/json:
+              schema:
+                type: string
