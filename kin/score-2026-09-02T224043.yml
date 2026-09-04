@@ -1,45 +1,52 @@
-# Kin Score artifact — getir — 2026-08-03T161012
+# Kin Score artifact — getir — 2026-09-02T224043
 # The API Evangelist rating (https://github.com/api-evangelist/kin-score). Generated; do not edit.
 ---
 kin_score:
   slug: getir
-  schema_version: 0.9
-  scored_at: '2026-08-03'
-  run_ts: 2026-08-03T161012
-  composite: 46.6
-  band: developing
+  schema_version: 0.18.0
+  scored_at: '2026-09-02'
+  run_ts: 2026-09-02T224043
+  composite: 34.7
+  band: thin
   facets:
-    discoverability: 87.0
-    contract_quality: 51.6
-    governance: 11.5
-    operational_transparency: 76.3
-    developer_ergonomics: 58.2
+    discoverability: 75.9
+    contract_quality: 47.1
+    governance: 4.5
+    operational_transparency: 57.9
+    developer_ergonomics: 25.6
     commercial_clarity: 10.5
+    contract_governance: 4.5
+    access_clarity: 10.5
   agent_readiness:
-    score: 36.7
+    score: 33.1
     band: agent-ready
     dimensions:
       spec_presence: true
       agentic_access: derived
-      mcp_server: false
-      auth_clarity: true
+      reversibility_documented: documented
+      mcp_server: documented
+      auth_clarity: bearer
       idempotency: false
       error_semantics: documented
       openapi_examples: false
       rate_limit_signal: documented
-      event_surface_described: derived
+      event_surface_described: true
       agent_skills: derived
       well_known_catalog: false
       consent_identity: false
       agent_card: false
       dry_run_mode: false
+      delegated_identity: false
+      protected_resource_metadata: false
+      dynamic_client_registration: false
+      agentic_commerce: false
   provenance:
     mcp: first-party
     skills: derived
     agentic_access: derived
     conformance: derived
     contracts:
-      total: 1
+      total: 8
       derived: 0
       coverage: 0.0
-      callable: 0.0
+      callable: 100.0
