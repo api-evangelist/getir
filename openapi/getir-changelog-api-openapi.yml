@@ -5,14 +5,14 @@ info:
 servers:
 - url: https://food-external-api-gateway.getirapi.com/
 tags:
-- name: changelog
+- name: Changelog
 paths:
   /changelog:
     get:
       summary: Get API changelog
       operationId: getChangelog
       tags:
-      - changelog
+      - Changelog
       responses:
         default:
           description: Successful

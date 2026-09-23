@@ -6,7 +6,7 @@ info:
 servers:
 - url: https://food-external-api-gateway.getirapi.com/
 tags:
-- name: products
+- name: Products
   description: Endpoints in the products section can be used with product information obtained from restaurant endpoints.
 paths:
   /products/{productId}/status:
@@ -29,7 +29,7 @@ paths:
         schema:
           type: string
       tags:
-      - products
+      - Products
       responses:
         '200':
           description: Successful
@@ -57,7 +57,7 @@ paths:
         schema:
           type: string
       tags:
-      - products
+      - Products
       responses:
         default:
           description: Successful
@@ -90,7 +90,7 @@ paths:
         schema:
           type: string
       tags:
-      - products
+      - Products
       responses:
         '200':
           description: Successful
@@ -118,7 +118,7 @@ paths:
         schema:
           type: string
       tags:
-      - products
+      - Products
       responses:
         default:
           description: Successful
@@ -152,7 +152,7 @@ paths:
         schema:
           type: string
       tags:
-      - products
+      - Products
       responses:
         '200':
           description: Successful
@@ -182,7 +182,7 @@ paths:
         schema:
           type: string
       tags:
-      - products
+      - Products
       responses:
         '200':
           description: Successful
@@ -212,7 +212,7 @@ paths:
         schema:
           type: string
       tags:
-      - products
+      - Products
       responses:
         '200':
           description: Successful
@@ -242,7 +242,7 @@ paths:
         schema:
           type: string
       tags:
-      - products
+      - Products
       responses:
         '200':
           description: Successful
@@ -258,6 +258,13 @@ components:
       properties:
         result:
           type: boolean
+    Model21:
+      type: object
+      properties:
+        id:
+          type: string
+        status:
+          type: number
     Model34:
       type: object
       properties:
@@ -267,10 +274,3 @@ components:
           - 100
           - 200
           - 400
-    Model21:
-      type: object
-      properties:
-        id:
-          type: string
-        status:
-          type: number

@@ -13,7 +13,16 @@ paths:
     get:
       summary: Get restaurant food orders report
       operationId: getFoodordersReport
-      description: "You can use this endpoint to get food order reports to the restaurant’s POS.\n\nRestaurant Ids get to pass in query string and It uses with comma for multi restaurants. \n\nExample Query: \n\nrestaurantIds=3fd1e77960f103a5025b0d64,1qd1e73960f103a5024b0d61&startDate=2020-12-01&endDate=2020-12-31 "
+      description: 'You can use this endpoint to get food order reports to the restaurant’s POS.
+
+
+        Restaurant Ids get to pass in query string and It uses with comma for multi restaurants.
+
+
+        Example Query:
+
+
+        restaurantIds=3fd1e77960f103a5025b0d64,1qd1e73960f103a5024b0d61&startDate=2020-12-01&endDate=2020-12-31'
       parameters:
       - description: This token created after login.
         x-convert:
@@ -87,7 +96,16 @@ paths:
     get:
       summary: Get restaurant food orders report
       operationId: getFoodordersReportDetails
-      description: "You can use this endpoint to get food order report details to the restaurant’s POS.\n\nRestaurant Ids get to pass in query string and It uses with comma for multi restaurants. \n\nExample Query: \n\nrestaurantIds=3fd1e77960f103a5025b0d64,1qd1e73960f103a5024b0d61&startDate=2020-12-01&endDate=2020-12-31 "
+      description: 'You can use this endpoint to get food order report details to the restaurant’s POS.
+
+
+        Restaurant Ids get to pass in query string and It uses with comma for multi restaurants.
+
+
+        Example Query:
+
+
+        restaurantIds=3fd1e77960f103a5025b0d64,1qd1e73960f103a5024b0d61&startDate=2020-12-01&endDate=2020-12-31'
       parameters:
       - description: This token created after login.
         x-convert:
@@ -629,18 +647,20 @@ paths:
                 $ref: '#/components/schemas/Model23'
 components:
   schemas:
-    Model4:
+    Model27:
       type: object
+      properties:
+        cancelNote:
+          type: string
+        cancelReasonId:
+          type: string
+        productId:
+          type: string
     Model23:
       type: object
       properties:
         result:
           type: boolean
-    Model29:
-      type: object
-      properties:
-        targetRestaurantId:
-          type: string
     Model28:
       type: object
       properties:
@@ -652,12 +672,10 @@ components:
               - https
       required:
       - url
-    Model27:
+    Model4:
+      type: object
+    Model29:
       type: object
       properties:
-        cancelNote:
-          type: string
-        cancelReasonId:
-          type: string
-        productId:
+        targetRestaurantId:
           type: string

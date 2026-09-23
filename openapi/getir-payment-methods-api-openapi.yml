@@ -5,7 +5,7 @@ info:
 servers:
 - url: https://food-external-api-gateway.getirapi.com/
 tags:
-- name: payment-methods
+- name: Payment Methods
 paths:
   /payment-methods:
     get:
@@ -22,7 +22,7 @@ paths:
         schema:
           type: string
       tags:
-      - payment-methods
+      - Payment Methods
       responses:
         '200':
           description: Successful
@@ -32,6 +32,17 @@ paths:
                 $ref: '#/components/schemas/Model2'
 components:
   schemas:
+    name:
+      type: object
+      properties:
+        tr:
+          type: string
+        en:
+          type: string
+    Model2:
+      type: array
+      items:
+        $ref: '#/components/schemas/Model1'
     Model1:
       type: object
       properties:
@@ -53,14 +64,3 @@ components:
       type: array
       items:
         type: number
-    name:
-      type: object
-      properties:
-        tr:
-          type: string
-        en:
-          type: string
-    Model2:
-      type: array
-      items:
-        $ref: '#/components/schemas/Model1'

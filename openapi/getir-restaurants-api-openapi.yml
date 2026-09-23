@@ -6,7 +6,7 @@ info:
 servers:
 - url: https://food-external-api-gateway.getirapi.com/
 tags:
-- name: restaurants
+- name: Restaurants
   description: Endpoints about restaurant and courier opening and closing features can be seen in the restaurants section.
 paths:
   /restaurants:
@@ -23,7 +23,7 @@ paths:
         schema:
           type: string
       tags:
-      - restaurants
+      - Restaurants
       responses:
         '200':
           description: Successful
@@ -45,7 +45,7 @@ paths:
         schema:
           type: string
       tags:
-      - restaurants
+      - Restaurants
       responses:
         '200':
           description: Successful
@@ -67,7 +67,7 @@ paths:
         schema:
           type: string
       tags:
-      - restaurants
+      - Restaurants
       responses:
         '200':
           description: Successful
@@ -89,7 +89,7 @@ paths:
         schema:
           type: string
       tags:
-      - restaurants
+      - Restaurants
       responses:
         '200':
           description: Successful
@@ -110,7 +110,7 @@ paths:
         schema:
           type: string
       tags:
-      - restaurants
+      - Restaurants
       responses:
         '200':
           description: Successful
@@ -136,7 +136,7 @@ paths:
         schema:
           type: string
       tags:
-      - restaurants
+      - Restaurants
       responses:
         '200':
           description: Successful
@@ -185,7 +185,7 @@ paths:
         schema:
           type: number
       tags:
-      - restaurants
+      - Restaurants
       responses:
         default:
           description: Successful
@@ -207,7 +207,7 @@ paths:
         schema:
           type: string
       tags:
-      - restaurants
+      - Restaurants
       responses:
         '200':
           description: Successful
@@ -228,7 +228,7 @@ paths:
         schema:
           type: string
       tags:
-      - restaurants
+      - Restaurants
       responses:
         default:
           description: Successful
@@ -243,7 +243,7 @@ paths:
               $ref: '#/components/schemas/Model33'
   /restaurants/zones:
     get:
-      summary: Get restaurant's zone list.
+      summary: Get restaurant's zone list
       operationId: getRestaurantsZones
       parameters:
       - description: This token created after login.
@@ -255,7 +255,7 @@ paths:
         schema:
           type: string
       tags:
-      - restaurants
+      - Restaurants
       responses:
         default:
           description: Successful
@@ -277,7 +277,7 @@ paths:
         schema:
           type: string
       tags:
-      - restaurants
+      - Restaurants
       responses:
         default:
           description: Successful
@@ -304,7 +304,7 @@ paths:
         schema:
           type: string
       tags:
-      - restaurants
+      - Restaurants
       responses:
         default:
           description: Successful
@@ -317,7 +317,7 @@ paths:
       summary: Get restaurant key pos status
       operationId: postRestaurantsPosstatus
       tags:
-      - restaurants
+      - Restaurants
       responses:
         default:
           description: Successful
@@ -334,7 +334,7 @@ paths:
       summary: Update restaurant key pos status
       operationId: putRestaurantsPosstatus
       tags:
-      - restaurants
+      - Restaurants
       responses:
         default:
           description: Successful
@@ -361,7 +361,7 @@ paths:
         schema:
           type: string
       tags:
-      - restaurants
+      - Restaurants
       responses:
         default:
           description: Successful
@@ -388,7 +388,7 @@ paths:
         schema:
           type: string
       tags:
-      - restaurants
+      - Restaurants
       responses:
         '200':
           description: Successful
@@ -410,7 +410,7 @@ paths:
         schema:
           type: string
       tags:
-      - restaurants
+      - Restaurants
       responses:
         '200':
           description: Successful
@@ -437,7 +437,7 @@ paths:
         schema:
           type: string
       tags:
-      - restaurants
+      - Restaurants
       responses:
         '200':
           description: Successful
@@ -464,7 +464,7 @@ paths:
         schema:
           type: string
       tags:
-      - restaurants
+      - Restaurants
       responses:
         '200':
           description: Successful
@@ -492,7 +492,7 @@ paths:
         schema:
           type: string
       tags:
-      - restaurants
+      - Restaurants
       responses:
         default:
           description: Successful
@@ -519,7 +519,7 @@ paths:
         schema:
           type: string
       tags:
-      - restaurants
+      - Restaurants
       responses:
         default:
           description: Successful
@@ -546,7 +546,7 @@ paths:
         schema:
           type: string
       tags:
-      - restaurants
+      - Restaurants
       responses:
         '200':
           description: Successful
@@ -573,7 +573,7 @@ paths:
         schema:
           type: string
       tags:
-      - restaurants
+      - Restaurants
       responses:
         default:
           description: Successful
@@ -600,7 +600,7 @@ paths:
         schema:
           type: string
       tags:
-      - restaurants
+      - Restaurants
       responses:
         default:
           description: Successful
@@ -632,7 +632,7 @@ paths:
         schema:
           type: string
       tags:
-      - restaurants
+      - Restaurants
       responses:
         default:
           description: Successful
@@ -647,9 +647,12 @@ paths:
               $ref: '#/components/schemas/Model36'
   ? /restaurants/option-products/chain-id/{chainOptionProductId}/option-categories/{chainOptionCategoryId}/options/{chainOptionId}/status
   : put:
-      summary: Update option product option status with chain id.
+      summary: Update option product option status with chain id
       operationId: putRestaurantsOptionproductsChainidChainoptionproductidOptioncategoriesChainoptioncategoryidOptionsChainoptionidStatus
-      description: 'Available status are ACTIVE: 100, INACTIVE: 200<br/><br/>The endpoint will no longer be supported as of January 1, 2025.'
+      description: 'Available status are ACTIVE: 100, INACTIVE: 200
+
+
+        The endpoint will no longer be supported as of January 1, 2025.'
       parameters:
       - description: This token created after login.
         x-convert:
@@ -676,7 +679,7 @@ paths:
         schema:
           type: string
       tags:
-      - restaurants
+      - Restaurants
       responses:
         '200':
           description: Successful
@@ -692,133 +695,6 @@ paths:
               $ref: '#/components/schemas/Model37'
 components:
   schemas:
-    Model14:
-      type: object
-      properties:
-        id:
-          type: string
-        name:
-          $ref: '#/components/schemas/name'
-        weight:
-          type: number
-        status:
-          type: number
-        optionCategories:
-          $ref: '#/components/schemas/optionCategories'
-        chainOptionProduct:
-          type: string
-        clientDisplayName:
-          $ref: '#/components/schemas/name'
-    Model32:
-      type: object
-      properties:
-        posStatus:
-          type: number
-          enum:
-          - 100
-          - 200
-        appSecretKey:
-          type: string
-          example: string
-          x-format:
-            token: true
-          x-convert:
-            trim: true
-        restaurantSecretKey:
-          type: string
-          example: string
-          x-format:
-            token: true
-          x-convert:
-            trim: true
-      required:
-      - posStatus
-      - appSecretKey
-      - restaurantSecretKey
-    Model15:
-      type: array
-      items:
-        $ref: '#/components/schemas/Model14'
-    Model6:
-      type: object
-      properties:
-        id:
-          type: string
-        product:
-          type: string
-        chainProduct:
-          type: string
-        name:
-          $ref: '#/components/schemas/name'
-        clientDisplayName:
-          $ref: '#/components/schemas/name'
-        optionProduct:
-          type: string
-        chainOptionProduct:
-          type: string
-        optionCategories:
-          $ref: '#/components/schemas/tr'
-        type:
-          type: number
-        price:
-          type: number
-        weight:
-          type: number
-        status:
-          type: number
-        chainOption:
-          type: string
-    name:
-      type: object
-      properties:
-        tr:
-          type: string
-        en:
-          type: string
-    workingHours:
-      type: object
-      properties:
-        startTime:
-          type: string
-          pattern: ^(\d|0\d|1\d|2[0-3]):[0-5]\d$
-        endTime:
-          type: string
-          pattern: ^(\d|0\d|1\d|2[0-3]):[0-5]\d$
-    Model7:
-      type: array
-      items:
-        $ref: '#/components/schemas/Model6'
-    tr:
-      type: array
-      items:
-        type: string
-    Model37:
-      type: object
-      properties:
-        status:
-          type: number
-          enum:
-          - 100
-          - 200
-    Model16:
-      type: object
-      properties:
-        id:
-          type: string
-        name:
-          $ref: '#/components/schemas/name'
-        icon:
-          type: string
-        paymentGroup:
-          type: number
-        active:
-          type: boolean
-        deliveryTypes:
-          $ref: '#/components/schemas/deliveryTypes'
-        type:
-          type: number
-        text:
-          $ref: '#/components/schemas/name'
     restaurantWorkingHours:
       type: array
       example:
@@ -853,6 +729,139 @@ components:
         unique: day
       items:
         $ref: '#/components/schemas/Model18'
+    Model18:
+      type: object
+      properties:
+        day:
+          type: number
+          minimum: 0
+          maximum: 6
+        workingHours:
+          $ref: '#/components/schemas/workingHours'
+        closed:
+          type: boolean
+      required:
+      - day
+    Model14:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          $ref: '#/components/schemas/name'
+        weight:
+          type: number
+        status:
+          type: number
+        optionCategories:
+          $ref: '#/components/schemas/optionCategories'
+        chainOptionProduct:
+          type: string
+        clientDisplayName:
+          $ref: '#/components/schemas/name'
+    Model11:
+      type: array
+      items:
+        $ref: '#/components/schemas/Model10'
+    tr:
+      type: array
+      items:
+        type: string
+    Model33:
+      type: object
+      properties:
+        restaurantWorkingHours:
+          $ref: '#/components/schemas/restaurantWorkingHours'
+    name:
+      type: object
+      properties:
+        tr:
+          type: string
+        en:
+          type: string
+    Model16:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          $ref: '#/components/schemas/name'
+        icon:
+          type: string
+        paymentGroup:
+          type: number
+        active:
+          type: boolean
+        deliveryTypes:
+          $ref: '#/components/schemas/deliveryTypes'
+        type:
+          type: number
+        text:
+          $ref: '#/components/schemas/name'
+    Model22:
+      type: object
+      properties:
+        paymentMethodId:
+          type: string
+      required:
+      - paymentMethodId
+    Model23:
+      type: object
+      properties:
+        result:
+          type: boolean
+    Model9:
+      type: array
+      items:
+        $ref: '#/components/schemas/Model8'
+    Model35:
+      type: object
+      properties:
+        isBusy:
+          type: boolean
+        busynessDifferenceDuration:
+          type: number
+          enum:
+          - 15
+          - 30
+          - 45
+    Model36:
+      type: object
+      properties:
+        eta:
+          type: string
+        minBasketSize:
+          type: number
+          minimum: 1
+          x-constraint:
+            precision: 2
+      required:
+      - minBasketSize
+    Model17:
+      type: array
+      items:
+        $ref: '#/components/schemas/Model16'
+    Model4:
+      type: object
+    Model3:
+      type: object
+      properties:
+        id:
+          type: string
+        averagePreparationTime:
+          type: number
+        status:
+          type: number
+        isCourierAvailable:
+          type: boolean
+        name:
+          type: string
+        isStatusChangedByUser:
+          type: boolean
+        closedSource:
+          type: number
+        rating:
+          type: number
     Model10:
       type: object
       properties:
@@ -884,49 +893,64 @@ components:
           type: string
         chainProduct:
           type: string
-    Model36:
-      type: object
-      properties:
-        eta:
-          type: string
-        minBasketSize:
-          type: number
-          minimum: 1
-          x-constraint:
-            precision: 2
-      required:
-      - minBasketSize
-    Model33:
-      type: object
-      properties:
-        restaurantWorkingHours:
-          $ref: '#/components/schemas/restaurantWorkingHours'
-    optionCategories:
+    productCategories:
       type: array
       items:
-        $ref: '#/components/schemas/Model4'
-    Model19:
+        $ref: '#/components/schemas/Model12'
+    Model37:
       type: object
       properties:
-        restaurantWorkingHours:
-          $ref: '#/components/schemas/restaurantWorkingHours'
-        restaurantCourierHours:
-          $ref: '#/components/schemas/restaurantWorkingHours'
-    Model35:
+        status:
+          type: number
+          enum:
+          - 100
+          - 200
+    Model15:
+      type: array
+      items:
+        $ref: '#/components/schemas/Model14'
+    Model7:
+      type: array
+      items:
+        $ref: '#/components/schemas/Model6'
+    Model30:
       type: object
       properties:
-        isBusy:
-          type: boolean
-        busynessDifferenceDuration:
+        timeOffAmount:
           type: number
           enum:
           - 15
           - 30
           - 45
-    Model17:
-      type: array
-      items:
-        $ref: '#/components/schemas/Model16'
+    Model6:
+      type: object
+      properties:
+        id:
+          type: string
+        product:
+          type: string
+        chainProduct:
+          type: string
+        name:
+          $ref: '#/components/schemas/name'
+        clientDisplayName:
+          $ref: '#/components/schemas/name'
+        optionProduct:
+          type: string
+        chainOptionProduct:
+          type: string
+        optionCategories:
+          $ref: '#/components/schemas/tr'
+        type:
+          type: number
+        price:
+          type: number
+        weight:
+          type: number
+        status:
+          type: number
+        chainOption:
+          type: string
     Model12:
       type: object
       properties:
@@ -946,15 +970,17 @@ components:
           type: number
         chainProductCategory:
           type: string
-    Model30:
+    optionCategories:
+      type: array
+      items:
+        $ref: '#/components/schemas/Model4'
+    Model31:
       type: object
       properties:
-        timeOffAmount:
+        averagePreparationTime:
           type: number
-          enum:
-          - 15
-          - 30
-          - 45
+          minimum: 5
+          maximum: 90
     Model8:
       type: object
       properties:
@@ -976,77 +1002,54 @@ components:
           type: string
         options:
           $ref: '#/components/schemas/Model7'
-    Model18:
+    workingHours:
       type: object
       properties:
-        day:
+        startTime:
+          type: string
+          pattern: ^(\d|0\d|1\d|2[0-3]):[0-5]\d$
+        endTime:
+          type: string
+          pattern: ^(\d|0\d|1\d|2[0-3]):[0-5]\d$
+    Model32:
+      type: object
+      properties:
+        posStatus:
           type: number
-          minimum: 0
-          maximum: 6
-        workingHours:
-          $ref: '#/components/schemas/workingHours'
-        closed:
-          type: boolean
+          enum:
+          - 100
+          - 200
+        appSecretKey:
+          type: string
+          example: string
+          x-format:
+            token: true
+          x-convert:
+            trim: true
+        restaurantSecretKey:
+          type: string
+          example: string
+          x-format:
+            token: true
+          x-convert:
+            trim: true
       required:
-      - day
-    Model3:
+      - posStatus
+      - appSecretKey
+      - restaurantSecretKey
+    Model19:
       type: object
       properties:
-        id:
-          type: string
-        averagePreparationTime:
-          type: number
-        status:
-          type: number
-        isCourierAvailable:
-          type: boolean
-        name:
-          type: string
-        isStatusChangedByUser:
-          type: boolean
-        closedSource:
-          type: number
-        rating:
-          type: number
-    Model22:
-      type: object
-      properties:
-        paymentMethodId:
-          type: string
-      required:
-      - paymentMethodId
-    Model31:
-      type: object
-      properties:
-        averagePreparationTime:
-          type: number
-          minimum: 5
-          maximum: 90
-    Model9:
-      type: array
-      items:
-        $ref: '#/components/schemas/Model8'
-    Model4:
-      type: object
+        restaurantWorkingHours:
+          $ref: '#/components/schemas/restaurantWorkingHours'
+        restaurantCourierHours:
+          $ref: '#/components/schemas/restaurantWorkingHours'
     Model13:
       type: object
       properties:
         productCategories:
           $ref: '#/components/schemas/productCategories'
-    Model23:
-      type: object
-      properties:
-        result:
-          type: boolean
     deliveryTypes:
       type: array
       items:
         type: number
-    productCategories:
-      type: array
-      items:
-        $ref: '#/components/schemas/Model12'
-    Model11:
-      type: array
-      items:
-        $ref: '#/components/schemas/Model10'

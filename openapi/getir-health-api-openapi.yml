@@ -6,15 +6,15 @@ info:
 servers:
 - url: https://food-external-api-gateway.getirapi.com/
 tags:
-- name: health
+- name: Health
   description: This endpoint can be used to check the health of the application
 paths:
   /health:
     get:
-      summary: Health check for the service.
+      summary: Health check for the service
       operationId: getHealth
       tags:
-      - health
+      - Health
       responses:
         '200':
           description: Successful

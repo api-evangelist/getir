@@ -6,16 +6,18 @@ info:
 servers:
 - url: https://food-external-api-gateway.getirapi.com/
 tags:
-- name: auth
+- name: Auth
   description: Secret keys provided to your company will be used for login. After successful login, you must use the token returned to your company in other endpoints. The validity period of the token is 1 hour, at the end of this period, requests will be received from this token.
 paths:
   /auth/login:
     post:
       summary: Login
       operationId: postAuthLogin
-      description: "Authentication is performed via HTTP Basic Auth.\n Use your appSecretKey and restaurantSecretKey taking new token for reaching all routes."
+      description: 'Authentication is performed via HTTP Basic Auth.
+
+        Use your appSecretKey and restaurantSecretKey taking new token for reaching all routes.'
       tags:
-      - auth
+      - Auth
       responses:
         '200':
           description: Successful

@@ -1,0 +1,45 @@
+{
+  "provider": "getir",
+  "sources": [
+    "_original/getir-food-openapi.json"
+  ],
+  "outputs": [
+    "getir-auth-api-openapi.yml",
+    "getir-chain-menus-api-openapi.yml",
+    "getir-changelog-api-openapi.yml",
+    "getir-food-orders-api-openapi.yml",
+    "getir-health-api-openapi.yml",
+    "getir-payment-methods-api-openapi.yml",
+    "getir-products-api-openapi.yml",
+    "getir-restaurants-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [
+    "getir-food-openapi.json: dangling $ref: #/definitions/Active%20Food%20Orders%20Response%20Schema",
+    "getir-food-openapi.json: dangling $ref: #/definitions/Available%20Restaurants%20for%20Food%20Order%20Transfer%20Schema",
+    "getir-food-openapi.json: dangling $ref: #/definitions/Food%20Order%20Cancel%20Option%20Response%20Schema",
+    "getir-food-openapi.json: dangling $ref: #/definitions/Get%20Food%20Order%20Response%20Schema",
+    "getir-food-openapi.json: dangling $ref: #/definitions/Health%20Check%20Response%20Schema",
+    "getir-food-openapi.json: dangling $ref: #/definitions/Login%20Response%20Schema",
+    "getir-food-openapi.json: dangling $ref: #/definitions/Login%20Schema"
+  ],
+  "warnings": [],
+  "notes": [
+    "1 archived document(s) dropped as subsets of other archived documents",
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "getir-food-openapi.json: upgraded swagger 2.0 -> OpenAPI 3.2.0; renamed 7 component key(s) illegal in 3.x (e.g. Active Food Orders Response Schema)",
+    "getir-food-openapi.json: declared missing tag: chain-menus",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "_original/getir-food-openapi.yml: archived document superseded by a larger archived document",
+    "getir-auth-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "getir-chain-menus-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "getir-changelog-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "getir-food-orders-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "getir-health-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "getir-payment-methods-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "getir-products-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "getir-restaurants-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
+}
