@@ -112,10 +112,10 @@ paths:
               $ref: '#/components/schemas/Model26'
 components:
   schemas:
-    chainOptions:
+    chainProducts:
       type: array
       items:
-        $ref: '#/components/schemas/Model25'
+        $ref: '#/components/schemas/Model24'
     Model24:
       type: object
       properties:
@@ -129,17 +129,6 @@ components:
       required:
       - chainProductOID
       - price
-    chainProducts:
-      type: array
-      items:
-        $ref: '#/components/schemas/Model24'
-    Model26:
-      type: object
-      properties:
-        chainProducts:
-          $ref: '#/components/schemas/chainProducts'
-        chainOptions:
-          $ref: '#/components/schemas/chainOptions'
     Model25:
       type: object
       properties:
@@ -153,3 +142,14 @@ components:
       required:
       - chainOptionOID
       - price
+    chainOptions:
+      type: array
+      items:
+        $ref: '#/components/schemas/Model25'
+    Model26:
+      type: object
+      properties:
+        chainProducts:
+          $ref: '#/components/schemas/chainProducts'
+        chainOptions:
+          $ref: '#/components/schemas/chainOptions'

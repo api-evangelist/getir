@@ -695,6 +695,72 @@ paths:
               $ref: '#/components/schemas/Model37'
 components:
   schemas:
+    Model15:
+      type: array
+      items:
+        $ref: '#/components/schemas/Model14'
+    Model6:
+      type: object
+      properties:
+        id:
+          type: string
+        product:
+          type: string
+        chainProduct:
+          type: string
+        name:
+          $ref: '#/components/schemas/name'
+        clientDisplayName:
+          $ref: '#/components/schemas/name'
+        optionProduct:
+          type: string
+        chainOptionProduct:
+          type: string
+        optionCategories:
+          $ref: '#/components/schemas/tr'
+        type:
+          type: number
+        price:
+          type: number
+        weight:
+          type: number
+        status:
+          type: number
+        chainOption:
+          type: string
+    Model31:
+      type: object
+      properties:
+        averagePreparationTime:
+          type: number
+          minimum: 5
+          maximum: 90
+    Model32:
+      type: object
+      properties:
+        posStatus:
+          type: number
+          enum:
+          - 100
+          - 200
+        appSecretKey:
+          type: string
+          example: string
+          x-format:
+            token: true
+          x-convert:
+            trim: true
+        restaurantSecretKey:
+          type: string
+          example: string
+          x-format:
+            token: true
+          x-convert:
+            trim: true
+      required:
+      - posStatus
+      - appSecretKey
+      - restaurantSecretKey
     restaurantWorkingHours:
       type: array
       example:
@@ -729,56 +795,72 @@ components:
         unique: day
       items:
         $ref: '#/components/schemas/Model18'
-    Model18:
+    Model4:
+      type: object
+    Model22:
       type: object
       properties:
-        day:
-          type: number
-          minimum: 0
-          maximum: 6
-        workingHours:
-          $ref: '#/components/schemas/workingHours'
-        closed:
-          type: boolean
+        paymentMethodId:
+          type: string
       required:
-      - day
-    Model14:
+      - paymentMethodId
+    Model37:
+      type: object
+      properties:
+        status:
+          type: number
+          enum:
+          - 100
+          - 200
+    deliveryTypes:
+      type: array
+      items:
+        type: number
+    tr:
+      type: array
+      items:
+        type: string
+    Model35:
+      type: object
+      properties:
+        isBusy:
+          type: boolean
+        busynessDifferenceDuration:
+          type: number
+          enum:
+          - 15
+          - 30
+          - 45
+    Model23:
+      type: object
+      properties:
+        result:
+          type: boolean
+    Model7:
+      type: array
+      items:
+        $ref: '#/components/schemas/Model6'
+    Model8:
       type: object
       properties:
         id:
           type: string
         name:
           $ref: '#/components/schemas/name'
+        minCount:
+          type: number
+        maxCount:
+          type: number
+        removeToppings:
+          type: boolean
         weight:
           type: number
         status:
           type: number
-        optionCategories:
-          $ref: '#/components/schemas/optionCategories'
-        chainOptionProduct:
+        chainOptionCategory:
           type: string
-        clientDisplayName:
-          $ref: '#/components/schemas/name'
-    Model11:
-      type: array
-      items:
-        $ref: '#/components/schemas/Model10'
-    tr:
-      type: array
-      items:
-        type: string
-    Model33:
-      type: object
-      properties:
-        restaurantWorkingHours:
-          $ref: '#/components/schemas/restaurantWorkingHours'
-    name:
-      type: object
-      properties:
-        tr:
-          type: string
-        en:
-          type: string
+        options:
+          $ref: '#/components/schemas/Model7'
     Model16:
       type: object
       properties:
@@ -798,51 +880,15 @@ components:
           type: number
         text:
           $ref: '#/components/schemas/name'
-    Model22:
+    workingHours:
       type: object
       properties:
-        paymentMethodId:
+        startTime:
           type: string
-      required:
-      - paymentMethodId
-    Model23:
-      type: object
-      properties:
-        result:
-          type: boolean
-    Model9:
-      type: array
-      items:
-        $ref: '#/components/schemas/Model8'
-    Model35:
-      type: object
-      properties:
-        isBusy:
-          type: boolean
-        busynessDifferenceDuration:
-          type: number
-          enum:
-          - 15
-          - 30
-          - 45
-    Model36:
-      type: object
-      properties:
-        eta:
+          pattern: ^(\d|0\d|1\d|2[0-3]):[0-5]\d$
+        endTime:
           type: string
-        minBasketSize:
-          type: number
-          minimum: 1
-          x-constraint:
-            precision: 2
-      required:
-      - minBasketSize
-    Model17:
-      type: array
-      items:
-        $ref: '#/components/schemas/Model16'
-    Model4:
-      type: object
+          pattern: ^(\d|0\d|1\d|2[0-3]):[0-5]\d$
     Model3:
       type: object
       properties:
@@ -862,6 +908,64 @@ components:
           type: number
         rating:
           type: number
+    Model13:
+      type: object
+      properties:
+        productCategories:
+          $ref: '#/components/schemas/productCategories'
+    Model12:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          $ref: '#/components/schemas/name'
+        restaurant:
+          type: string
+        products:
+          $ref: '#/components/schemas/Model11'
+        isApproved:
+          type: boolean
+        weight:
+          type: number
+        status:
+          type: number
+        chainProductCategory:
+          type: string
+    Model33:
+      type: object
+      properties:
+        restaurantWorkingHours:
+          $ref: '#/components/schemas/restaurantWorkingHours'
+    Model18:
+      type: object
+      properties:
+        day:
+          type: number
+          minimum: 0
+          maximum: 6
+        workingHours:
+          $ref: '#/components/schemas/workingHours'
+        closed:
+          type: boolean
+      required:
+      - day
+    Model36:
+      type: object
+      properties:
+        eta:
+          type: string
+        minBasketSize:
+          type: number
+          minimum: 1
+          x-constraint:
+            precision: 2
+      required:
+      - minBasketSize
+    productCategories:
+      type: array
+      items:
+        $ref: '#/components/schemas/Model12'
     Model10:
       type: object
       properties:
@@ -893,26 +997,46 @@ components:
           type: string
         chainProduct:
           type: string
-    productCategories:
-      type: array
-      items:
-        $ref: '#/components/schemas/Model12'
-    Model37:
+    Model14:
       type: object
       properties:
+        id:
+          type: string
+        name:
+          $ref: '#/components/schemas/name'
+        weight:
+          type: number
         status:
           type: number
-          enum:
-          - 100
-          - 200
-    Model15:
+        optionCategories:
+          $ref: '#/components/schemas/optionCategories'
+        chainOptionProduct:
+          type: string
+        clientDisplayName:
+          $ref: '#/components/schemas/name'
+    Model17:
       type: array
       items:
-        $ref: '#/components/schemas/Model14'
-    Model7:
+        $ref: '#/components/schemas/Model16'
+    optionCategories:
       type: array
       items:
-        $ref: '#/components/schemas/Model6'
+        $ref: '#/components/schemas/Model4'
+    name:
+      type: object
+      properties:
+        tr:
+          type: string
+        en:
+          type: string
+    Model9:
+      type: array
+      items:
+        $ref: '#/components/schemas/Model8'
+    Model11:
+      type: array
+      items:
+        $ref: '#/components/schemas/Model10'
     Model30:
       type: object
       properties:
@@ -922,121 +1046,6 @@ components:
           - 15
           - 30
           - 45
-    Model6:
-      type: object
-      properties:
-        id:
-          type: string
-        product:
-          type: string
-        chainProduct:
-          type: string
-        name:
-          $ref: '#/components/schemas/name'
-        clientDisplayName:
-          $ref: '#/components/schemas/name'
-        optionProduct:
-          type: string
-        chainOptionProduct:
-          type: string
-        optionCategories:
-          $ref: '#/components/schemas/tr'
-        type:
-          type: number
-        price:
-          type: number
-        weight:
-          type: number
-        status:
-          type: number
-        chainOption:
-          type: string
-    Model12:
-      type: object
-      properties:
-        id:
-          type: string
-        name:
-          $ref: '#/components/schemas/name'
-        restaurant:
-          type: string
-        products:
-          $ref: '#/components/schemas/Model11'
-        isApproved:
-          type: boolean
-        weight:
-          type: number
-        status:
-          type: number
-        chainProductCategory:
-          type: string
-    optionCategories:
-      type: array
-      items:
-        $ref: '#/components/schemas/Model4'
-    Model31:
-      type: object
-      properties:
-        averagePreparationTime:
-          type: number
-          minimum: 5
-          maximum: 90
-    Model8:
-      type: object
-      properties:
-        id:
-          type: string
-        name:
-          $ref: '#/components/schemas/name'
-        minCount:
-          type: number
-        maxCount:
-          type: number
-        removeToppings:
-          type: boolean
-        weight:
-          type: number
-        status:
-          type: number
-        chainOptionCategory:
-          type: string
-        options:
-          $ref: '#/components/schemas/Model7'
-    workingHours:
-      type: object
-      properties:
-        startTime:
-          type: string
-          pattern: ^(\d|0\d|1\d|2[0-3]):[0-5]\d$
-        endTime:
-          type: string
-          pattern: ^(\d|0\d|1\d|2[0-3]):[0-5]\d$
-    Model32:
-      type: object
-      properties:
-        posStatus:
-          type: number
-          enum:
-          - 100
-          - 200
-        appSecretKey:
-          type: string
-          example: string
-          x-format:
-            token: true
-          x-convert:
-            trim: true
-        restaurantSecretKey:
-          type: string
-          example: string
-          x-format:
-            token: true
-          x-convert:
-            trim: true
-      required:
-      - posStatus
-      - appSecretKey
-      - restaurantSecretKey
     Model19:
       type: object
       properties:
@@ -1044,12 +1053,3 @@ components:
           $ref: '#/components/schemas/restaurantWorkingHours'
         restaurantCourierHours:
           $ref: '#/components/schemas/restaurantWorkingHours'
-    Model13:
-      type: object
-      properties:
-        productCategories:
-          $ref: '#/components/schemas/productCategories'
-    deliveryTypes:
-      type: array
-      items:
-        type: number

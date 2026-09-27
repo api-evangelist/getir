@@ -39,10 +39,10 @@ components:
           type: string
         en:
           type: string
-    Model2:
+    deliveryTypes:
       type: array
       items:
-        $ref: '#/components/schemas/Model1'
+        type: number
     Model1:
       type: object
       properties:
@@ -60,7 +60,7 @@ components:
           type: number
       required:
       - id
-    deliveryTypes:
+    Model2:
       type: array
       items:
-        type: number
+        $ref: '#/components/schemas/Model1'
