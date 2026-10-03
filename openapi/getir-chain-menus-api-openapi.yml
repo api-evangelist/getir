@@ -116,19 +116,6 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/Model24'
-    Model24:
-      type: object
-      properties:
-        chainProductOID:
-          type: string
-        price:
-          type: number
-          minimum: 0
-          x-constraint:
-            precision: 2
-      required:
-      - chainProductOID
-      - price
     Model25:
       type: object
       properties:
@@ -142,10 +129,6 @@ components:
       required:
       - chainOptionOID
       - price
-    chainOptions:
-      type: array
-      items:
-        $ref: '#/components/schemas/Model25'
     Model26:
       type: object
       properties:
@@ -153,3 +136,20 @@ components:
           $ref: '#/components/schemas/chainProducts'
         chainOptions:
           $ref: '#/components/schemas/chainOptions'
+    Model24:
+      type: object
+      properties:
+        chainProductOID:
+          type: string
+        price:
+          type: number
+          minimum: 0
+          x-constraint:
+            precision: 2
+      required:
+      - chainProductOID
+      - price
+    chainOptions:
+      type: array
+      items:
+        $ref: '#/components/schemas/Model25'

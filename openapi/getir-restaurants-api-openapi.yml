@@ -695,39 +695,33 @@ paths:
               $ref: '#/components/schemas/Model37'
 components:
   schemas:
-    Model15:
-      type: array
-      items:
-        $ref: '#/components/schemas/Model14'
-    Model6:
+    Model36:
       type: object
       properties:
-        id:
+        eta:
           type: string
-        product:
-          type: string
-        chainProduct:
-          type: string
-        name:
-          $ref: '#/components/schemas/name'
-        clientDisplayName:
-          $ref: '#/components/schemas/name'
-        optionProduct:
-          type: string
-        chainOptionProduct:
-          type: string
-        optionCategories:
-          $ref: '#/components/schemas/tr'
-        type:
+        minBasketSize:
           type: number
-        price:
+          minimum: 1
+          x-constraint:
+            precision: 2
+      required:
+      - minBasketSize
+    Model9:
+      type: array
+      items:
+        $ref: '#/components/schemas/Model8'
+    Model35:
+      type: object
+      properties:
+        isBusy:
+          type: boolean
+        busynessDifferenceDuration:
           type: number
-        weight:
-          type: number
-        status:
-          type: number
-        chainOption:
-          type: string
+          enum:
+          - 15
+          - 30
+          - 45
     Model31:
       type: object
       properties:
@@ -735,32 +729,25 @@ components:
           type: number
           minimum: 5
           maximum: 90
-    Model32:
+    Model3:
       type: object
       properties:
-        posStatus:
+        id:
+          type: string
+        averagePreparationTime:
           type: number
-          enum:
-          - 100
-          - 200
-        appSecretKey:
+        status:
+          type: number
+        isCourierAvailable:
+          type: boolean
+        name:
           type: string
-          example: string
-          x-format:
-            token: true
-          x-convert:
-            trim: true
-        restaurantSecretKey:
-          type: string
-          example: string
-          x-format:
-            token: true
-          x-convert:
-            trim: true
-      required:
-      - posStatus
-      - appSecretKey
-      - restaurantSecretKey
+        isStatusChangedByUser:
+          type: boolean
+        closedSource:
+          type: number
+        rating:
+          type: number
     restaurantWorkingHours:
       type: array
       example:
@@ -795,8 +782,32 @@ components:
         unique: day
       items:
         $ref: '#/components/schemas/Model18'
-    Model4:
+    Model18:
       type: object
+      properties:
+        day:
+          type: number
+          minimum: 0
+          maximum: 6
+        workingHours:
+          $ref: '#/components/schemas/workingHours'
+        closed:
+          type: boolean
+      required:
+      - day
+    productCategories:
+      type: array
+      items:
+        $ref: '#/components/schemas/Model12'
+    Model15:
+      type: array
+      items:
+        $ref: '#/components/schemas/Model14'
+    Model13:
+      type: object
+      properties:
+        productCategories:
+          $ref: '#/components/schemas/productCategories'
     Model22:
       type: object
       properties:
@@ -804,6 +815,10 @@ components:
           type: string
       required:
       - paymentMethodId
+    Model17:
+      type: array
+      items:
+        $ref: '#/components/schemas/Model16'
     Model37:
       type: object
       properties:
@@ -812,34 +827,59 @@ components:
           enum:
           - 100
           - 200
-    deliveryTypes:
-      type: array
-      items:
-        type: number
-    tr:
-      type: array
-      items:
-        type: string
-    Model35:
+    Model30:
       type: object
       properties:
-        isBusy:
-          type: boolean
-        busynessDifferenceDuration:
+        timeOffAmount:
           type: number
           enum:
           - 15
           - 30
           - 45
-    Model23:
+    Model4:
       type: object
-      properties:
-        result:
-          type: boolean
     Model7:
       type: array
       items:
         $ref: '#/components/schemas/Model6'
+    Model32:
+      type: object
+      properties:
+        posStatus:
+          type: number
+          enum:
+          - 100
+          - 200
+        appSecretKey:
+          type: string
+          example: string
+          x-format:
+            token: true
+          x-convert:
+            trim: true
+        restaurantSecretKey:
+          type: string
+          example: string
+          x-format:
+            token: true
+          x-convert:
+            trim: true
+      required:
+      - posStatus
+      - appSecretKey
+      - restaurantSecretKey
+    Model33:
+      type: object
+      properties:
+        restaurantWorkingHours:
+          $ref: '#/components/schemas/restaurantWorkingHours'
+    name:
+      type: object
+      properties:
+        tr:
+          type: string
+        en:
+          type: string
     Model8:
       type: object
       properties:
@@ -861,111 +901,28 @@ components:
           type: string
         options:
           $ref: '#/components/schemas/Model7'
-    Model16:
+    Model14:
       type: object
       properties:
         id:
           type: string
         name:
           $ref: '#/components/schemas/name'
-        icon:
-          type: string
-        paymentGroup:
-          type: number
-        active:
-          type: boolean
-        deliveryTypes:
-          $ref: '#/components/schemas/deliveryTypes'
-        type:
-          type: number
-        text:
-          $ref: '#/components/schemas/name'
-    workingHours:
-      type: object
-      properties:
-        startTime:
-          type: string
-          pattern: ^(\d|0\d|1\d|2[0-3]):[0-5]\d$
-        endTime:
-          type: string
-          pattern: ^(\d|0\d|1\d|2[0-3]):[0-5]\d$
-    Model3:
-      type: object
-      properties:
-        id:
-          type: string
-        averagePreparationTime:
-          type: number
-        status:
-          type: number
-        isCourierAvailable:
-          type: boolean
-        name:
-          type: string
-        isStatusChangedByUser:
-          type: boolean
-        closedSource:
-          type: number
-        rating:
-          type: number
-    Model13:
-      type: object
-      properties:
-        productCategories:
-          $ref: '#/components/schemas/productCategories'
-    Model12:
-      type: object
-      properties:
-        id:
-          type: string
-        name:
-          $ref: '#/components/schemas/name'
-        restaurant:
-          type: string
-        products:
-          $ref: '#/components/schemas/Model11'
-        isApproved:
-          type: boolean
         weight:
           type: number
         status:
           type: number
-        chainProductCategory:
+        optionCategories:
+          $ref: '#/components/schemas/optionCategories'
+        chainOptionProduct:
           type: string
-    Model33:
+        clientDisplayName:
+          $ref: '#/components/schemas/name'
+    Model23:
       type: object
       properties:
-        restaurantWorkingHours:
-          $ref: '#/components/schemas/restaurantWorkingHours'
-    Model18:
-      type: object
-      properties:
-        day:
-          type: number
-          minimum: 0
-          maximum: 6
-        workingHours:
-          $ref: '#/components/schemas/workingHours'
-        closed:
+        result:
           type: boolean
-      required:
-      - day
-    Model36:
-      type: object
-      properties:
-        eta:
-          type: string
-        minBasketSize:
-          type: number
-          minimum: 1
-          x-constraint:
-            precision: 2
-      required:
-      - minBasketSize
-    productCategories:
-      type: array
-      items:
-        $ref: '#/components/schemas/Model12'
     Model10:
       type: object
       properties:
@@ -997,55 +954,14 @@ components:
           type: string
         chainProduct:
           type: string
-    Model14:
-      type: object
-      properties:
-        id:
-          type: string
-        name:
-          $ref: '#/components/schemas/name'
-        weight:
-          type: number
-        status:
-          type: number
-        optionCategories:
-          $ref: '#/components/schemas/optionCategories'
-        chainOptionProduct:
-          type: string
-        clientDisplayName:
-          $ref: '#/components/schemas/name'
-    Model17:
+    tr:
       type: array
       items:
-        $ref: '#/components/schemas/Model16'
+        type: string
     optionCategories:
       type: array
       items:
         $ref: '#/components/schemas/Model4'
-    name:
-      type: object
-      properties:
-        tr:
-          type: string
-        en:
-          type: string
-    Model9:
-      type: array
-      items:
-        $ref: '#/components/schemas/Model8'
-    Model11:
-      type: array
-      items:
-        $ref: '#/components/schemas/Model10'
-    Model30:
-      type: object
-      properties:
-        timeOffAmount:
-          type: number
-          enum:
-          - 15
-          - 30
-          - 45
     Model19:
       type: object
       properties:
@@ -1053,3 +969,87 @@ components:
           $ref: '#/components/schemas/restaurantWorkingHours'
         restaurantCourierHours:
           $ref: '#/components/schemas/restaurantWorkingHours'
+    Model12:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          $ref: '#/components/schemas/name'
+        restaurant:
+          type: string
+        products:
+          $ref: '#/components/schemas/Model11'
+        isApproved:
+          type: boolean
+        weight:
+          type: number
+        status:
+          type: number
+        chainProductCategory:
+          type: string
+    Model16:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          $ref: '#/components/schemas/name'
+        icon:
+          type: string
+        paymentGroup:
+          type: number
+        active:
+          type: boolean
+        deliveryTypes:
+          $ref: '#/components/schemas/deliveryTypes'
+        type:
+          type: number
+        text:
+          $ref: '#/components/schemas/name'
+    Model6:
+      type: object
+      properties:
+        id:
+          type: string
+        product:
+          type: string
+        chainProduct:
+          type: string
+        name:
+          $ref: '#/components/schemas/name'
+        clientDisplayName:
+          $ref: '#/components/schemas/name'
+        optionProduct:
+          type: string
+        chainOptionProduct:
+          type: string
+        optionCategories:
+          $ref: '#/components/schemas/tr'
+        type:
+          type: number
+        price:
+          type: number
+        weight:
+          type: number
+        status:
+          type: number
+        chainOption:
+          type: string
+    deliveryTypes:
+      type: array
+      items:
+        type: number
+    Model11:
+      type: array
+      items:
+        $ref: '#/components/schemas/Model10'
+    workingHours:
+      type: object
+      properties:
+        startTime:
+          type: string
+          pattern: ^(\d|0\d|1\d|2[0-3]):[0-5]\d$
+        endTime:
+          type: string
+          pattern: ^(\d|0\d|1\d|2[0-3]):[0-5]\d$
