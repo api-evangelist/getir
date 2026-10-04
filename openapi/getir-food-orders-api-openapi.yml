@@ -647,8 +647,11 @@ paths:
                 $ref: '#/components/schemas/Model23'
 components:
   schemas:
-    Model4:
+    Model23:
       type: object
+      properties:
+        result:
+          type: boolean
     Model28:
       type: object
       properties:
@@ -660,11 +663,13 @@ components:
               - https
       required:
       - url
-    Model23:
+    Model4:
+      type: object
+    Model29:
       type: object
       properties:
-        result:
-          type: boolean
+        targetRestaurantId:
+          type: string
     Model27:
       type: object
       properties:
@@ -673,9 +678,4 @@ components:
         cancelReasonId:
           type: string
         productId:
-          type: string
-    Model29:
-      type: object
-      properties:
-        targetRestaurantId:
           type: string

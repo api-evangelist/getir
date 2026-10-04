@@ -253,6 +253,11 @@ paths:
       deprecated: true
 components:
   schemas:
+    Model23:
+      type: object
+      properties:
+        result:
+          type: boolean
     Model34:
       type: object
       properties:
@@ -262,11 +267,6 @@ components:
           - 100
           - 200
           - 400
-    Model23:
-      type: object
-      properties:
-        result:
-          type: boolean
     Model21:
       type: object
       properties:

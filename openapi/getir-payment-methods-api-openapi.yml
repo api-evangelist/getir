@@ -32,13 +32,6 @@ paths:
                 $ref: '#/components/schemas/Model2'
 components:
   schemas:
-    name:
-      type: object
-      properties:
-        tr:
-          type: string
-        en:
-          type: string
     deliveryTypes:
       type: array
       items:
@@ -60,6 +53,13 @@ components:
           type: number
       required:
       - id
+    name:
+      type: object
+      properties:
+        tr:
+          type: string
+        en:
+          type: string
     Model2:
       type: array
       items:
