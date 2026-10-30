@@ -64,66 +64,133 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Getir is an Istanbul-based on-demand delivery company, founded in 2015, that pioneered the
-ultrafast "groceries in minutes" model and grew into a super-app spanning rapid grocery,
-large-basket grocery (GetirBüyük), water (GetirSu), restaurant food delivery
-(GetirYemek / GetirFood) and local-merchant commerce (GetirÇarşı / GetirLocals).
+Getir is an Istanbul-based on-demand delivery company, founded in 2015, that pioneered the ultrafast "groceries in minutes" model and grew into a super-app spanning rapid grocery (Getir), large-basket grocery (GetirBüyük), water (GetirSu), restaurant food delivery (GetirYemek / GetirFood) and local-merchant commerce (GetirÇarşı / GetirLocals). Its developer-facing surface is a partner-integration platform rather than a public product API: Getir publishes the GetirFood API — a Swagger 2.0 contract at food-external-api-gateway.getirapi.com covering restaurant onboarding, menu and product status, working hours, delivery zones, payment methods and the full food-order lifecycle (verify, prepare, handover, deliver, cancel, transfer) — for POS and integrator companies that connect restaurant point-of-sale systems to GetirFood. Orders are pushed to partners over webhooks, with a documented rate limiter, a 99-entry service error registry, published test cards and a dedicated test environment. In February 2026 Uber agreed to acquire Getir's Türkiye delivery business, cleared by the Turkish Competition Authority in June 2026.
 
-Its developer surface is a **partner-integration platform**, not a public product API: POS and
-integrator companies connect restaurant point-of-sale systems to GetirFood.
+**Areas:** Company · Food Delivery · Grocery Delivery · On-Demand Delivery · Logistics · Restaurant · Point-of-Sale · Marketplace · Turkey · Partner Integration
 
-- Website: https://getir.com/
-- Developer portal: https://developers.getir.com/
-- Integration docs: https://developers.getir.com/food/documentation/giris
-- API reference: https://developers.getir.com/food/api-documentation
-- Status page: https://getir-food-integration.instatus.com/
-- Support: getiryemekapi@getir.com
+## Getir on APIs.io
 
-## GetirFood API
+Everything profiled for Getir is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/getir/](https://apis.io/providers/getir/)** — or go straight to one of the APIs or properties below.
 
-Swagger 2.0, version 1.5.8 — 54 paths, 62 operations, 63 definitions, live at
-`https://food-external-api-gateway.getirapi.com/swagger.json`.
+### APIs (8)
 
-Covers restaurant configuration (open/close, working hours, delivery zones, average preparation
-time, courier service, payment methods), menu and product/option availability, chain menus, and
-the full food-order lifecycle: verify, verify-scheduled, prepare, handover, deliver, cancel,
-transfer to another restaurant, and invoice attachment.
+- [Getir Auth API](https://apis.io/apis/getir/getir-auth-api/) — Secret keys provided to your company will be used for login. After successful login, you must use the token returned to your company in other endpoints. The…
+- [Getir Chain Menus API](https://apis.io/apis/getir/getir-chain-menus-api/) — The chain-menus API from Getir — 4 operation(s) for chain-menus.
+- [Getir Changelog API](https://apis.io/apis/getir/getir-changelog-api/) — The changelog API from Getir — 1 operation(s) for changelog.
+- [Getir Food Orders API](https://apis.io/apis/getir/getir-food-orders-api/) — Endpoints about food orders
+- [Getir Health API](https://apis.io/apis/getir/getir-health-api/) — This endpoint can be used to check the health of the application
+- [Getir Payment Methods API](https://apis.io/apis/getir/getir-payment-methods-api/) — The payment-methods API from Getir — 1 operation(s) for payment-methods.
+- [Getir Products API](https://apis.io/apis/getir/getir-products-api/) — Endpoints in the products section can be used with product information obtained from restaurant endpoints.
+- [Getir Restaurants API](https://apis.io/apis/getir/getir-restaurants-api/) — Endpoints about restaurant and courier opening and closing features can be seen in the restaurants section.
 
-Orders are **pushed** to two partner-registered webhook URLs (new order, cancel order) over
-HTTP POST with a shared `x-api-key`; `/food-orders/periodic/unapproved` and
-`/food-orders/active` are the documented backup queries.
+### Published properties
 
-## What is in this repo
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-| Artifact | Path |
+#### AsyncAPI (1)
+
+Event-driven and webhook contracts.
+
+- [Getir Food Webhooks](https://apis.io/asyncapis/getir/getir-food-webhooks/)
+
+#### MCP servers (1)
+
+Model Context Protocol servers that expose the API to agents.
+
+- [getir-mcp.yml](https://apis.io/servers/getir/getir-mcp-yml/)
+
+#### Agentic access (1)
+
+Which operations an agent can call, which act, and which need a human in the loop.
+
+- [Getir Agentic Access](https://apis.io/agentic-access/getir/getir-agentic-access/)
+
+#### Collections (1)
+
+Postman and Open Collection request collections.
+
+- [GetirFood API Documentation](https://apis.io/collections/getir/open-getir-food/)
+
+#### Overlays (1)
+
+OpenAPI overlays, including conversational phrasing for each operation.
+
+- [Getir Food Overlay](https://apis.io/overlays/getir/getir-food-overlay/)
+
+#### Security (2)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Getir Authentication](https://apis.io/security/getir/getir-authentication/)
+- [Getir Domain Security](https://apis.io/security/getir/getir-domain-security/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Getir Rate Limits](https://apis.io/rate-limits/getir/getir-rate-limits/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://getir.com/)
+- [Documentation](https://developers.getir.com/food/documentation/giris)
+- [Getting started](https://developers.getir.com/food/documentation/giris)
+- [API reference](https://developers.getir.com/food/api-documentation)
+- [Privacy policy](https://getir.com/yardim/gizlilik-politikasi/)
+- [GitHub](https://github.com/getir)
+- [Status](https://getir-food-integration.instatus.com/)
+
+## API Evangelist rating
+
+**Kin Score 33.4** — thin · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
 |---|---|
-| OpenAPI / Swagger (verbatim + YAML) | `openapi/` |
-| Overlay of our enhancements | `overlays/` |
-| Authentication profile | `authentication/` |
-| API conventions | `conventions/` |
-| Error registry (99 published codes) | `errors/` |
-| Rate limits (52 endpoints) | `rate-limits/` |
-| Webhook catalog | `asyncapi/` |
-| Sandbox / test data | `sandbox/` |
-| Data model | `data-model/` |
-| Lifecycle + changelog | `lifecycle/`, `changelog/` |
-| Conformance | `conformance/` |
-| Packages | `packages/` |
-| MCP servers + tool crosswalk | `mcp/` |
-| Agent skills | `skills/` |
-| Agentic access contracts | `agentic-access/` |
-| Domain security + well-known probes | `security/`, `well-known/` |
-| llms.txt | `llms/` |
+| Discoverability | 71.7 |
+| Contract quality | 43.2 |
+| Contract governance | 4.5 |
+| Operational transparency | 57.9 |
+| Developer ergonomics | 25.6 |
+| Access clarity | 10.5 |
 
-## What Getir does not publish
+**Agent readiness 31.8** — agent-ready
 
-No OpenAPI 3.x, GraphQL, gRPC or AsyncAPI; no official MCP server; no A2A agent card; no
-`/.well-known/` documents on any host; no official SDK or CLI; no deprecation policy, SLA,
-trust center, bug bounty or published compliance certifications; no Postman collection.
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | documented (partial credit) |
+| MCP Server | platform (partial credit) |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | documented (partial credit) |
+| OpenAPI Examples | — |
+| Rate Limit Signal | documented (partial credit) |
+| Event Surface Described | yes |
+| Agent Skills | derived (partial credit) |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
 
-## Corporate note
+**Regulatory alignment 20.6** — Horizontal (data, software, accessibility, platform)
 
-In February 2026 Uber agreed to acquire Getir's Türkiye delivery business (food, grocery,
-retail and water); the Turkish Competition Authority cleared the transaction in June 2026. As
-of 2026-07-31 the GetirFood developer portal, docs API, production gateway and status page are
-all live and serving.
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/getir/](https://apis.io/providers/getir/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Getir: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/getir/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
